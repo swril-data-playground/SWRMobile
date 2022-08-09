@@ -10,7 +10,7 @@ interface SWRTextInputWithTitleProps extends SWRTextInputProps {
 export const SWRTextInputWithTitle = (props: SWRTextInputWithTitleProps) => {
 	return (
 		<View style={[styles.container, props.style]}>
-			<SWRText style={gs.text}>{props.name}</SWRText>
+			<SWRText style={gs.h4}>{props.name}</SWRText>
 			<SWRTextInput {...props} />
 		</View>
 	)

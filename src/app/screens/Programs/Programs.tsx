@@ -15,7 +15,7 @@ const ProgramsScreen = () => {
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign={true} screenPadding={true}/>
 			<View style={[styles.header, gs.screenPadding]}>
-				<SWRText font={'medium'} style={gs.titleText}>Programs</SWRText>
+				<SWRText font={'medium'} style={gs.h1}>Programs</SWRText>
 				<TouchableOpacity>
 					<Image source={images['tune']}/>
 				</TouchableOpacity>

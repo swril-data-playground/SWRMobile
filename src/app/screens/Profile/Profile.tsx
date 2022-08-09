@@ -21,21 +21,21 @@ const ProfileScreen = () => {
 					<SWRText font={'medium'} style={styles.name}>{auth.account?.firstName}</SWRText>
 					<SWRText font={'medium'} style={styles.name}>{auth.account?.lastName}</SWRText>
 					<SWRButton onPress={() => {}} style={styles.whiteSection}>
-						<SWRText style={gs.text}>Edit Profile</SWRText>
+						<SWRText style={gs.h4}>Edit Profile</SWRText>
 					</SWRButton>
 					<SWRButton onPress={() => {}} style={styles.whiteSection}>
-						<SWRText style={gs.text}>Edit Avatar</SWRText>
+						<SWRText style={gs.h4}>Edit Avatar</SWRText>
 					</SWRButton>
 					<View style={[styles.whiteSection, {backgroundColor: 'white', padding: 15}]}>
 						<SWRText font={'medium'}>Wallet ID</SWRText>
-						<SWRText style={gs.smallText}>{auth.account?.walletId}</SWRText>
+						<SWRText style={gs.h7}>{auth.account?.walletId}</SWRText>
 						<SWRText font={'medium'}>Key phrase</SWRText>
-						<SWRText style={gs.smallText}>{auth.account?.keyPhrase}</SWRText>
+						<SWRText style={gs.h7}>{auth.account?.keyPhrase}</SWRText>
 					</View>
 				</View>
 			</View>
 			<View style={styles.householdMembersContainer}>
-				<SWRText font={'medium'} style={gs.text}>Household Members</SWRText>
+				<SWRText font={'medium'} style={gs.h4}>Household Members</SWRText>
 				<ScrollView horizontal={true}>
 					{auth.account?.householdMembers.map((member, i) => {
 						return (
@@ -48,22 +48,22 @@ const ProfileScreen = () => {
 					})}
 					<TouchableOpacity style={styles.member}>
 						<Image source={images.add} style={{margin: 8}}/>
-						<SWRText style={[gs.smallText, {textAlign: 'center'}]}>Add household member</SWRText>
+						<SWRText style={[gs.h7, {textAlign: 'center'}]}>Add household member</SWRText>
 					</TouchableOpacity>
 				</ScrollView>
 			</View>
 			<View style={styles.linksContainer}>
 				<SWRButton style={[styles.whiteSection, styles.linkButton]} onPress={() => setNav('Help')}>
 					<Image source={images.question_icon} style={styles.linkIcon}/>
-					<SWRText style={gs.text}>Help</SWRText>
+					<SWRText style={gs.h4}>Help</SWRText>
 				</SWRButton>
 				<SWRButton style={[styles.whiteSection, styles.linkButton]} onPress={() => setNav('LearnMore')}>
 					<Image source={images.search_icon} style={styles.linkIcon}/>
-					<SWRText style={gs.text}>Learn more</SWRText>
+					<SWRText style={gs.h4}>Learn more</SWRText>
 				</SWRButton>
 				<SWRButton style={[styles.whiteSection, styles.linkButton]} onPress={() => setNav('Privacy')}>
 					<Image source={images.profile_sheild} style={styles.linkIcon}/>
-					<SWRText style={gs.text}>Privacy policy</SWRText>
+					<SWRText style={gs.h4}>Privacy policy</SWRText>
 				</SWRButton>
 			</View>
 		</View>

@@ -9,8 +9,8 @@ export const HomeHeader = () => {
 	const { auth } = useContext(AuthContext)
 	return (
 		<View style={styles.container}>
-			<SWRText font={'medium'} style={[gs.largeText, styles.headerText]}>Hey, <SWRText font={'medium'} style={styles.blueText}>{auth.account?.firstName}</SWRText></SWRText>
-			<SWRText font={'medium'} style={[gs.largeText, styles.headerText]}>Let's start exploring</SWRText>
+			<SWRText font={'medium'} style={[gs.h2, styles.headerText]}>Hey, <SWRText font={'medium'} style={styles.blueText}>{auth.account?.firstName}</SWRText></SWRText>
+			<SWRText font={'medium'} style={[gs.h2, styles.headerText]}>Let's start exploring</SWRText>
 		</View>
 	)
 }

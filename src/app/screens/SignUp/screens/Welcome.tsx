@@ -17,14 +17,14 @@ export const Welcome = (props: {
 	return (
 		<View style={gs.fullScreen} >
 			<PuzzleImage/>
-			<SWRText font={'medium'} style={gs.titleText}>Welcome!</SWRText>
+			<SWRText font={'medium'} style={gs.h1}>Welcome!</SWRText>
 			<WelcomeScroller/>
 			<SWRButton onPress={props.next} style={styles.signUpButton}>
-				<SWRText font={'medium'} style={gs.text}>Sign up</SWRText>
+				<SWRText font={'medium'} style={gs.h4}>Sign up</SWRText>
 			</SWRButton>
 			<View style={styles.bottomText}>
-				<SWRText style={gs.text}>{'Already have an account? '}</SWRText>
-				<TextButton onPress={() => setNav('Login')} style={[gs.text, {color: 'blue'}]}>Login</TextButton>
+				<SWRText style={gs.h4}>{'Already have an account? '}</SWRText>
+				<TextButton onPress={() => setNav('Login')} style={[gs.h4, {color: 'blue'}]}>Login</TextButton>
 			</View>
 		</View>
 	)

@@ -5,7 +5,7 @@ import { SWRText } from 'components/SWRText'
 const MyDataScreen = () => {
 	return (
 		<View style={gs.fullScreen}>
-			<SWRText style={gs.titleText}>My data</SWRText>
+			<SWRText style={gs.h1}>My data</SWRText>
 		</View>
 	)
 }

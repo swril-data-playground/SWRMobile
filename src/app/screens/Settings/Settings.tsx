@@ -6,7 +6,7 @@ const SettingsScreen = () => {
 	return (
 		<>
 			<View style={gs.fullScreen}>
-				<SWRText style={gs.titleText}>Settings</SWRText>
+				<SWRText style={gs.h1}>Settings</SWRText>
 			</View>
 		</>
 	)

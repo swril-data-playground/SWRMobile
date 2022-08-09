@@ -14,7 +14,7 @@ export const Help = () => {
 						source={images.question_icon}
 						style={styles.headerIcon}
 					/>
-					<SWRText style={gs.largeText}>Help</SWRText>
+					<SWRText style={gs.h2}>Help</SWRText>
 				</View>
 			</ScrollView>
 		</View>

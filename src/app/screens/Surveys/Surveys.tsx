@@ -15,7 +15,7 @@ const SurveysScreen = () => {
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign={true} screenPadding={true}/>
 			<View style={[styles.header, gs.screenPadding]}>
-				<SWRText font={'medium'} style={gs.titleText}>Surveys</SWRText>
+				<SWRText font={'medium'} style={gs.h1}>Surveys</SWRText>
 				<TouchableOpacity>
 					<Image source={images['tune']}/>
 				</TouchableOpacity>

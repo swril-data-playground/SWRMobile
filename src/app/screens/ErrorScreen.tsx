@@ -21,7 +21,7 @@ export const ErrorScreen = () => {
 					marginBottom: 20,
 				}}
 			/>
-			<SWRText style={gs.text}>Something went wrong, we are sorry.</SWRText>
+			<SWRText style={gs.h4}>Something went wrong, we are sorry.</SWRText>
 			<ScrollView style={errorStyles.errorContainer}>
 				<SWRText style={errorStyles.errorTitle}>{error?.name}</SWRText>
 				<Line style={{ margin: 5 }} />
@@ -35,7 +35,7 @@ export const ErrorScreen = () => {
 			<TouchableOpacity
 				style={errorStyles.restartButton}
 			>
-				<SWRText style={gs.largeText}>Restart</SWRText>
+				<SWRText style={gs.h2}>Restart</SWRText>
 			</TouchableOpacity>
 		</View>
 	)

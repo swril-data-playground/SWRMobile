@@ -17,7 +17,7 @@ export const LoadingScreen = () => {
 						marginVertical: 50,
 					}}
 				/>
-				<Text style={gs.largeText}>Loading...</Text>
+				<Text style={gs.h2}>Loading...</Text>
 				<ActivityIndicator size="large" />
 			</View>
 		</>

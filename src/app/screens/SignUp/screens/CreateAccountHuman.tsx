@@ -41,7 +41,7 @@ export const CreateAccountHuman = (props: {
 			}}/>
 
 			<SWRButton disabled={!nextEnabled} onPress={tryCreateAccount} style={styles.nextButton}>
-				<SWRText style={gs.text}>Next</SWRText>
+				<SWRText style={gs.h4}>Next</SWRText>
 			</SWRButton>
 			<Image source={images.woman_at_desk} style={styles.officeDeskImage}/>
 		</View>

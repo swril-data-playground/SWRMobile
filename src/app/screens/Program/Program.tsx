@@ -19,7 +19,7 @@ export const Program = (props: {content: any}) => {
 				<BackButton leftAlign={true} style={{margin: 10}} />
 			</View>
 			<View style={styles.infoContainer}>
-				<SWRText style={gs.mediumText} font={'medium'}>{content.name}</SWRText>
+				<SWRText style={gs.h3} font={'medium'}>{content.name}</SWRText>
 				<SWRText style={styles.description}>{content.description}</SWRText>
 			</View>
 			<View style={styles.signUpContainer}>
@@ -29,10 +29,10 @@ export const Program = (props: {content: any}) => {
 							<AvatarIcon key={i} avatar={attendee.avatar} style={styles.avatarIcon}/>
 						)
 					})}
-					{over3Attendees && <SWRText style={[{marginLeft: 20}, gs.text]}>+{content.attendees.length - 3}</SWRText>}
+					{over3Attendees && <SWRText style={[{marginLeft: 20}, gs.h4]}>+{content.attendees.length - 3}</SWRText>}
 				</View>
 				<SWRButton onPress={trySignUp} style={{backgroundColor: 'lightgrey', width: '70%'}}>
-					<SWRText style={[gs.mediumText, {textAlign: 'center'}]}>Sign Up</SWRText>
+					<SWRText style={[gs.h3, {textAlign: 'center'}]}>Sign Up</SWRText>
 				</SWRButton>
 			</View>
 		</View>

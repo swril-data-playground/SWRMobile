@@ -14,7 +14,7 @@ export const LearnMore = () => {
 						source={images.search_icon}
 						style={styles.headerIcon}
 					/>
-					<SWRText style={gs.largeText}>Learn More</SWRText>
+					<SWRText style={gs.h2}>Learn More</SWRText>
 				</View>
 			</ScrollView>
 		</View>

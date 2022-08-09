@@ -5,6 +5,7 @@ import { TextButton } from "components/TextButton"
 import { NavContext } from "contexts/navContext"
 import { useContext } from "react"
 import { Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
+import { gs } from "styles/globals"
 import { ProgramType } from "types/programs"
 
 export const HomePrograms = (props: {
@@ -14,7 +15,7 @@ export const HomePrograms = (props: {
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<SWRText style={{fontSize: 18}} font={'bold'}>Explore Nearby Programs</SWRText>
+				<SWRText style={gs.h5} font={'bold'}>Explore Nearby Programs</SWRText>
 				<TextButton onPress={() => setNav('Programs')}>View all</TextButton>
 			</View>
 			<ScrollView style={styles.scroller} horizontal={true} showsHorizontalScrollIndicator={false}>

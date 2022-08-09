@@ -9,8 +9,8 @@ const CreateScreen = () => {
 		<View style={gs.fullScreen}>
 			<Image source={images.puzzle} style={styles.puzzleImage}/>
 			<View style={styles.header}>
-				<SWRText font={'medium'} style={gs.titleText}>Create</SWRText>
-				<SWRText style={gs.mediumText}>Let's make something</SWRText>
+				<SWRText font={'medium'} style={gs.h1}>Create</SWRText>
+				<SWRText style={gs.h3}>Let's make something</SWRText>
 			</View>
 			<SWRButton onPress={() => {}} style={styles.button}>
 				<SWRText style={styles.buttonText}>Survey</SWRText>

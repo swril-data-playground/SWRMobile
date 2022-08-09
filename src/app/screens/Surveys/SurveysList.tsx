@@ -12,12 +12,12 @@ export const SurveysList = (props: {
 	const { setNav } = useContext(NavContext)
 	return (
 		<View>
-			<SWRText style={gs.mediumText}>{props.title}</SWRText>
+			<SWRText style={gs.h3}>{props.title}</SWRText>
 			<View style={styles.list}>
 				{props.surveys.map((survey, i) => {
 					return (
 						<TouchableOpacity key={i} style={styles.survey} onPress={() => setNav('Survey', survey)}>
-							<SWRText style={styles.surveyName}>{survey.name}</SWRText>
+							<SWRText style={gs.h5}>{survey.name}</SWRText>
 						</TouchableOpacity>
 					)
 				})}
@@ -43,7 +43,4 @@ const styles = StyleSheet.create({
 		width: '45%',
 		backgroundColor: 'white'
 	},
-	surveyName: {
-		fontSize: 18,
-	}
 })

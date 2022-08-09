@@ -14,7 +14,7 @@ export const Privacy = () => {
 						source={images.profile_sheild}
 						style={styles.headerIcon}
 					/>
-					<SWRText style={gs.largeText}>Privacy policy</SWRText>
+					<SWRText style={gs.h2}>Privacy policy</SWRText>
 				</View>
 			</ScrollView>
 		</View>

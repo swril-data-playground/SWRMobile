@@ -17,21 +17,21 @@ export const GetStarted = (props: {
 		<View style={gs.fullScreen} >
 			<BackButton onPressOverride={props.back} leftAlign={true} style={{position: 'absolute'}}/>
 			<PuzzleImage/>
-			<SWRText font={'medium'} style={gs.largeText}>Let's get started</SWRText>
-			<SWRText  style={gs.text}>Tell us a little bit about yourself!</SWRText>
-			<SWRText style={[gs.mediumText, {marginTop: 50}]}>Are you a...</SWRText>
+			<SWRText font={'medium'} style={gs.h2}>Let's get started</SWRText>
+			<SWRText  style={gs.h4}>Tell us a little bit about yourself!</SWRText>
+			<SWRText style={[gs.h3, {marginTop: 50}]}>Are you a...</SWRText>
 			<SWRButton onPress={() => {
 				props.setData({...props.data, type: 'Human'})
 				props.next()
 			}} style={styles.button}>
-				<SWRText style={gs.text}>Human</SWRText>
+				<SWRText style={gs.h4}>Human</SWRText>
 			</SWRButton>
-			<SWRText style={gs.mediumText}>or</SWRText>
+			<SWRText style={gs.h3}>or</SWRText>
 			<SWRButton onPress={() => {
 				props.setData({...props.data, type: 'Org'})
 				props.next()
 			}} style={styles.button}>
-				<SWRText style={gs.text}>Community Organization</SWRText>
+				<SWRText style={gs.h4}>Community Organization</SWRText>
 			</SWRButton>
 			<Image source={images.cape_boy} style={styles.capeBoy}/>
 		</View>

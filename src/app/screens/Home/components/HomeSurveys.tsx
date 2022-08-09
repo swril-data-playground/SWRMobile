@@ -14,7 +14,7 @@ export const HomeSurveys = (props: {
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<SWRText style={{fontSize: 18}} font={'bold'}>Featured Surveys</SWRText>
+				<SWRText style={gs.h5} font={'bold'}>Featured Surveys</SWRText>
 				<TextButton onPress={() => setNav('Surveys')}>View all</TextButton>
 			</View>
 			<ScrollView style={styles.scroller} horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -25,7 +25,7 @@ export const HomeSurveys = (props: {
 								<BackgroundImage image={{uri: survey.image}} style={gs.fillImage}/>
 							</View>
 							<View style={styles.surveyInfoView}>
-								<SWRText font={'medium'} style={styles.surveyName}>{survey.name}</SWRText>
+								<SWRText font={'medium'} style={gs.h6}>{survey.name}</SWRText>
 								<SWRText style={styles.surveyCreator}>By {survey.creator}</SWRText>
 							</View>
 						</TouchableOpacity>
@@ -67,9 +67,6 @@ const styles = StyleSheet.create({
 	surveyInfoView: {
 		flex: 1,
 		padding: 7
-	},
-	surveyName: {
-		fontSize: 15,
 	},
 	surveyCreator: {
 		fontSize: 12,

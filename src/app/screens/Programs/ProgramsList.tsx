@@ -13,7 +13,7 @@ export const ProgramsList = (props: {
 	const { setNav } = useContext(NavContext)
 	return (
 		<View>
-			<SWRText style={gs.mediumText}>{props.title}</SWRText>
+			<SWRText style={gs.h3}>{props.title}</SWRText>
 			<View style={styles.list}>
 				{props.programs.map((program, i) => {
 					return (
@@ -23,10 +23,10 @@ export const ProgramsList = (props: {
 								<SWRText style={styles.categoryPill}>{program.category}</SWRText>
 							</View>
 							<View style={styles.programFooter}>
-								<SWRText style={styles.programName}>{program.name}</SWRText>
+								<SWRText style={gs.h6}>{program.name}</SWRText>
 								<View style={styles.locationContainer}>
 									<Image source={images['location']} style={styles.locationIcon}/>
-									<SWRText style={styles.locationText}>{program.location}, ON</SWRText>
+									<SWRText style={gs.h7}>{program.location}, ON</SWRText>
 								</View>
 							</View>
 						</TouchableOpacity>
@@ -64,9 +64,6 @@ const styles = StyleSheet.create({
 		marginTop: 5,
 		padding: 5
 	},
-	programName: {
-		fontSize: 15
-	},
 	locationIcon: {
 		height: 15,
 		width: 15
@@ -75,9 +72,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flexDirection: 'row',
 		marginTop: 5
-	},
-	locationText: {
-		fontSize: 12
 	},
 	categoryPill: {
 		position: 'absolute',

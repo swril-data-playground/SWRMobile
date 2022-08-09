@@ -17,8 +17,8 @@ export const Login = () => {
 				<SWRText>Login</SWRText>
 			</SWRButton>
 			<View style={styles.bottomText}>
-				<SWRText style={gs.text}>{'Don\'t have an account? '}</SWRText>
-				<TextButton onPress={() => setNav('SignUp')} style={[gs.text, {color: 'blue'}]}>Sign up</TextButton>
+				<SWRText style={gs.h4}>{'Don\'t have an account? '}</SWRText>
+				<TextButton onPress={() => setNav('SignUp')} style={[gs.h4, {color: 'blue'}]}>Sign up</TextButton>
 			</View>
 		</View>
 	)

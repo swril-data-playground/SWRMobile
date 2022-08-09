@@ -12,19 +12,25 @@ export const gs = StyleSheet.create({
 	screenPadding: {
 		paddingHorizontal: 20
 	},
-	smallText: {
+	h7: {
 		fontSize: 12
 	},
-	text: {
+	h6: {
+		fontSize: 15
+	},
+	h5: {
+		fontSize: 18
+	},
+	h4: {
 		fontSize: 20,
 	},
-	mediumText: {
+	h3: {
 		fontSize: 30
 	},
-	largeText: {
+	h2: {
 		fontSize: 40,
 	},
-	titleText: {
+	h1: {
 		fontSize: 50,
 	},
 	fillImage: {
