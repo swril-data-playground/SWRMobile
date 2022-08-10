@@ -14,10 +14,6 @@ export const CreateAccountOrg = (props: {
 	next: step
 	back: step
 }) => {
-	const tryCreateAccount = async () => {
-		await new Promise((resolve) => setTimeout(resolve, 1000))
-		props.next()
-	}
 	const nextEnabled = (props.data.name.length > 0 &&
 		props.data.password.length > 0 &&
 		props.data.password === props.data.password2)
@@ -36,7 +32,7 @@ export const CreateAccountOrg = (props: {
 				props.setData({...props.data, password2})	
 			}}/>
 
-			<SWRButton disabled={!nextEnabled} onPress={tryCreateAccount} style={styles.nextButton}>
+			<SWRButton disabled={!nextEnabled} onPress={props.next} style={styles.nextButton}>
 				<SWRText style={gs.h4}>Next</SWRText>
 			</SWRButton>
 			<Image source={images.woman_at_desk} style={styles.officeDeskImage}/>
