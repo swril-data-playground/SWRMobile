@@ -15,7 +15,7 @@ export const GetStarted = (props: {
 }) => {
 	return (
 		<View style={gs.fullScreen} >
-			<BackButton onPressOverride={props.back} leftAlign={true} style={{position: 'absolute'}}/>
+			<BackButton onPressOverride={props.back} leftAlign style={{position: 'absolute'}}/>
 			<PuzzleImage/>
 			<SWRText font={'medium'} style={gs.h2}>Let's get started</SWRText>
 			<SWRText  style={gs.h4}>Tell us a little bit about yourself!</SWRText>

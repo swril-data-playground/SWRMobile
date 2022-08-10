@@ -3,8 +3,11 @@ import { gs } from 'styles/globals'
 import { SWRText } from 'components/SWRText'
 import { images } from 'assets/images'
 import { SWRButton } from 'components/SWRButton'
+import { useContext } from 'react'
+import { NavContext } from 'contexts/navContext'
 
 const CreateScreen = () => {
+	const { setNav } = useContext(NavContext)
 	return (
 		<View style={gs.fullScreen}>
 			<Image source={images.puzzle} style={styles.puzzleImage}/>
@@ -12,7 +15,7 @@ const CreateScreen = () => {
 				<SWRText font={'medium'} style={gs.h1}>Create</SWRText>
 				<SWRText style={gs.h3}>Let's make something</SWRText>
 			</View>
-			<SWRButton onPress={() => {}} style={styles.button}>
+			<SWRButton onPress={() => setNav('CreateSurvey')} style={styles.button}>
 				<SWRText style={styles.buttonText}>Survey</SWRText>
 			</SWRButton>
 			<SWRButton onPress={() => {}} style={styles.button}>
@@ -28,7 +31,7 @@ const CreateScreen = () => {
 
 const styles = StyleSheet.create({
 	puzzleImage: {
-		width: 200,
+		width: 160,
 		height: 100
 	},
 	header: {
@@ -45,8 +48,9 @@ const styles = StyleSheet.create({
 	},
 	skaterGirlImage: {
 		marginTop: 10,
+		marginLeft: 40,
 		height: 240,
-		width: 100
+		width: 140
 	}
 })
 

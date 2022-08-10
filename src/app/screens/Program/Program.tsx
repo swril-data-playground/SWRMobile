@@ -16,7 +16,7 @@ export const Program = (props: {content: any}) => {
 		<View style={styles.container}>
 			<View style={styles.imageContainer}>
 				<BackgroundImage image={{uri: content.image}} style={{borderTopLeftRadius: 20, borderTopRightRadius: 20}} />
-				<BackButton leftAlign={true} style={{margin: 10}} />
+				<BackButton style={{margin: 10}} />
 			</View>
 			<View style={styles.infoContainer}>
 				<SWRText style={gs.h3} font={'medium'}>{content.name}</SWRText>

@@ -15,9 +15,9 @@ export const Survey = (props: {content: any}) => {
 	const [answers, setAnswers] = useState<AnswerType[]>(generateAnswersArray(content.questions))
 	return (
 		<View style={gs.scrollParent}>
-			<BackButton leftAlign={true} screenPadding={true}/>
+			<BackButton leftAlign screenPadding/>
 			<ScrollView >
-				<SWRText font={'medium'} style={styles.h1}>{content.name}</SWRText>
+				<SWRText font={'medium'} style={styles.h1}>{content.title}</SWRText>
 				<Questions answers={answers} setAnswers={setAnswers} quesions={content.questions}/>
 			</ScrollView>
 		</View>

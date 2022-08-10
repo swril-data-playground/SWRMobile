@@ -6,7 +6,7 @@ export const PuzzleImage = () => {
 		<Image 
 			source={images.puzzle} 
 			style={{
-				width: 240,
+				width: 200,
 				height: 120
 			}}
 		/>

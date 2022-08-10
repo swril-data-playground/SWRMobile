@@ -57,7 +57,7 @@ export const examplePrograms:ProgramType[] = [
 
 export const exampleSurveys:SurveyType[] = [
 	{
-		name: 'What is your favourite park equipment?',
+		title: 'What is your favourite park equipment?',
 		description: mediumLorem,
 		creator: 'Child & Your Planning Table',
 		image: 'https://picsum.photos/300/200',
@@ -85,7 +85,7 @@ export const exampleSurveys:SurveyType[] = [
 		],
 	},
 	{
-		name: 'What inspires you?',
+		title: 'What inspires you?',
 		description: mediumLorem,
 		creator: 'SWRIL',
 		image: 'https://picsum.photos/300/200',
@@ -114,7 +114,7 @@ export const exampleSurveys:SurveyType[] = [
 		],
 	},
 	{
-		name: 'Nullam bibendum',
+		title: 'Nullam bibendum',
 		description: mediumLorem,
 		creator: 'Lorem Ipsum',
 		image: 'https://picsum.photos/300/200',

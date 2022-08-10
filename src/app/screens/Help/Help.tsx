@@ -7,7 +7,7 @@ import { gs } from "styles/globals"
 export const Help = () => {
 	return (
 		<View style={gs.scrollParent}>
-			<BackButton leftAlign={true} screenPadding={true}/>
+			<BackButton leftAlign screenPadding/>
 			<ScrollView style={gs.screenPadding}>
 				<View style={styles.header}>
 					<Image

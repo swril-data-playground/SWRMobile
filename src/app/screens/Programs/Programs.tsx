@@ -13,7 +13,7 @@ const ProgramsScreen = () => {
 	const discoverPrograms = data.programs
 	return (
 		<View style={gs.scrollParent}>
-			<BackButton leftAlign={true} screenPadding={true}/>
+			<BackButton leftAlign screenPadding/>
 			<View style={[styles.header, gs.screenPadding]}>
 				<SWRText font={'medium'} style={gs.h1}>Programs</SWRText>
 				<TouchableOpacity>

@@ -6,7 +6,7 @@ import { exampleAccount } from './exampleData';
 export const tryGetAuth = async (): Promise<{ status: statusType, auth: AuthContextType }> => {
 	await new Promise((resolve) => setTimeout(resolve, 1000))
 	return {
-		status: 404,
+		status: 200,
 		auth: {
 			auth: '',
 			account: exampleAccount
