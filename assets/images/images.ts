@@ -53,6 +53,8 @@ export const images = {
 	white_puzzle: require('assets/images/white_puzzle.png'),
 	woman_at_desk: require('assets/images/woman_at_desk.png'),
 	yellow_puzzle: require('assets/images/yellow_puzzle.png'),
+	check: require('assets/images/check.png'),
+	triangle: require('assets/images/triangle.png'),
 } as const
 
 export type imageName = keyof typeof images

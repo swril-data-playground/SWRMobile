@@ -1,6 +1,9 @@
+import { images } from "assets/images"
 import { useState } from "react"
-import { StyleSheet, TouchableOpacity, View } from "react-native"
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
+import { colors } from "styles/colors"
 import { gs } from "styles/globals"
+import { CheckBox } from "./CheckBox"
 import { SWRText } from "./SWRText"
 
 export interface SWRSelectInputProps {
@@ -13,22 +16,31 @@ export interface SWRSelectInputProps {
 
 export const SWRSelectInput = (props: SWRSelectInputProps) => {
 	const [open, setOpen] = useState(false)
-	const modalStyle = { display: open? 'flex':'none'}
+	const modalStyle = { display: open? 'flex':'none'} as const
+	const valueStyle = { backgroundColor: open? colors.lightGrey:'white' }
 	const content = (
 		<View style={styles.container}>
 			<TouchableOpacity 
-				style={styles.primaryButton} 
+				style={[styles.option, styles.primaryButton,  valueStyle]} 
 				onPress={() => setOpen(!open)}
 			>
-				<SWRText>
+				<SWRText style={gs.h5}>
 					{props.value ?? '-Select-' }
 				</SWRText>
+				<Image source={images.triangle} style={styles.triangleIcon}/>
 			</TouchableOpacity>
 			<View style={[styles.optionsModal, modalStyle]}>
 				{props.choices.map((choice, i) => {
+					const selected = props.value === choice
+					const selectStyle = {
+						backgroundColor: selected? colors.lightBlue : undefined
+					}
 					return (
-						<TouchableOpacity key={i}>
-							<SWRText>{choice}</SWRText>
+						<TouchableOpacity key={i} style={[styles.option, selectStyle]} onPress={() => {
+							props.onChange(choice)
+						}}>
+							<CheckBox checked={selected} size={20} style={{marginRight: 10}} color={colors.blue}/>
+							<SWRText style={gs.h5}>{choice}</SWRText>
 						</TouchableOpacity>
 					)
 				})}
@@ -51,21 +63,32 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		overflow: 'visible',
+		width: '100%'
 	},
 	primaryButton: {
-
+		borderRadius: 15,
+		paddingLeft: 20,
+		justifyContent: 'space-between'
 	},
 	optionsModal: {
-
+		backgroundColor: 'white',
+		borderRadius: 15,
+		overflow: 'hidden'
 	},
-	textInput: {
+	option: {
 		height: 50,
 		padding: 10,
-		marginVertical: 4,
-		borderRadius: 15,
 		fontSize: 18,
 		textAlign: 'left',
 		width: '100%',
-		backgroundColor: 'white'
+		justifyContent: 'flex-start',
+		alignItems: 'center',
+		flexDirection: 'row'
 	},
+	triangleIcon: {
+		height: 15,
+		width: 14,
+		resizeMode: 'stretch',
+		marginRight: 15
+	}
 })

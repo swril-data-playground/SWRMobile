@@ -33,6 +33,8 @@ export const CreateSurvey = () => {
 					value={surveyData.category}
 					choices={questionTypes}
 					onChange={(value) => setSurveyData({...surveyData, category: value as CategoryType})}
+					name={'Category'}
+					withTitle
 				/>
 			</ScrollView>
 		</View>
