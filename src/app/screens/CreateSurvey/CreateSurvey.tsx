@@ -1,9 +1,11 @@
 import { BackButton } from "components/BackButton"
+import { QuestionsCreator } from "components/QuestionsCreator"
 import { SWRSelectInput } from "components/SWRSelectInput"
 import { SWRText } from "components/SWRText"
 import { SWRTextInput } from "components/SWRTextInput"
 import { useState } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
+import { colors } from "styles/colors"
 import { gs } from "styles/globals"
 import { CategoryType } from "types/filter"
 import { questionTypes } from "types/questions"
@@ -34,6 +36,11 @@ export const CreateSurvey = () => {
 					choices={questionTypes}
 					onChange={(value) => setSurveyData({...surveyData, category: value as CategoryType})}
 					name={'Category'}
+					withTitle
+				/>
+				<QuestionsCreator 
+					questions={surveyData.questions} 
+					setQuestions={(questions) => setSurveyData({...surveyData, questions})} 
 					withTitle
 				/>
 			</ScrollView>

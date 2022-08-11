@@ -23,16 +23,16 @@ export const CreateAccountHuman = (props: {
 			<BackButton onPressOverride={props.back} leftAlign style={{position: 'absolute'}}/>
 			<PuzzleImage/>
 			<SWRText font={'medium'} style={styles.title}>Create an account</SWRText>
-			<SWRTextInput withTitle value={props.data.firstName} name={'First Name'} style={styles.textInput} onChange={(firstName) => {
+			<SWRTextInput withTitle value={props.data.firstName} name={'First Name'} containerStyle={styles.textInput} onChange={(firstName) => {
 				props.setData({...props.data, firstName})	
 			}}/>
-			<SWRTextInput withTitle value={props.data.lastName} name={'Last Name'} style={styles.textInput} onChange={(lastName) => {
+			<SWRTextInput withTitle value={props.data.lastName} name={'Last Name'} containerStyle={styles.textInput} onChange={(lastName) => {
 				props.setData({...props.data, lastName})	
 			}}/>
-			<SWRTextInput withTitle value={props.data.password} name={'Password'} style={styles.textInput} onChange={(password) => {
+			<SWRTextInput withTitle value={props.data.password} name={'Password'} containerStyle={styles.textInput} onChange={(password) => {
 				props.setData({...props.data, password})	
 			}}/>
-			<SWRTextInput withTitle value={props.data.password2} name={'Confirm Password'} style={styles.textInput} onChange={(password2) => {
+			<SWRTextInput withTitle value={props.data.password2} name={'Confirm Password'} containerStyle={styles.textInput} onChange={(password2) => {
 				props.setData({...props.data, password2})	
 			}}/>
 

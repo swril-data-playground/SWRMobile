@@ -1,6 +1,6 @@
 import { images } from "assets/images"
 import { useState } from "react"
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
+import { Image, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native"
 import { colors } from "styles/colors"
 import { gs } from "styles/globals"
 import { CheckBox } from "./CheckBox"
@@ -12,6 +12,8 @@ export interface SWRSelectInputProps {
 	onChange: (newValue: string) => void,
 	withTitle?: boolean
 	name?: string
+	containerStyle?: StyleProp<ViewStyle>
+	buttonStyle?: StyleProp<ViewStyle>
 }
 
 export const SWRSelectInput = (props: SWRSelectInputProps) => {
@@ -21,7 +23,7 @@ export const SWRSelectInput = (props: SWRSelectInputProps) => {
 	const content = (
 		<View style={styles.container}>
 			<TouchableOpacity 
-				style={[styles.option, styles.primaryButton,  valueStyle]} 
+				style={[styles.option, styles.primaryButton,  valueStyle,  props.buttonStyle]} 
 				onPress={() => setOpen(!open)}
 			>
 				<SWRText style={gs.h5}>
@@ -49,7 +51,7 @@ export const SWRSelectInput = (props: SWRSelectInputProps) => {
 	)
 	if (!props.withTitle) return content
 	return (
-		<View style={[styles.withTitleContainer]}>
+		<View style={[styles.withTitleContainer, props.containerStyle]}>
 			<SWRText style={gs.h4}>{props.name}</SWRText>
 			{content}
 		</View>
@@ -63,7 +65,8 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		overflow: 'visible',
-		width: '100%'
+		width: '100%',
+		marginVertical: 4,
 	},
 	primaryButton: {
 		borderRadius: 15,

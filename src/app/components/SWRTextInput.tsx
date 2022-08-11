@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { StyleProp, StyleSheet, TextInput, View, ViewStyle } from "react-native"
 import { gs } from "styles/globals"
 import { SWRText } from "./SWRText"
@@ -9,7 +10,8 @@ export interface SWRTextInputProps {
 	keyboardType?: "default" | "email-address" | "numeric" | "phone-pad" | "number-pad" | "decimal-pad" |"url"
 	lines?: number
 	withTitle?: boolean
-	style?: StyleProp<ViewStyle>,
+	containerStyle?: StyleProp<ViewStyle>,
+	inputStyle?: StyleProp<ViewStyle>,
 }
 
 export const SWRTextInput = (props: SWRTextInputProps) => {
@@ -23,7 +25,7 @@ export const SWRTextInput = (props: SWRTextInputProps) => {
 		<TextInput 
 			keyboardType={props.keyboardType} 
 			value={props.value} 
-			style={[styles.textInput, additionalStyles]} 
+			style={[styles.textInput, additionalStyles, props.inputStyle]} 
 			placeholder={props.name} 
 			onChangeText={props.onChange}
 			multiline={multiline}
@@ -31,7 +33,7 @@ export const SWRTextInput = (props: SWRTextInputProps) => {
 	)
 	if (!props.withTitle) return content
 	return (
-		<View style={[styles.container, props.style]}>
+		<View style={[styles.container, props.containerStyle]}>
 			<SWRText style={gs.h4}>{props.name}</SWRText>
 			{content}
 		</View>

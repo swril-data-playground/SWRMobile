@@ -66,21 +66,18 @@ export const exampleSurveys:SurveyType[] = [
 				id: '11',
 				prompt: 'Which park equipment is your favourite?',
 				type: 'Multiple choice',
-				optional: false,
 				choices: ['Slide', 'Swing', 'Monkey Bars', 'Other']
 			},
 			{
 				id: '2',
 				prompt: 'What is best day to go to the park?',
 				type: 'Multiple choice',
-				optional: false,
 				choices: ['Friday', 'Saturday', 'Sunday', 'Other']
 			},
 			{
 				id: '3',
 				prompt: 'What is your date of birth?',
 				type: 'Date',
-				optional: false,
 			},
 		],
 	},
@@ -94,21 +91,18 @@ export const exampleSurveys:SurveyType[] = [
 				id: '4',
 				prompt: 'Wich season is the most inspiring?',
 				type: 'Multiple choice',
-				optional: false,
 				choices: ['Spring', 'Summer', 'Fall', 'Winter']
 			},
 			{
 				id: '5',
 				prompt: 'What colour is the most inspiring?',
 				type: 'Multiple choice',
-				optional: false,
 				choices: ['Blue', 'Green', 'Pink', 'Yellow']
 			},
 			{
 				id: '6',
 				prompt: 'Does being at the beach make you feel inspired?',
 				type: 'Multiple choice',
-				optional: false,
 				choices: ['Yes', 'No']
 			},
 		],
@@ -122,13 +116,11 @@ export const exampleSurveys:SurveyType[] = [
 			id: '7',
 			prompt: 'Extra words extra words',
 			type: 'Open-ended',
-			optional: false,
 		},
 		{
 			id: '8',
 			prompt: 'Extra words extra words, reallyreallylongword',
 			type: 'Open-ended',
-			optional: false,
 		},],
 	},
 ]

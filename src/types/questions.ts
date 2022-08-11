@@ -2,12 +2,16 @@ export const questionTypes = ['Open-ended', 'Multiple choice', 'Demographic', 'D
 export type typeOfQuestion = typeof questionTypes[number]
 
 export interface QuestionType {
-	id: string
+	id?: string
 	prompt: string
-	type: typeOfQuestion
+	type?: typeOfQuestion
 	choices?: string[]
-	optional: boolean
+	optional?: boolean
 }
+
+export const defaultQuestion:QuestionType = {
+	prompt: ''
+}	
 
 export type AnswerType = string
 

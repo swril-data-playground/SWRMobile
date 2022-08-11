@@ -22,13 +22,13 @@ export const CreateAccountOrg = (props: {
 			<BackButton onPressOverride={props.back} leftAlign style={{position: 'absolute'}}/>
 			<PuzzleImage/>
 			<SWRText font={'medium'} style={styles.title}>Create an account</SWRText>
-			<SWRTextInput withTitle value={props.data.name} name={'Name of Organization'} style={styles.textInput} onChange={(name) => {
+			<SWRTextInput withTitle value={props.data.name} name={'Name of Organization'} containerStyle={styles.textInput} onChange={(name) => {
 				props.setData({...props.data, name})	
 			}}/>
-			<SWRTextInput withTitle value={props.data.password} name={'Password'} style={styles.textInput} onChange={(password) => {
+			<SWRTextInput withTitle value={props.data.password} name={'Password'} containerStyle={styles.textInput} onChange={(password) => {
 				props.setData({...props.data, password})	
 			}}/>
-			<SWRTextInput withTitle value={props.data.password2} name={'Confirm Password'} style={styles.textInput} onChange={(password2) => {
+			<SWRTextInput withTitle value={props.data.password2} name={'Confirm Password'} containerStyle={styles.textInput} onChange={(password2) => {
 				props.setData({...props.data, password2})	
 			}}/>
 
