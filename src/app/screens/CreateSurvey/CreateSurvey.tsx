@@ -1,9 +1,13 @@
 import { BackButton } from "components/BackButton"
 import { QuestionsCreator } from "components/QuestionsCreator"
+import { SWRButton } from "components/SWRButton"
 import { SWRSelectInput } from "components/SWRSelectInput"
 import { SWRText } from "components/SWRText"
 import { SWRTextInput } from "components/SWRTextInput"
-import { useState } from "react"
+import { AuthContext } from "contexts/authContext"
+import { NavContext } from "contexts/navContext"
+import { tryCreateSurvey } from "data/surveys"
+import { useContext, useState } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
 import { colors } from "styles/colors"
 import { gs } from "styles/globals"
@@ -13,6 +17,20 @@ import { defaultSurvey, SurveyType } from "types/surveys"
 
 export const CreateSurvey = () => {
 	const [surveyData, setSurveyData] = useState<SurveyType>(defaultSurvey)
+	const { auth } = useContext(AuthContext)
+	const { setNav } = useContext(NavContext)
+	const handleTryCreateSurvey = async () => {
+		if (!auth.account) return
+		const {survey, status} = await tryCreateSurvey(surveyData, auth.account)
+		if (status === 200) setNav("Survey", survey)
+		else throw Error('Failed to create survey')
+	}
+	const doneEnabled = (
+		surveyData.title.length > 0 &&
+		surveyData.description.length > 0 &&
+		surveyData.category &&
+		surveyData.questions.length > 0
+	)
 	return (
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign screenPadding />
@@ -43,6 +61,9 @@ export const CreateSurvey = () => {
 					setQuestions={(questions) => setSurveyData({...surveyData, questions})} 
 					withTitle
 				/>
+				<SWRButton style={styles.doneButton} onPress={handleTryCreateSurvey} disabled={!doneEnabled}>
+					<SWRText style={gs.h5} font={'medium'}>Done</SWRText>
+				</SWRButton>
 			</ScrollView>
 		</View>
 	)
@@ -53,5 +74,9 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 40,
 		marginBottom: 10
+	},
+	doneButton: {
+		marginTop: 20,
+		borderRadius: 15,
 	}
 })

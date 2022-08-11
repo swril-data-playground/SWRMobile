@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { NavContext } from 'contexts/navContext'
 import { imageName, images } from "assets/images"
 import { tabItems, tabName } from 'src/app/navigation/tabs'
+import { colors } from 'styles/colors'
 export const Tabs = (props: { tab: tabName}) => {
 	const { setNav } = useContext(NavContext)
 	return (
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'flex-start',
 		justifyContent: 'space-between',
-		backgroundColor: 'white'
+		backgroundColor: colors.lightGrey
 	},
 	navItem: {
 		flex: 1,

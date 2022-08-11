@@ -2,6 +2,7 @@ import { SWRText } from "components/SWRText"
 import { AuthContext } from "contexts/authContext"
 import { useContext } from "react"
 import { StyleSheet, View } from "react-native"
+import { colors } from "styles/colors"
 import { gs } from "styles/globals"
 
 
@@ -23,6 +24,6 @@ const styles = StyleSheet.create({
 		textAlign: 'left'
 	},
 	blueText: {
-		color: 'blue'
+		color: colors.navyBlue
 	}
 })

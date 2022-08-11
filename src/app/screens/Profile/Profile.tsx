@@ -47,7 +47,7 @@ const ProfileScreen = () => {
 						)
 					})}
 					<TouchableOpacity style={styles.member}>
-						<Image source={images.add} style={{margin: 8}}/>
+						<Image source={images.add} style={styles.addImage}/>
 						<SWRText style={[gs.h7, {textAlign: 'center'}]}>Add household member</SWRText>
 					</TouchableOpacity>
 				</ScrollView>
@@ -119,6 +119,11 @@ const styles = StyleSheet.create({
 		height: 30,
 		width: 30,
 		marginRight: 10
+	},
+	addImage: {
+		margin: 8,
+		height: 40,
+		width: 40
 	}
 })
 
