@@ -11,7 +11,12 @@ export const defaultNavValue: NavContextType = {
 	stack: ['Home']
 }
 
-export const NavContext = createContext<{nav: NavContextType; setNav: (newNav: string, newNavContent?: any) => void }>({
+export const NavContext = createContext<{
+	nav: NavContextType; 
+	setNav: (newNav: string, newNavContent?: any) => void 
+	setStack: (newStack: string[], newNavContent: any) => void
+}>({
 	nav: defaultNavValue,
 	setNav: (newNav: string, newNavContent: any = null) => {},
+	setStack: (newStack: string[], newNavContent: any = null) => {},
 })

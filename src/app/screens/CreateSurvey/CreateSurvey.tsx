@@ -18,11 +18,14 @@ import { defaultSurvey, SurveyType } from "types/surveys"
 export const CreateSurvey = () => {
 	const [surveyData, setSurveyData] = useState<SurveyType>(defaultSurvey)
 	const { auth } = useContext(AuthContext)
-	const { setNav } = useContext(NavContext)
+	const { setStack } = useContext(NavContext)
 	const handleTryCreateSurvey = async () => {
 		if (!auth.account) return
 		const {survey, status} = await tryCreateSurvey(surveyData, auth.account)
-		if (status === 200) setNav("Survey", survey)
+		if (status === 200) {
+			setSurveyData(defaultSurvey)
+			setStack(['Home', 'Survey'], survey)
+		}
 		else throw Error('Failed to create survey')
 	}
 	const doneEnabled = (
