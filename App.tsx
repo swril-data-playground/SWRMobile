@@ -8,6 +8,14 @@ import { defaultErrorValue, ErrorContext, ErrorContextType } from 'contexts/erro
 import { DataContextType, defaultDataValue, DataContext } from 'contexts/dataContext'
 import { LoadingScreen } from 'screens/LoadingScreen'
 import { ErrorScreen } from 'screens/ErrorScreen'
+import { Program } from 'screens/Program'
+import { Privacy } from 'screens/Privacy'
+import { Help } from 'screens/Help'
+import { LearnMore } from 'screens/LearnMore'
+import { Login } from 'screens/Login/Login'
+import { Survey } from 'screens/Survey'
+import { CreateSurvey } from 'screens/CreateSurvey'
+import { CreateProgram } from 'screens/CreateProgram'
 import Home from 'screens/Home'
 import Programs from 'screens/Programs'
 import Settings from 'screens/Settings'
@@ -22,15 +30,9 @@ import { listIncludes } from 'utils/typelessIncludes'
 import * as Font from 'expo-font';
 import { fonts } from 'assets/fonts/fonts'
 import { tryGetPrograms } from 'data/programs'
-import { Program } from 'screens/Program'
-import { Privacy } from 'screens/Privacy'
-import { Help } from 'screens/Help'
-import { LearnMore } from 'screens/LearnMore'
-import { Login } from 'screens/Login/Login'
 import { tryGetSurveys } from 'data/surveys'
-import { Survey } from 'screens/Survey/Survey'
-import { CreateSurvey } from 'screens/CreateSurvey/CreateSurvey'
-import { CreateProgram } from 'screens/CreateProgram/CreateProgram'
+import { ProgramData } from 'screens/ProgramData'
+import { SurveyData } from 'screens/SurveyData'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -135,6 +137,8 @@ const SmartWaterlooMobile = () => {
 										<NavItem name={'LearnMore'} component={<LearnMore />} />
 										<NavItem name={'CreateSurvey'} component={<CreateSurvey />} />
 										<NavItem name={'CreateProgram'} component={<CreateProgram />} />
+										<NavItem name={'ProgramData'} component={<ProgramData />} />
+										<NavItem name={'SurveyData'} component={<SurveyData />} />
 									</NavContainer>
 									{mainTab && <Tabs tab={nav.nav as tabName} />}
 								</>

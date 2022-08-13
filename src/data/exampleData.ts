@@ -2,7 +2,8 @@ import { AccountType } from "types/account";
 import { defaultAvatar } from "types/avatar";
 import { defaultProgram, ProgramType } from "types/programs";
 import { defaultSurvey, SurveyType } from "types/surveys";
-import { mediumLorem } from "./lorem";
+
+export const mediumLorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit arcu sed efficitur pharetra. Aenean pretium blandit dictum. Nullam nulla,vulputate tempor augue.'
 
 export const exampleAccount:AccountType = {
 	firstName: 'Jonathan',

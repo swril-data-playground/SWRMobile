@@ -13,6 +13,7 @@
 			"src/*": ["src/*"],
 			"assets/*": ["assets/*"]
 		},
+		"alwaysStrict": true,
 		"jsx": "react-jsx",
 		"strict": true,
 		"noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied `any` type.. */,

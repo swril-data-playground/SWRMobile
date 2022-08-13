@@ -1,1 +1,0 @@
-export const mediumLorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit arcu sed efficitur pharetra. Aenean pretium blandit dictum. Nullam nulla,vulputate tempor augue.'

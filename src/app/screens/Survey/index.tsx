@@ -1,1 +1,1 @@
-export { Program } from './Survey'
+export { Survey } from './Survey'

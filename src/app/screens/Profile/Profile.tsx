@@ -36,7 +36,7 @@ const ProfileScreen = () => {
 			</View>
 			<View style={styles.householdMembersContainer}>
 				<SWRText font={'medium'} style={gs.h4}>Household Members</SWRText>
-				<ScrollView horizontal={true}>
+				<ScrollView horizontal>
 					{auth.account?.householdMembers.map((member, i) => {
 						return (
 							<View key={i} style={styles.member}>

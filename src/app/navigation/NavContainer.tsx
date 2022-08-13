@@ -27,7 +27,7 @@ export const NavContainer = (props: NavContainerType['props']): JSX.Element => {
 		navNames.push(name)
 		if (nav.nav === name) navFound = true
 	})
-	if (!navFound) throw Error('Page ' + nav + ' not found')
+	if (!navFound) throw Error('Page ' + nav.nav + ' not found')
 	return (
 		<>
 			{navItems.map((item, i) => {

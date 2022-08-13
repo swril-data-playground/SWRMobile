@@ -17,7 +17,7 @@ export const HomeSurveys = (props: {
 				<SWRText style={gs.h5} font={'bold'}>Featured Surveys</SWRText>
 				<TextButton onPress={() => setNav('Surveys')}>View all</TextButton>
 			</View>
-			<ScrollView style={styles.scroller} horizontal={true} showsHorizontalScrollIndicator={false}>
+			<ScrollView style={styles.scroller} horizontal showsHorizontalScrollIndicator={false}>
 				{props.surveys.map((survey, i) => {
 					return (
 						<TouchableOpacity style={styles.survey} onPress={() => setNav('Survey', survey)} key={i}>
@@ -25,7 +25,7 @@ export const HomeSurveys = (props: {
 								<BackgroundImage image={{uri: survey.image}} style={gs.fillImage}/>
 							</View>
 							<View style={styles.surveyInfoView}>
-								<SWRText font={'medium'} style={gs.h6}>{survey.name}</SWRText>
+								<SWRText font={'medium'} style={gs.h6}>{survey.title}</SWRText>
 								<SWRText style={styles.surveyCreator}>By {survey.creator}</SWRText>
 							</View>
 						</TouchableOpacity>
