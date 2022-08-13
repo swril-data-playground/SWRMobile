@@ -19,7 +19,7 @@ export const Program = (props: {content: any}) => {
 				<BackButton style={{margin: 10}} />
 			</View>
 			<View style={styles.infoContainer}>
-				<SWRText style={gs.h3} font={'medium'}>{content.name}</SWRText>
+				<SWRText style={gs.h3} font={'medium'}>{content.title}</SWRText>
 				<SWRText style={styles.description}>{content.description}</SWRText>
 			</View>
 			<View style={styles.signUpContainer}>

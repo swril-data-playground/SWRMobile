@@ -21,7 +21,7 @@ const CreateScreen = () => {
 			<SWRButton onPress={() => {}} style={styles.button}>
 				<SWRText style={styles.buttonText}>Poll</SWRText>
 			</SWRButton>
-			<SWRButton onPress={() => {}} style={styles.button}>
+			<SWRButton onPress={() => setNav('CreateProgram')} style={styles.button}>
 				<SWRText style={styles.buttonText}>Program</SWRText>
 			</SWRButton>
 			<Image source={images.skateboard_girl} style={styles.skaterGirlImage}/>

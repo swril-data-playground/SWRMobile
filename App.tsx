@@ -30,6 +30,7 @@ import { Login } from 'screens/Login/Login'
 import { tryGetSurveys } from 'data/surveys'
 import { Survey } from 'screens/Survey/Survey'
 import { CreateSurvey } from 'screens/CreateSurvey/CreateSurvey'
+import { CreateProgram } from 'screens/CreateProgram/CreateProgram'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -133,6 +134,7 @@ const SmartWaterlooMobile = () => {
 										<NavItem name={'Help'} component={<Help />} />
 										<NavItem name={'LearnMore'} component={<LearnMore />} />
 										<NavItem name={'CreateSurvey'} component={<CreateSurvey />} />
+										<NavItem name={'CreateProgram'} component={<CreateProgram />} />
 									</NavContainer>
 									{mainTab && <Tabs tab={nav.nav as tabName} />}
 								</>

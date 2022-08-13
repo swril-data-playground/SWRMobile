@@ -23,7 +23,7 @@ export const HomePrograms = (props: {
 					return (
 						<TouchableOpacity style={styles.program} onPress={() => setNav('Program', program)} key={i}>
 							<BackgroundImage image={{uri: program.image}} style={styles.programImage}/>
-							<SWRText font={'bold'} style={styles.programName}>{program.name}</SWRText>
+							<SWRText font={'bold'} style={styles.programName}>{program.title}</SWRText>
 							<SWRText style={styles.programCaption}>{program.caption}</SWRText>
 							<View style={styles.arrowSection}>
 								<Image source={images['long_arrow_right']}/>

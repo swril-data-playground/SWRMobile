@@ -17,7 +17,7 @@ export const SurveysList = (props: {
 				{props.surveys.map((survey, i) => {
 					return (
 						<TouchableOpacity key={i} style={styles.survey} onPress={() => setNav('Survey', survey)}>
-							<SWRText style={gs.h5}>{survey.name}</SWRText>
+							<SWRText style={gs.h5}>{survey.title}</SWRText>
 						</TouchableOpacity>
 					)
 				})}

@@ -20,7 +20,7 @@ export const exampleAccount:AccountType = {
 export const examplePrograms:ProgramType[] = [
 	{
 		...defaultProgram,
-		name: 'Exploring Bauhaus',
+		title: 'Exploring Bauhaus',
 		caption: 'Learn new things',
 		description: mediumLorem,
 		category: 'Gardening',
@@ -31,10 +31,10 @@ export const examplePrograms:ProgramType[] = [
 	},
 	{
 		...defaultProgram,
-		name: 'Intro to Chemistry',
+		title: 'Intro to Chemistry',
 		caption: 'At a school near you',
 		description: mediumLorem,
-		location: 'Kitchener',
+		municipality: 'Kitchener',
 		date: '2022-09-21',
 		startTime: '11:15',
 		endTime: '13:00',
@@ -42,11 +42,11 @@ export const examplePrograms:ProgramType[] = [
 	},
 	{
 		...defaultProgram,
-		name: 'Plant Vegetables in Elmira',
+		title: 'Plant Vegetables in Elmira',
 		caption: 'Sign up now',
 		description: mediumLorem,
 		category: 'Gardening',
-		location: 'Cambridge',
+		municipality: 'Cambridge',
 		date: '2022-09-28',
 		startTime: '10:00',
 		endTime: '11:30',

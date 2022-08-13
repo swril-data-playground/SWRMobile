@@ -1,18 +1,18 @@
 export const dataCategories = ['All', 'Sports', 'Gardening', 'Volunteering', 'Learning'] as const 
-export const dataLocations = ['Kitchener', 'Cambridge', 'Waterloo', 'North Dumfries', 'Wellesley', 'Wilmot', 'Woolwich'] as const
+export const municipalities = ['Kitchener', 'Cambridge', 'Waterloo', 'North Dumfries', 'Wellesley', 'Wilmot', 'Woolwich'] as const
 export type CategoryType = typeof dataCategories[number]
-export type LocationType = typeof dataLocations[number]
+export type MunicipalityType = typeof municipalities[number]
 
 export interface FilterType {
 	category: CategoryType
-	locations: LocationType[]
+	municipalities: MunicipalityType[]
 	recent: boolean
 	lastOpened: boolean
 }
 
 export const defaultFilter: FilterType = {
 	category: 'All',
-	locations: ['Kitchener'],
+	municipalities: ['Kitchener'],
 	recent: false,
 	lastOpened: false
 }

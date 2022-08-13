@@ -23,10 +23,10 @@ export const ProgramsList = (props: {
 								<SWRText style={styles.categoryPill}>{program.category}</SWRText>
 							</View>
 							<View style={styles.programFooter}>
-								<SWRText style={gs.h6}>{program.name}</SWRText>
+								<SWRText style={gs.h6}>{program.title}</SWRText>
 								<View style={styles.locationContainer}>
 									<Image source={images['location']} style={styles.locationIcon}/>
-									<SWRText style={gs.h7}>{program.location}, ON</SWRText>
+									<SWRText style={gs.h7}>{program.municipality}, ON</SWRText>
 								</View>
 							</View>
 						</TouchableOpacity>

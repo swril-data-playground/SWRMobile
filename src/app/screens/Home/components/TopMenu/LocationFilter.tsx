@@ -2,10 +2,10 @@ import { images } from "assets/images"
 import { SWRText } from "components/SWRText"
 import { Image, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
-import { dataLocations } from "types/filter"
+import { municipalities } from "types/filter"
 
 export const LocationFilter = () => {
-	const location = dataLocations[0]
+	const location = municipalities[0]
 	return (
 		<View style={styles.container}>
 			<Image 

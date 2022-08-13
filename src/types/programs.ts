@@ -1,33 +1,40 @@
 import { mediumLorem } from "data/lorem"
 import { defaultPublicAccount, PublicAccountType } from "./account"
-import { CategoryType, LocationType } from "./filter"
+import { CategoryType, MunicipalityType } from "./filter"
+import { QuestionType } from "./questions"
 
 
 interface ProgramType {
 	id?: string,
-	name: string,
+	title: string,
 	caption: string,
+	creator: string,
 	image: string,
 	description: string,
 	category: CategoryType,
-	location: LocationType,
+	municipality: MunicipalityType,
+	address: string,
 	date: string,
 	startTime: string,
 	endTime: string,
 	repeat?: string,
 	attendees: PublicAccountType[],
+	questions: QuestionType[]
 }
 const defaultProgram: ProgramType = {
-	name: '',
+	title: '',
 	caption: '',
+	creator: '',
 	image: '',
 	description: '',
 	category: 'Learning',
-	location: 'Waterloo',
+	municipality: 'Waterloo',
+	address: '',
 	date: '',
 	startTime: '',
 	endTime: '',
 	attendees: [defaultPublicAccount, defaultPublicAccount, defaultPublicAccount, defaultPublicAccount],
+	questions: []
 }
 
 export { defaultProgram }
