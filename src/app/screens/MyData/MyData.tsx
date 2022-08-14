@@ -4,6 +4,7 @@ import { SWRText } from 'components/SWRText'
 import { images } from 'assets/images'
 import { useContext } from 'react'
 import { NavContext } from 'contexts/navContext'
+import { MyCreations } from './components/MyCreations'
 
 const MyDataScreen = () => {
 	const { setNav } = useContext(NavContext)
@@ -19,7 +20,7 @@ const MyDataScreen = () => {
 				<Image source={images.puzzle} style={styles.puzzleImage}/>
 				<SWRText style={gs.h2} font={'medium'}>My data</SWRText>
 				<SWRText style={styles.subHeaderText} font={'medium'}>Who has access to my data?</SWRText>
-				<ScrollView style={styles.sideScroller} horizontal showsHorizontalScrollIndicator={false}	>
+				<ScrollView style={{overflow: 'visible'}} horizontal showsHorizontalScrollIndicator={false}	>
 					{accessPanels.map((panel, i) => {
 						const arrowColor = {backgroundColor: panel.color}
 						return (
@@ -34,9 +35,7 @@ const MyDataScreen = () => {
 						)
 					})}
 				</ScrollView>
-				<View style={styles.subHeader}>
-					<SWRText style={styles.subHeaderText} font={'medium'}>My creations</SWRText>
-				</View>
+				<MyCreations/>
 				<SWRText style={styles.subHeaderText} font={'medium'}>My cloud</SWRText>
 				<SWRText style={styles.subHeaderText} font={'medium'}>My cloud</SWRText>
 			</ScrollView>
@@ -47,13 +46,6 @@ const styles = StyleSheet.create({
 	puzzleImage: {
 		width: 160,
 		height: 100
-	},
-	subHeader: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		fontSize: 20,
-		textAlign: 'left',
-		width: '100%',
 	},
 	subHeaderText: {
 		marginVertical: 10,
@@ -83,9 +75,6 @@ const styles = StyleSheet.create({
 		left: 0,
 		alignItems: 'center',
 		justifyContent: 'center'
-	},
-	sideScroller: {
-		overflow: 'visible'
 	},
 })
 

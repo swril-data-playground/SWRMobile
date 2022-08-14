@@ -5,18 +5,6 @@ import { defaultSurvey, SurveyType } from "types/surveys";
 
 export const mediumLorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit arcu sed efficitur pharetra. Aenean pretium blandit dictum. Nullam nulla,vulputate tempor augue.'
 
-export const exampleAccount:AccountType = {
-	firstName: 'Jonathan',
-	lastName: 'Lateef',
-	avatar: defaultAvatar,
-	walletId: '4252-427e-af7d-3dcaaf2db2df',
-	keyPhrase: 'One two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen',
-	householdMembers: [
-		{firstName: 'Miriam', lastName: 'Lateef', avatar: defaultAvatar},
-		{firstName: 'Zainab', lastName: 'Lateef', avatar: defaultAvatar},
-		{firstName: 'Seth', lastName: 'Lateef', avatar: defaultAvatar},
-	]
-}
 
 export const examplePrograms:ProgramType[] = [
 	{
@@ -125,3 +113,20 @@ export const exampleSurveys:SurveyType[] = [
 		},],
 	},
 ]
+
+export const exampleAccount:AccountType = {
+	firstName: 'Jonathan',
+	lastName: 'Lateef',
+	avatar: defaultAvatar,
+	walletId: '4252-427e-af7d-3dcaaf2db2df',
+	keyPhrase: 'One two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen',
+	householdMembers: [
+		{firstName: 'Miriam', lastName: 'Lateef', avatar: defaultAvatar},
+		{firstName: 'Zainab', lastName: 'Lateef', avatar: defaultAvatar},
+		{firstName: 'Seth', lastName: 'Lateef', avatar: defaultAvatar},
+	],
+	creations: {
+		programs: [...examplePrograms],
+		surveys: [...exampleSurveys],
+	}
+}

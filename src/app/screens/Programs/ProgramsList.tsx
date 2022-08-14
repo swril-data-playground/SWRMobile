@@ -38,9 +38,6 @@ export const ProgramsList = (props: {
 }
 
 const styles = StyleSheet.create({
-	container: {
-
-	},
 	list: {
 		flexWrap: 'wrap',
 		flexDirection: 'row',

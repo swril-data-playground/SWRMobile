@@ -1,4 +1,6 @@
 import { AvatarType, defaultAvatar } from "./avatar"
+import { ProgramType } from "./programs"
+import { SurveyType } from "./surveys"
 
 interface AccountType {
 	firstName: string
@@ -7,6 +9,10 @@ interface AccountType {
 	walletId: string
 	keyPhrase: string
 	householdMembers: PublicAccountType[]
+	creations: {
+		programs: ProgramType[],
+		surveys: SurveyType[],
+	}
 }
 
 const defaultAccount: AccountType = {
@@ -16,6 +22,10 @@ const defaultAccount: AccountType = {
 	walletId: '',
 	keyPhrase: '',
 	householdMembers: [],
+	creations: {
+		programs: [],
+		surveys: [],
+	}
 }
 
 interface PublicAccountType {
