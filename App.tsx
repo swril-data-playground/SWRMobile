@@ -34,6 +34,7 @@ import { tryGetSurveys } from 'data/surveys'
 import { ProgramData } from 'screens/ProgramData'
 import { SurveyData } from 'screens/SurveyData'
 import { MyCreations } from 'screens/MyCreations'
+import { UploadScreen } from 'screens/Upload'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -141,6 +142,7 @@ const SmartWaterlooMobile = () => {
 										<NavItem name={'ProgramData'} component={<ProgramData />} />
 										<NavItem name={'SurveyData'} component={<SurveyData />} />
 										<NavItem name={'MyCreations'} component={<MyCreations />} />
+										<NavItem name={'UploadScreen'} component={<UploadScreen />} />
 									</NavContainer>
 									{mainTab && <Tabs tab={nav.nav as tabName} />}
 								</>

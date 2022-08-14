@@ -59,6 +59,7 @@ export const images = {
 	up_arrow: require('assets/images/up_arrow.png'),
 	delete: require('assets/images/delete.png'),
 	x: require('assets/images/x.png'),
+	upload: require('assets/images/upload.png'),
 } as const
 
 export type imageName = keyof typeof images

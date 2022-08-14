@@ -5,6 +5,7 @@ import { images } from 'assets/images'
 import { useContext } from 'react'
 import { NavContext } from 'contexts/navContext'
 import { MyCreations } from './components/MyCreations'
+import { SWRButton } from 'components/SWRButton'
 
 const MyDataScreen = () => {
 	const { setNav } = useContext(NavContext)
@@ -37,7 +38,11 @@ const MyDataScreen = () => {
 				</ScrollView>
 				<MyCreations/>
 				<SWRText style={styles.subHeaderText} font={'medium'}>My cloud</SWRText>
-				<SWRText style={styles.subHeaderText} font={'medium'}>My cloud</SWRText>
+				<SWRButton onPress={() => setNav('UploadScreen')} style={styles.uploadButton}>
+					<SWRText style={gs.h5}>Upload</SWRText>
+					<Image source={images.upload} style={styles.uploadIcon}/>
+				</SWRButton>
+				<SWRText style={styles.subHeaderText} font={'medium'}>My Folders</SWRText>
 			</ScrollView>
 		</View>
 	)
@@ -76,6 +81,15 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
+	uploadButton: {
+		width: '100%',
+		borderRadius: 10,
+		alignItems: 'center'
+	},
+	uploadIcon: {
+		height: 25,
+		width: 25
+	}
 })
 
 

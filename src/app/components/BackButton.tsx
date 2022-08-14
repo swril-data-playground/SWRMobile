@@ -4,6 +4,7 @@ import { Image, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from 
 import { images } from "assets/images"
 
 export const BackButton = (props: {
+	onPressPrefix?: () => void
 	onPressOverride?: () => void,
 	leftAlign?: boolean,
 	screenPadding?: boolean,
@@ -15,6 +16,7 @@ export const BackButton = (props: {
 		<TouchableOpacity 
 			style={[styles.container, props.style]}
 			onPress={props.onPressOverride ? props.onPressOverride : () => {
+				if (props.onPressPrefix) props.onPressPrefix()
 				if (nav.stack.length < 2) throw Error('Back button used with no nav stack')
 				setNav(nav.stack[nav.stack.length - 2])
 			}}
