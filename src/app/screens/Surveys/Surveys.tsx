@@ -6,6 +6,7 @@ import { images } from 'assets/images'
 import { SurveysList } from './SurveysList'
 import { useContext } from 'react'
 import { DataContext } from 'contexts/dataContext'
+import { FilterButtonModal } from 'components/FilterButtonModal'
 
 const SurveysScreen = () => {
 	const { data } = useContext(DataContext)
@@ -16,9 +17,7 @@ const SurveysScreen = () => {
 			<BackButton leftAlign screenPadding/>
 			<View style={[styles.header, gs.screenPadding]}>
 				<SWRText font={'medium'} style={gs.h1}>Surveys</SWRText>
-				<TouchableOpacity>
-					<Image source={images['tune']}/>
-				</TouchableOpacity>
+				<FilterButtonModal	/>
 			</View>
 			<ScrollView style={gs.screenPadding}>
 				<SurveysList surveys={requestedSurveys} title={'Requested'}/>

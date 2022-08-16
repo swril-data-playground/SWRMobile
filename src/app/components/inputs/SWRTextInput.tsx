@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { StyleProp, StyleSheet, TextInput, View, ViewStyle } from "react-native"
 import { gs } from "styles/globals"
-import { SWRText } from "./SWRText"
+import { SWRText } from "../SWRText"
+import { SWRInputLabel } from "./SWRInputLabel"
 
 export interface SWRTextInputProps {
 	name: string,
@@ -33,10 +34,9 @@ export const SWRTextInput = (props: SWRTextInputProps) => {
 	)
 	if (!props.withTitle) return content
 	return (
-		<View style={[styles.container, props.containerStyle]}>
-			<SWRText style={gs.h4}>{props.name}</SWRText>
+		<SWRInputLabel style={props.containerStyle} name={props.name??''}>
 			{content}
-		</View>
+		</SWRInputLabel>
 	)
 }
 

@@ -1,4 +1,5 @@
 import { BackButton } from "components/BackButton"
+import { FilterButtonModal } from "components/FilterButtonModal"
 import { SWRText } from "components/SWRText"
 import { AuthContext } from "contexts/authContext"
 import { NavContext } from "contexts/navContext"
@@ -16,7 +17,10 @@ export const MyCreations = () => {
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign screenPadding />
 			<ScrollView style={gs.screenPadding} >
-				<SWRText style={gs.h2} font={'medium'}>My Creations</SWRText>
+				<View style={styles.header}>
+					<SWRText style={gs.h2} font={'medium'}>My Creations</SWRText>
+					<FilterButtonModal/>
+				</View>
 				<View style={styles.list}>
 					{creationList.map((creation, i) => {
 						return (
@@ -34,6 +38,12 @@ export const MyCreations = () => {
 }
 
 const styles = StyleSheet.create({
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		width: '100%'
+	},
 	list: {
 		flexWrap: 'wrap',
 		flexDirection: 'row',

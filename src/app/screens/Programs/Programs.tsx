@@ -6,6 +6,7 @@ import { images } from 'assets/images'
 import { ProgramsList } from './ProgramsList'
 import { useContext } from 'react'
 import { DataContext } from 'contexts/dataContext'
+import { FilterButtonModal } from 'components/FilterButtonModal'
 
 const ProgramsScreen = () => {
 	const { data } = useContext(DataContext)
@@ -16,9 +17,7 @@ const ProgramsScreen = () => {
 			<BackButton leftAlign screenPadding/>
 			<View style={[styles.header, gs.screenPadding]}>
 				<SWRText font={'medium'} style={gs.h1}>Programs</SWRText>
-				<TouchableOpacity>
-					<Image source={images['tune']}/>
-				</TouchableOpacity>
+				<FilterButtonModal/>
 			</View>
 			<ScrollView style={gs.screenPadding}>
 				<ProgramsList programs={nearYouPrograms} title={'Near you'}/>

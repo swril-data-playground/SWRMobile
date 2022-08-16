@@ -4,10 +4,9 @@ import { colors } from "styles/colors"
 import { gs } from "styles/globals"
 import { defaultQuestion, QuestionType, questionTypes, typeOfQuestion } from "types/questions"
 import { SWRButton } from "./SWRButton"
-import { SWRSelectInput } from "./SWRSelectInput"
+import { SWRSelectInput } from "./inputs/SWRSelectInput"
 import { SWRText } from "./SWRText"
-import { SWRTextInput } from "./SWRTextInput"
-import { useCallback } from "react"
+import { SWRTextInput } from "./inputs/SWRTextInput"
 
 export const QuestionsCreator = (props: {
 	questions: QuestionType[]

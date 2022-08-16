@@ -3,8 +3,9 @@ import { useState } from "react"
 import { Image, StyleProp, StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native"
 import { colors } from "styles/colors"
 import { gs } from "styles/globals"
-import { CheckBox } from "./CheckBox"
-import { SWRText } from "./SWRText"
+import { CheckBox } from "../CheckBox"
+import { SWRText } from "../SWRText"
+import { SWRInputLabel } from "./SWRInputLabel"
 
 export interface SWRSelectInputProps {
 	value: string | undefined,
@@ -51,10 +52,9 @@ export const SWRSelectInput = (props: SWRSelectInputProps) => {
 	)
 	if (!props.withTitle) return content
 	return (
-		<View style={[styles.withTitleContainer, props.containerStyle]}>
-			<SWRText style={gs.h4}>{props.name}</SWRText>
+		<SWRInputLabel style={props.containerStyle} name={props.name??''}>
 			{content}
-		</View>
+		</SWRInputLabel>
 	)
 }
 

@@ -2,7 +2,7 @@ import { images } from "assets/images"
 import { BackButton } from "components/BackButton"
 import { SWRButton } from "components/SWRButton"
 import { SWRText } from "components/SWRText"
-import { SWRTextInput } from "components/SWRTextInput"
+import { SWRTextInput } from "components/inputs/SWRTextInput"
 import { Image, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { setSignUpData, SignUpData, step } from '../SignUpFlow'

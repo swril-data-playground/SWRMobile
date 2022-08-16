@@ -1,3 +1,7 @@
+import { SWRDateInput } from "components/inputs/SWRDateInput";
+import { SWRMCInput } from "components/inputs/SWRMCInput";
+import { SWRSelectInput } from "components/inputs/SWRSelectInput";
+import { SWRTextInput } from "components/inputs/SWRTextInput";
 import { SWRText } from "components/SWRText";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { gs } from "styles/globals";
@@ -19,18 +23,32 @@ export const Questions = (props: {
 					newAnswers[i] = newAnswer
 					props.setAnswers(newAnswers)
 				}
-				let choices;
-				if (question.type === 'Multiple choice') {
-					choices = <MultipleChoiceQuestion
-						answer={answer}
-						question={question}
-						setAnswer={setAnswer}
-					/>
+				let input;
+				switch (question.type) {
+					case 'Multiple choice': input = <SWRMCInput
+						value={answer}
+						choices={question.choices ?? []}
+						onChange={setAnswer}
+					/>; break;
+					case 'Select': input = <SWRSelectInput
+						value={answer}
+						choices={question.choices ?? []}
+						onChange={setAnswer}
+					/>; break;
+					case 'Open-ended': input = <SWRTextInput
+						name={'Enter your answer'}
+						value={answer}
+						onChange={setAnswer}
+					/>; break;
+					case 'Date': input = <SWRDateInput
+						value={answer}
+						onChange={setAnswer}
+					/>; break;
 				}
 				return (
 					<View style={styles.question} key={i}>
 						<SWRText style={gs.h5}>{i+1}. {question.prompt}</SWRText>
-						{choices}
+						{input}
 					</View>
 				)
 			})}
