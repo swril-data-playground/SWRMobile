@@ -3,11 +3,15 @@ import { ProgramType, SurveyType } from '../types'
 
 export type DataContextType = {
 	programs: ProgramType[]
-	surveys: SurveyType[]
+	programCache: Map<string, ProgramType[]>
+	surveys: SurveyType[],
+	surveyCache: Map<string, SurveyType[]>
 }
 export const defaultDataValue: DataContextType = {
 	programs: [],
-	surveys: []
+	programCache: new Map(),
+	surveys: [],
+	surveyCache: new Map(),
 }
 
 export const DataContext = createContext<{ data: DataContextType; setData: (newData: DataContextType) => void }>({

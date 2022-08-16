@@ -1,10 +1,9 @@
-import { useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { useEffect, useState } from 'react'
+import { Keyboard, StyleSheet, View } from 'react-native'
 import { NavContainer, NavItem, Tabs } from 'src/app/navigation'
 import { tabName, tabNames } from 'src/app/navigation/tabs'
 import { AuthContext, AuthContextType, defaultAuthValue } from 'contexts/authContext'
 import { defaultNavValue, NavContext, NavContextType } from 'contexts/navContext'
-import { defaultErrorValue, ErrorContext, ErrorContextType } from 'contexts/errorContext'
 import { DataContextType, defaultDataValue, DataContext } from 'contexts/dataContext'
 import { LoadingScreen } from 'screens/LoadingScreen'
 import { ErrorScreen } from 'screens/ErrorScreen'
@@ -35,15 +34,19 @@ import { ProgramData } from 'screens/ProgramData'
 import { SurveyData } from 'screens/SurveyData'
 import { MyCreations } from 'screens/MyCreations'
 import { UploadScreen } from 'screens/Upload'
+import { defaultDisplayValue, DisplayContext, DisplayContextType } from 'contexts/displayContext'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
 	const [auth, setAuth] = useState<AuthContextType>(defaultAuthValue)
 	const [nav, setNav] = useState<NavContextType>(defaultNavValue)
-	const [error, setError] = useState<ErrorContextType>(defaultErrorValue)
+	const [error, setError] = useState<Error|null>(null)
+	const [display, setDisplay] = useState<DisplayContextType>(defaultDisplayValue)
+	const throwError = (e:Error) => { setError(e); setScreenState('ERROR')}
 	const [data, setData] = useState<DataContextType>(defaultDataValue)
 	const [navContent, setNavContent] = useState<any>(null)
 	const dataValue = { data, setData }
+	const displayValue = { display }
 	const navValue = { 
 		nav, 
 		setNav: (newNav: string, newNavContent: any = null) => {
@@ -75,37 +78,43 @@ const SmartWaterlooMobile = () => {
 			setAuth(newAuth)
 		},
 	 }
-	const errorValue = {
-		error,
-		setError: (newError: ErrorContextType) => {
-			console.error(newError)
-			setScreenState('ERROR')
-			setError(newError)
-		},
-	}
+	useEffect(() => {
+		const keyboardDidShowListener = Keyboard.addListener(
+			'keyboardDidShow', (e) => {setDisplay({...display, keyboardHeight: e.endCoordinates.height})}
+		)
+		const keyboardDidHideListener = Keyboard.addListener(
+			'keyboardDidHide', () => {setDisplay({...display, keyboardHeight: 0})}
+		)
+		return () => {
+			keyboardDidHideListener.remove();
+			keyboardDidShowListener.remove();
+		}
+	}, []);
+
 	const initialLoad = async () => {
 		await Font.loadAsync(fonts);
 		const { status: authStatus, auth: gotAuth } = await tryGetAuth()
 		if (authStatus === 200) {
 			setAuth(gotAuth)
 		} else if (authStatus === 400) {
-			errorValue.setError(new Error('User authorization failed'))
+			throwError(new Error('User authorization failed'))
 			return
 		} else if (authStatus === 404) {
 			navValue.setNav('SignUp')
+			return
 		}
 		const { status: programStatus, programs } = await tryGetPrograms()
 		const { status: surveyStatus, surveys } = await tryGetSurveys()
 		if (programStatus === 200 && surveyStatus === 200) {
-			setData({programs, surveys})
+			setData({...data, programs, surveys})
 			setScreenState('LOADED')
 		} else {
 			if (programStatus !== 200 && surveyStatus !== 200) {
-				errorValue.setError(new Error('Programs and surveys failed to load'))
+				throwError(new Error('Programs and surveys failed to load'))
 			} else if (programStatus !== 200) {
-				errorValue.setError(new Error('Programs failed to load'))
+				throwError(new Error('Programs failed to load'))
 			} else if (surveyStatus !== 200) {
-				errorValue.setError(new Error('Surveys failed to load'))
+				throwError(new Error('Surveys failed to load'))
 			}
 		}
 	}
@@ -115,11 +124,11 @@ const SmartWaterlooMobile = () => {
 		<AuthContext.Provider value={authValue}>
 			<DataContext.Provider value={dataValue}>
 				<NavContext.Provider value={navValue}>
-					<ErrorContext.Provider value={errorValue}>
+					<DisplayContext.Provider value={displayValue}>
 						<View style={styles.parentContainer}>
 							<BackgroundImage />
 							{screenState === 'LOADING' && <LoadingScreen />}
-							{screenState === 'ERROR' && <ErrorScreen />}
+							{screenState === 'ERROR' && error && <ErrorScreen err={error} />}
 							{screenState === 'LOADED' && (
 								<>
 									<NavContainer >
@@ -148,7 +157,7 @@ const SmartWaterlooMobile = () => {
 								</>
 							)}
 						</View>
-					</ErrorContext.Provider>
+					</DisplayContext.Provider>
 				</NavContext.Provider>
 			</DataContext.Provider>
 		</AuthContext.Provider>
