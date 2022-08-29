@@ -1,7 +1,7 @@
 import { BackButton } from "components/BackButton"
 import { SWRText } from "components/SWRText"
 import { useState } from "react"
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { Image, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { SWRButton } from "components/SWRButton"
 import { images } from "assets/images"

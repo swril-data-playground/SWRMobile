@@ -2,7 +2,7 @@ import { AccountType } from "types/account";
 import { defaultAvatar } from "types/avatar";
 import { PollType } from "types/polls";
 import { defaultProgram, ProgramType } from "types/programs";
-import { defaultSurvey, SurveyType } from "types/surveys";
+import { SurveyType } from "types/surveys";
 
 export const mediumLorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit arcu sed efficitur pharetra. Aenean pretium blandit dictum. Nullam nulla,vulputate tempor augue.'
 

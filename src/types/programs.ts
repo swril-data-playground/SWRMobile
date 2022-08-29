@@ -1,4 +1,3 @@
-import { mediumLorem } from "data/lorem"
 import { defaultPublicAccount, PublicAccountType } from "./account"
 import { CategoryType, MunicipalityType } from "./filter"
 import { QuestionType } from "./questions"

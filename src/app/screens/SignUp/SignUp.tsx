@@ -22,7 +22,11 @@ const SignUp = (): JSX.Element => {
 				walletId: '4252-427e-af7d-3dcaaf2db2df',
 				keyPhrase: 'One two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen',
 				avatar: defaultAvatar,
-				householdMembers: []
+				householdMembers: [],
+				creations: {
+					surveys: [],
+					programs: [],
+				}
 			}
 		})
 	}

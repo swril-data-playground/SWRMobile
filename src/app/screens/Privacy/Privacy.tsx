@@ -1,7 +1,7 @@
 import { images } from "assets/images"
 import { BackButton } from "components/BackButton"
 import { SWRText } from "components/SWRText"
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native"
+import { Image, ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 
 export const Privacy = () => {

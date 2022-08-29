@@ -1,7 +1,6 @@
 import { images } from "assets/images"
 import { SWRText } from "components/SWRText"
 import { Image, StyleSheet, View } from "react-native"
-import { gs } from "styles/globals"
 import { municipalities } from "types/filter"
 
 export const LocationFilter = () => {

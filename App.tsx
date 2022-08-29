@@ -71,7 +71,6 @@ const SmartWaterlooMobile = () => {
 			setNav({nav: newStack[newStack.length-1], stack: newStack})
 			if (newNavContent === null) setNavContent(newNavContent)
 		},
-		
 	}
 	const authValue = { 
 		auth, 

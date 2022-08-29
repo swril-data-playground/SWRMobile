@@ -1,4 +1,3 @@
-import { images } from "assets/images"
 import { SWRButton } from "components/SWRButton"
 import { SWRText } from "components/SWRText"
 import { TextButton } from "components/TextButton"

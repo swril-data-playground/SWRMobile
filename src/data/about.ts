@@ -1,5 +1,5 @@
 import { QandAType } from "types/about";
-import { mediumLorem } from "./lorem";
+import { mediumLorem } from "./exampleData";
 
 export const helpData:QandAType[] = [
 	{question: 'How to edit my profile?', answer: mediumLorem},

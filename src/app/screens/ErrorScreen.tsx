@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { Image, View, StyleSheet, TouchableOpacity, ScrollView, Button } from 'react-native'
 import { gs } from 'styles/globals'
 import { Line } from 'components/Line'
