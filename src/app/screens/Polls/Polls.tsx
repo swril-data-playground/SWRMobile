@@ -2,25 +2,25 @@ import { ScrollView, StyleSheet, View } from 'react-native'
 import { gs } from 'styles/globals'
 import { BackButton } from 'components/BackButton'
 import { SWRText } from 'components/SWRText'
-import { SurveysList } from './SurveysList'
+import { PollsList } from './PollsList'
 import { useContext } from 'react'
 import { DataContext } from 'contexts/dataContext'
 import { FilterButtonModal } from 'components/FilterButtonModal'
 
-const SurveysScreen = () => {
+const PollsScreen = () => {
 	const { data } = useContext(DataContext)
-	const requestedSurveys = data.surveys
-	const nearYouSurveys = data.surveys
+	const yourPolls = data.polls
+	const discoverPolls = data.polls
 	return (
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign screenPadding/>
 			<View style={[styles.header, gs.screenPadding]}>
-				<SWRText font={'medium'} style={gs.h1}>Surveys</SWRText>
+				<SWRText font={'medium'} style={gs.h1}>Play a Part</SWRText>
 				<FilterButtonModal	/>
 			</View>
 			<ScrollView style={gs.screenPadding}>
-				<SurveysList surveys={requestedSurveys} title={'Requested'}/>
-				<SurveysList surveys={nearYouSurveys} title={'For you'}/>
+				<PollsList polls={yourPolls} title={'Your Organizations'}/>
+				<PollsList polls={discoverPolls} title={'Discover'}/>
 			</ScrollView>
 		</View>
 	)
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default SurveysScreen
+export default PollsScreen

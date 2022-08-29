@@ -36,6 +36,8 @@ import { MyCreations } from 'screens/MyCreations'
 import { UploadScreen } from 'screens/Upload'
 import { defaultDisplayValue, DisplayContext, DisplayContextType } from 'contexts/displayContext'
 import { tryGetPolls } from 'data/polls'
+import Polls from 'screens/Polls'
+import { Poll } from 'screens/Poll'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -139,6 +141,8 @@ const SmartWaterlooMobile = () => {
 										<NavItem name={'Program'} component={<Program content={navContent} />} />
 										<NavItem name={'Surveys'} component={<Surveys />} />
 										<NavItem name={'Survey'} component={<Survey content={navContent} />} />
+										<NavItem name={'Polls'} component={<Polls />} />
+										<NavItem name={'Poll'} component={<Poll content={navContent} />} />
 										<NavItem name={'Settings'} component={<Settings />} />
 										<NavItem name={'Profile'} component={<Profile />} />
 										<NavItem name={'Create'} component={<Create />} />

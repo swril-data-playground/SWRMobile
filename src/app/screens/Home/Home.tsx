@@ -1,6 +1,5 @@
 import {  ScrollView, View } from 'react-native'
 import { gs } from 'styles/globals'
-import { Tabs } from 'src/app/navigation'
 import { TopMenu } from './components/TopMenu'
 import { HomeHeader } from './components/HomeHeader'
 import { SearchBar } from './components/SearchBar'

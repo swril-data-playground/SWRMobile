@@ -6,11 +6,11 @@ import { DisplayContext } from "contexts/displayContext"
 import { useContext, useState } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
+import { PollType } from "types/polls"
 import { AnswerType } from "types/questions"
-import { SurveyType } from "types/surveys"
 
-export const Survey = (props: {content: any}) => {
-	const content = props.content as SurveyType
+export const Poll = (props: {content: any}) => {
+	const content = props.content as PollType
 	const [answers, setAnswers] = useState<AnswerType[]>(generateAnswersArray(content.questions))
 	const { display } = useContext(DisplayContext)
 	const keyboardPadding = {marginBottom: display.keyboardHeight}
