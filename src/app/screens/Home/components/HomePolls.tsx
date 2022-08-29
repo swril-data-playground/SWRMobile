@@ -5,28 +5,28 @@ import { NavContext } from "contexts/navContext"
 import { useContext } from "react"
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { gs } from "styles/globals"
-import { SurveyType } from "types/surveys"
+import { PollType } from "types/polls"
 
-export const HomeSurveys = (props: {
-	surveys: SurveyType[]	
+export const HomePolls = (props: {
+	polls: PollType[]	
 }) => {
 	const { setNav } = useContext(NavContext)
 	return (
 		<View style={styles.container}>
 			<View style={styles.header}>
-				<SWRText style={gs.h5} font={'bold'}>Featured Surveys</SWRText>
-				<TextButton onPress={() => setNav('Surveys')}>View all</TextButton>
+				<SWRText style={gs.h5} font={'bold'}>Play a part</SWRText>
+				<TextButton onPress={() => setNav('Polls')}>View all</TextButton>
 			</View>
 			<ScrollView style={styles.scroller} horizontal showsHorizontalScrollIndicator={false}>
-				{props.surveys.map((survey, i) => {
+				{props.polls.map((poll, i) => {
 					return (
-						<TouchableOpacity style={styles.survey} onPress={() => setNav('Survey', survey)} key={i}>
+						<TouchableOpacity style={styles.survey} onPress={() => setNav('Poll', poll)} key={i}>
 							<View style={styles.surveyImage}>
-								<BackgroundImage image={{uri: survey.image}} style={gs.fillImage}/>
+								<BackgroundImage image={{uri: poll.image}} style={gs.fillImage}/>
 							</View>
 							<View style={styles.surveyInfoView}>
-								<SWRText font={'medium'} style={gs.h6}>{survey.title}</SWRText>
-								<SWRText style={styles.surveyCreator}>By {survey.creator}</SWRText>
+								<SWRText font={'medium'} style={gs.h6}>{poll.title}</SWRText>
+								<SWRText style={styles.surveyCreator}>By {poll.creator}</SWRText>
 							</View>
 						</TouchableOpacity>
 					)

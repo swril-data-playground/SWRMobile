@@ -35,6 +35,7 @@ import { SurveyData } from 'screens/SurveyData'
 import { MyCreations } from 'screens/MyCreations'
 import { UploadScreen } from 'screens/Upload'
 import { defaultDisplayValue, DisplayContext, DisplayContextType } from 'contexts/displayContext'
+import { tryGetPolls } from 'data/polls'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -105,17 +106,16 @@ const SmartWaterlooMobile = () => {
 		}
 		const { status: programStatus, programs } = await tryGetPrograms()
 		const { status: surveyStatus, surveys } = await tryGetSurveys()
-		if (programStatus === 200 && surveyStatus === 200) {
-			setData({...data, programs, surveys})
+		const { status: pollStatus, polls } = await tryGetPolls()
+		if (programStatus === 200 && surveyStatus === 200 && pollStatus === 200) {
+			setData({...data, programs, surveys, polls})
 			setScreenState('LOADED')
 		} else {
-			if (programStatus !== 200 && surveyStatus !== 200) {
-				throwError(new Error('Programs and surveys failed to load'))
-			} else if (programStatus !== 200) {
-				throwError(new Error('Programs failed to load'))
-			} else if (surveyStatus !== 200) {
-				throwError(new Error('Surveys failed to load'))
-			}
+			let errorStrings = []
+			if (pollStatus !== 200) errorStrings.push('Polls')
+			else if (programStatus !== 200) errorStrings.push('Programs')
+			else if (surveyStatus !== 200) errorStrings.push('Surveys')
+			throwError(new Error(`${errorStrings.join(' and ')} failed to load`))
 		}
 	}
 	if (screenState === 'LOADING') initialLoad()
