@@ -25,10 +25,7 @@ const styles = StyleSheet.create({
 		zIndex: 1,
 	},
 	rightSection: {
-		// width: 80, 
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		borderColor: 'red',
-		borderWidth: 1
 	}
 })

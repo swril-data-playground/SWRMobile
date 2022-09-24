@@ -1,12 +1,13 @@
 import { ActivityIndicator, Image, Text, View } from 'react-native'
-import BackgroundImage from '../components/BackgroundImage'
+import BackgroundImage from '../../components/BackgroundImage'
 import { images } from "assets/images"
-import { gs } from '../styles/globals'
+import { gs } from '../../styles/globals'
+import { MovingBackground } from './MovingBackground'
 
 export const LoadingScreen = () => {
 	return (
 		<>
-			<BackgroundImage image={images.gradient} />
+			<MovingBackground/>
 			<View style={[gs.fullScreen, {marginTop: 50}]}>
 				<Text style={{ fontSize: 40 }}>SWR Mobile</Text>
 				<Image

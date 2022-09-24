@@ -60,6 +60,10 @@ export const images = {
 	delete: require('assets/images/delete.png'),
 	x: require('assets/images/x.png'),
 	upload: require('assets/images/upload.png'),
+	blur1: require('assets/images/BLUR1.png'),
+	blur2: require('assets/images/BLUR2.png'),
+	blur3: require('assets/images/BLUR3.png'),
+	blur4: require('assets/images/BLUR4.png'),
 } as const
 
 export type imageName = keyof typeof images

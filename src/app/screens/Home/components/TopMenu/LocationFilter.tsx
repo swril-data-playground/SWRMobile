@@ -27,7 +27,7 @@ export const LocationFilter = () => {
 						<TouchableOpacity onPress={() => {
 							setLocation(municipality)
 							setDropDownState(false)
-						}} style={styles.dropDownItem}>
+						}} style={styles.dropDownItem} key={i}>
 							<SWRText style={{fontSize: 17}}>{municipality}</SWRText>
 						</TouchableOpacity>
 					)
