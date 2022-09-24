@@ -19,6 +19,7 @@ export const ProfileIcon = () => {
 
 const styles = StyleSheet.create({
 	container: {
+		marginLeft: 10,
 		height: 50,
 		width: 50,
 	}
