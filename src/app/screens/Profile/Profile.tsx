@@ -46,7 +46,7 @@ const ProfileScreen = () => {
 							</View>
 						)
 					})}
-					<TouchableOpacity style={styles.member}>
+					<TouchableOpacity style={styles.member} onPress={() => setNav('AddHouseholdMember')}>
 						<Image source={images.add} style={styles.addImage}/>
 						<SWRText style={[gs.h7, {textAlign: 'center'}]}>Add household member</SWRText>
 					</TouchableOpacity>
