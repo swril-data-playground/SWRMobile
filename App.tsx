@@ -38,6 +38,9 @@ import { defaultDisplayValue, DisplayContext, DisplayContextType } from 'context
 import { tryGetPolls } from 'data/polls'
 import Polls from 'screens/Polls'
 import { Poll } from 'screens/Poll'
+import { HouseholdRequest } from 'screens/HouseholdRequest'
+import { defaultAccount } from 'types/account'
+import { defaultHouseholdRequestType } from 'types/householdRequest'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -102,6 +105,7 @@ const SmartWaterlooMobile = () => {
 			throwError(new Error('User authorization failed'))
 			return
 		} else if (authStatus === 404) {
+			setScreenState('LOADED')
 			navValue.setNav('SignUp')
 			return
 		}
@@ -155,6 +159,7 @@ const SmartWaterlooMobile = () => {
 										<NavItem name={'SurveyData'} component={<SurveyData />} />
 										<NavItem name={'MyCreations'} component={<MyCreations />} />
 										<NavItem name={'UploadScreen'} component={<UploadScreen />} />
+										<NavItem name={'HouseholdRequest'} component={<HouseholdRequest content={navContent}/>} />
 									</NavContainer>
 									{mainTab && <Tabs tab={nav.nav as tabName} />}
 								</>
