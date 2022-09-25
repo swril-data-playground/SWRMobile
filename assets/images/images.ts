@@ -64,6 +64,7 @@ export const images = {
 	blur2: require('assets/images/BLUR2.png'),
 	blur3: require('assets/images/BLUR3.png'),
 	blur4: require('assets/images/BLUR4.png'),
+	data_playground_text: require('assets/images/data_playground_text.png'),
 } as const
 
 export type imageName = keyof typeof images

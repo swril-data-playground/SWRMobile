@@ -6,7 +6,7 @@ import { SWRTextInput } from "components/inputs/SWRTextInput"
 import { Image, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { setSignUpData, SignUpData, step } from '../SignUpFlow'
-import { PuzzleImage } from "./components/PuzzleImage"
+import { PuzzleImage } from "../../../components/PuzzleImage"
 
 export const CreateAccountOrg = (props: {
 	data: SignUpData,
@@ -20,7 +20,7 @@ export const CreateAccountOrg = (props: {
 	return (
 		<View style={gs.fullScreen} >
 			<BackButton onPressOverride={props.back} leftAlign style={{position: 'absolute'}}/>
-			<PuzzleImage/>
+			<PuzzleImage width={200}/>
 			<SWRText font={'medium'} style={styles.title}>Create an account</SWRText>
 			<SWRTextInput withTitle value={props.data.name} name={'Name of Organization'} containerStyle={styles.textInput} onChange={(name) => {
 				props.setData({...props.data, name})	

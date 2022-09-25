@@ -1,13 +1,15 @@
 import { images } from "assets/images"
 import { Image } from "react-native"
 
-export const PuzzleImage = () => {
+export const PuzzleImage = (props: {
+	width: number	
+}) => {
 	return (
 		<Image 
 			source={images.puzzle} 
 			style={{
-				width: 200,
-				height: 120
+				width: props.width,
+				height: props.width * 0.6
 			}}
 		/>
 	)

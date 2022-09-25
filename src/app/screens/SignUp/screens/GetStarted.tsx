@@ -5,7 +5,7 @@ import { SWRText } from "components/SWRText"
 import { Image, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { setSignUpData, SignUpData, step } from "../SignUpFlow"
-import { PuzzleImage } from "./components/PuzzleImage"
+import { PuzzleImage } from "../../../components/PuzzleImage"
 
 export const GetStarted = (props: {
 	data: SignUpData,
@@ -16,7 +16,7 @@ export const GetStarted = (props: {
 	return (
 		<View style={gs.fullScreen} >
 			<BackButton onPressOverride={props.back} leftAlign style={{position: 'absolute'}}/>
-			<PuzzleImage/>
+			<PuzzleImage width={200}/>
 			<SWRText font={'medium'} style={gs.h2}>Let's get started</SWRText>
 			<SWRText  style={gs.h4}>Tell us a little bit about yourself!</SWRText>
 			<SWRText style={[gs.h3, {marginTop: 50}]}>Are you a...</SWRText>
