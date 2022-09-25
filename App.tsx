@@ -39,8 +39,7 @@ import { tryGetPolls } from 'data/polls'
 import Polls from 'screens/Polls'
 import { Poll } from 'screens/Poll'
 import { HouseholdRequest } from 'screens/HouseholdRequest'
-import { defaultAccount } from 'types/account'
-import { defaultHouseholdRequestType } from 'types/householdRequest'
+import { AddHouseholdMember } from 'screens/AddHouseholdMember'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -160,6 +159,7 @@ const SmartWaterlooMobile = () => {
 										<NavItem name={'MyCreations'} component={<MyCreations />} />
 										<NavItem name={'UploadScreen'} component={<UploadScreen />} />
 										<NavItem name={'HouseholdRequest'} component={<HouseholdRequest content={navContent}/>} />
+										<NavItem name={'AddHouseholdMember'} component={<AddHouseholdMember />} />
 									</NavContainer>
 									{mainTab && <Tabs tab={nav.nav as tabName} />}
 								</>
