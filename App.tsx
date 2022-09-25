@@ -103,6 +103,7 @@ const SmartWaterlooMobile = () => {
 			throwError(new Error('User authorization failed'))
 			return
 		} else if (authStatus === 404) {
+			setScreenState('LOADED')
 			navValue.setNav('SignUp')
 			return
 		}
