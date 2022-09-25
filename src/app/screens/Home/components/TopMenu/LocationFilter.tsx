@@ -1,8 +1,10 @@
 import { images } from "assets/images"
+import { CheckBox } from "components/CheckBox"
 import { SWRText } from "components/SWRText"
 import { useState } from "react"
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
 import { municipalities, MunicipalityType } from "types/filter"
+import { colors } from 'styles/colors'
 
 export const LocationFilter = () => {
 	const [location, setLocation] = useState<MunicipalityType>(municipalities[0])
@@ -23,12 +25,15 @@ export const LocationFilter = () => {
 			</TouchableOpacity>
 			<View style={[styles.dropdown, {display: dropDownDisplay}]}>
 				{municipalities.map((municipality, i) => {
+					const selected = municipality === location
+					const selectedStyle = selected? { backgroundColor: colors.lightOrange }: null
 					return (
 						<TouchableOpacity onPress={() => {
 							setLocation(municipality)
 							setDropDownState(false)
-						}} style={styles.dropDownItem} key={i}>
-							<SWRText style={{fontSize: 17}}>{municipality}</SWRText>
+						}} style={[styles.dropDownItem, selectedStyle]} key={i}>
+							<CheckBox checked={selected} size={17} color={colors.orange} />
+							<SWRText style={{fontSize: 17, marginLeft: 5}}>{municipality}</SWRText>
 						</TouchableOpacity>
 					)
 				})}
