@@ -5,26 +5,28 @@ import { SWRTextInput } from "components/inputs/SWRTextInput";
 import { SWRText } from "components/SWRText";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { gs } from "styles/globals";
-import { AnswerType, QuestionType } from "types/questions";
+import { AnswerType, QuestionType, typeOfQuestion } from "types/questions";
 import { MultipleChoiceQuestion } from "./MultipleChoiceQuestion";
 
 export const Questions = (props: {
-	quesions: QuestionType[],
+	questions: QuestionType[],
 	answers: AnswerType[],
 	setAnswers: (newAnswers: AnswerType[]) => void,
+	questionType?: typeOfQuestion, 
 	style?: StyleProp<ViewStyle>
 }) => {
 	return (
 		<View style={props.style}>
-			{props.quesions.map((question, i) => {
+			{props.questions.map((question, i) => {
 				const answer = props.answers[i];
+				const type = props.questionType ?? question.type
 				const setAnswer = (newAnswer: AnswerType) => {
 					const newAnswers = [...props.answers]
 					newAnswers[i] = newAnswer
 					props.setAnswers(newAnswers)
 				}
 				let input;
-				switch (question.type) {
+				switch (type) {
 					case 'Multiple choice': input = <SWRMCInput
 						value={answer}
 						choices={question.choices ?? []}

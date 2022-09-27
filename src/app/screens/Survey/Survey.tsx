@@ -19,7 +19,7 @@ export const Survey = (props: {content: any}) => {
 			<BackButton leftAlign screenPadding/>
 			<ScrollView style={keyboardPadding}>
 				<SWRText font={'medium'} style={styles.h1}>{content.title}</SWRText>
-				<Questions answers={answers} setAnswers={setAnswers} quesions={content.questions}/>
+				<Questions answers={answers} setAnswers={setAnswers} questions={content.questions} />
 			</ScrollView>
 		</View>
 	)

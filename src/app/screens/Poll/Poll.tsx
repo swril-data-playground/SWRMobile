@@ -1,6 +1,7 @@
 import { BackButton } from "components/BackButton"
 import { Questions } from "components/Questions"
 import { generateAnswersArray } from "components/Questions/generateAnswersArray"
+import { SWRButton } from "components/SWRButton"
 import { SWRText } from "components/SWRText"
 import { DisplayContext } from "contexts/displayContext"
 import { useContext, useState } from "react"
@@ -19,7 +20,10 @@ export const Poll = (props: {content: any}) => {
 			<BackButton leftAlign screenPadding/>
 			<ScrollView style={keyboardPadding}>
 				<SWRText font={'medium'} style={styles.h1}>{content.title}</SWRText>
-				<Questions answers={answers} setAnswers={setAnswers} quesions={content.questions}/>
+				<Questions answers={answers} setAnswers={setAnswers} questions={content.questions} questionType="Multiple choice"/>
+				<SWRButton onPress={() => {}} style={styles.submit}>
+					<SWRText style={gs.h4}>Submit</SWRText>
+				</SWRButton>
 			</ScrollView>
 		</View>
 	)
@@ -30,5 +34,10 @@ const styles = StyleSheet.create({
 		fontSize: 25,
 		marginTop: 10,
 		marginHorizontal: 20
-	}
+	},
+	submit: {
+		marginTop: 20,
+		marginBottom: 50,
+		marginHorizontal: 10,
+	},
 })
