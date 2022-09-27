@@ -12,6 +12,7 @@ export const WelcomeScroller = () => {
 
 	const onChange = () => {
 		setDimension(Dimensions.get('window'))
+		console.log(dimension)
 	}
 
 	useEffect(() => {
@@ -24,7 +25,7 @@ export const WelcomeScroller = () => {
 	const onScroll = useCallback(() => {
 		const newIndex = selectedIndex === imageSet.length - 1 ? 0 : selectedIndex + 1;
 		setSelectedIndex(newIndex)
-		scrollRef.current?.scrollTo({x: newIndex * dimension.width, animated: true})
+		scrollRef.current?.scrollTo({x: (newIndex * dimension.width)-40, animated: true})
 	}, [selectedIndex])
 
 	const startInterval = useCallback(() => {
@@ -49,7 +50,8 @@ export const WelcomeScroller = () => {
 	const imageSet = [
 		{
 			image: images.guitar_girl,
-			text: "Your information is yours and you choose who has access to it."
+			text: "Your information is yours and you choose who has access to it. " +
+			"\n\n"                                                                  
 		},
 		{
 			image: images.man_at_desk,
@@ -85,9 +87,9 @@ export const WelcomeScroller = () => {
 			  onTouchEnd={onTouchEnd}>
 				{
 					imageSet.map((item, index) => (
-					<View key={index} style={{ marginRight: 40, width: dimension.width-40}}>
+					<View key={index} style={{ marginLeft: 20, marginRight: 20, width: dimension.width-80}}>
 						<SWRText style={styles.captionText}>{item.text}</SWRText> 
-						<Image key = {index} source = {item.image} style={{ width: dimension.width, height: 256, resizeMode: 'contain', display: 'flex'}}/>
+						<Image key = {index} source = {item.image} style={{ width: dimension.width-80, height: 256, resizeMode: 'contain', display: 'flex'}}/>
 					</View>
 					))
 				}
