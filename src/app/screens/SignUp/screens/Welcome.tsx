@@ -6,7 +6,7 @@ import { useContext } from "react"
 import { View, StyleSheet } from "react-native"
 import { gs } from "styles/globals"
 import { step } from '../SignUpFlow'
-import { PuzzleImage } from "../../../components/PuzzleImage"
+import { PuzzleImage } from "./components/PuzzleImage"
 import { WelcomeScroller } from "./components/WelcomeScroller"
 
 export const Welcome = (props: {
@@ -15,7 +15,7 @@ export const Welcome = (props: {
 	const { setNav } = useContext(NavContext)
 	return (
 		<View style={gs.fullScreen} >
-			<PuzzleImage width={200}/>
+			<PuzzleImage/>
 			<SWRText font={'medium'} style={gs.h1}>Welcome!</SWRText>
 			<WelcomeScroller/>
 			<SWRButton onPress={props.next} style={styles.signUpButton}>

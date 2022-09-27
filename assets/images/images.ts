@@ -34,12 +34,21 @@ export const images = {
 	piggyback: require('assets/images/piggyback.png'),
 	pretzel_dog: require('assets/images/pretzel_dog.png'),
 	profile_selected: require('assets/images/profile_selected.png'),
-	profile_sheild: require('assets/images/profile_sheild.png'),
+
+	// profile_sheild: require('assets/images/profile_sheild.png'),
+	profile_sheild:require('assets/images/profile_sheild_help.png'),
+
 	profile: require('assets/images/profile.png'),
 	program: require('assets/images/program.png'),
 	puzzle: require('assets/images/puzzle.png'),
-	question_icon: require('assets/images/question_icon.png'),
-	search_icon: require('assets/images/search_icon.png'),
+
+	// question_icon: require('assets/images/question_icon.png'),
+	question_icon:require('assets/images/question_help.png'),
+
+	// search_icon: require('assets/images/search_icon.png'),
+	search_icon:require('assets/images/search_icon_help.png'),
+	randomize_icon:require('assets/images/Randomize.png'),
+
 	search: require('assets/images/search.png'),
 	settings: require('assets/images/settings.png'),
 	skateboard_girl: require('assets/images/skateboard_girl.png'),
@@ -60,11 +69,6 @@ export const images = {
 	delete: require('assets/images/delete.png'),
 	x: require('assets/images/x.png'),
 	upload: require('assets/images/upload.png'),
-	blur1: require('assets/images/BLUR1.png'),
-	blur2: require('assets/images/BLUR2.png'),
-	blur3: require('assets/images/BLUR3.png'),
-	blur4: require('assets/images/BLUR4.png'),
-	data_playground_text: require('assets/images/data_playground_text.png'),
 } as const
 
 export type imageName = keyof typeof images

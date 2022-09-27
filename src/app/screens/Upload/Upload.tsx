@@ -8,12 +8,10 @@ import { images } from "assets/images"
 import { DocumentResult, getDocumentAsync}  from 'expo-document-picker';
 import { ImageInfo, launchImageLibraryAsync, requestMediaLibraryPermissionsAsync}  from 'expo-image-picker';
 import { uploadFile, uploadImage } from "data/files"
-import { Processing } from "./Processing"
 
 export const UploadScreen = () => {
 	const [file, setFile] = useState<DocumentResult|null>(null)
 	const [image, setImage] = useState<ImageInfo|null>(null)
-	const [processing, setProcessing] = useState(false)
 	const selectFile = async () => {
 		const selectedFile = await getDocumentAsync({})
 		if (selectedFile.type !== 'cancel') {
@@ -46,7 +44,7 @@ export const UploadScreen = () => {
 			status = imageStatus;
 		} else return;
 		if (status === 200) {
-			console.log('success')
+			console.log('successs')
 			clearFiles()
 		} else {
 			console.log('failed')
@@ -55,48 +53,38 @@ export const UploadScreen = () => {
 	return (
 		<View style={gs.fullScreen}>
 			<BackButton onPressPrefix={clearFiles} leftAlign/>
-			<View style={[styles.container, processing?{display:'none'}:null]}>
-				<Image source={images.couch_dog} style={styles.couchImage}/>
-				<SWRText style={gs.h2}>Upload a file</SWRText>
-				<SWRText style={gs.h7}>Supported formats: JPEG, PNG, GIF, MP4, PDF, DOCX, PPT</SWRText>
-				<View style={{display: fileSelected?'none':'flex'}} >
-					<SWRButton onPress={selectFile} style={styles.selectButton}>
-						<SWRText style={gs.h4}>Select File</SWRText>
-						<Image style={styles.addIcon} source={images.add}/>
-					</SWRButton>
-					<SWRButton onPress={selectImage} style={styles.selectButton}>
-						<SWRText style={gs.h4}>Select Image</SWRText>
-						<Image style={styles.addIcon} source={images.add}/>
-					</SWRButton>
-				</View>
-				<View style={{display: fileSelected?'flex':'none'}} >
-					<View style={styles.preview} >
-						{image !== null && 
-							<Image style={styles.previewImage} source={{uri: image.uri}} />
-						}
-						<SWRText>{image? image.uri.split('/').slice(-1): file?.type==='cancel' ? '' : file?.name  }</SWRText>
-						<SWRButton onPress={clearFiles}>
-							<SWRText style={gs.h4}>Remove</SWRText>
-						</SWRButton>
-					</View>
-					<SWRButton onPress={() => setProcessing(true)} style={styles.uploadButton}>
-						<SWRText style={gs.h3}>Upload</SWRText>
-					</SWRButton>
-				</View>
+			<Image source={images.couch_dog} style={styles.couchImage}/>
+			<SWRText style={gs.h2}>Upload a file</SWRText>
+			<SWRText style={gs.h7}>Supported formats: JPEG, PNG, GIF, MP4, PDF, DOCX, PPT</SWRText>
+			<View style={{display: fileSelected?'none':'flex'}} >
+				<SWRButton onPress={selectFile} style={styles.selectButton}>
+					<SWRText style={gs.h4}>Select File</SWRText>
+					<Image style={styles.addIcon} source={images.add}/>
+				</SWRButton>
+				<SWRButton onPress={selectImage} style={styles.selectButton}>
+					<SWRText style={gs.h4}>Select Image</SWRText>
+					<Image style={styles.addIcon} source={images.add}/>
+				</SWRButton>
 			</View>
-			{processing && <>
-				<Processing process={upload} done={() => setProcessing(false)} />
-			</>}
+			<View style={{display: fileSelected?'flex':'none'}} >
+				<View style={styles.preview} >
+					{image !== null && 
+						<Image style={styles.previewImage} source={{uri: image.uri}} />
+					}
+					<SWRText>{image? image.uri.split('/').slice(-1): file?.type==='cancel' ? '' : file?.name  }</SWRText>
+					<SWRButton onPress={clearFiles}>
+						<SWRText style={gs.h4}>Remove</SWRText>
+					</SWRButton>
+				</View>
+				<SWRButton onPress={upload} style={styles.uploadButton}>
+					<SWRText style={gs.h3}>Upload</SWRText>
+				</SWRButton>
+			</View>
 		</View>
 	)
 }
 
 const styles = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		justifyContent: 'flex-start',
-		paddingHorizontal: 20
-	},
 	selectButton: {
 		width: '100%',
 		marginVertical: 10

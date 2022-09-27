@@ -7,10 +7,8 @@ export const TopMenu = () => {
 	return (
 		<View style={styles.container} >
 			<LocationFilter/>	
-			<View style={styles.rightSection}>
-				<Notifications/>
-				<ProfileIcon/>
-			</View>
+			<Notifications/>
+			<ProfileIcon/>
 		</View>
 	)
 }
@@ -21,11 +19,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		width: '100%',
 		marginBottom: 10,
-		paddingHorizontal: 20,
-		zIndex: 1,
+		paddingHorizontal: 20
 	},
-	rightSection: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-	}
 })

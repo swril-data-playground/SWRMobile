@@ -1,4 +1,6 @@
 export const questionTypes = ['Open-ended', 'Multiple choice', 'Demographic', 'Date', 'Select'] as const
+export const genderTypes=['Male','Female','Other'] as const
+export const religionTypes=['Christians','Sikhs','Hindus','Jains','Muslims'] as const
 export type typeOfQuestion = typeof questionTypes[number]
 
 export interface QuestionType {

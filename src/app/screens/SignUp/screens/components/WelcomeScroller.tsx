@@ -1,14 +1,32 @@
 import { images } from "assets/images"
-import { GenericScroller } from "components/GenericScroller"
 import { SWRText } from "components/SWRText"
-import { useCallback, useEffect, useRef, useState } from "react"
-import { View, StyleSheet, Image, ScrollView, Dimensions, Text } from "react-native"
-import { WelcomeScrollerData } from "./WelcomeScrollerData"
+import { View, StyleSheet, Image } from "react-native"
 
 export const WelcomeScroller = () => {
 	return (
-		<View>
-			<GenericScroller imageSet={WelcomeScrollerData}/>
+		<View style={styles.container}>
+			<SWRText style={styles.captionText}>Your information is yours and you chose who has access to it.</SWRText>
+			<Image
+				source={images.guitar_girl}
+				style={styles.guitarGirlImage}
+			/>
 		</View>
 	)
 }
+
+const styles = StyleSheet.create({
+	container: {
+		width: '100%',
+		alignItems: 'center',
+		marginTop: 40
+	},
+	captionText: {
+		textAlign: 'center',
+		fontSize: 20
+	},
+	guitarGirlImage: {
+		marginTop: 10,
+		height: 280,
+		width: 230
+	}
+})

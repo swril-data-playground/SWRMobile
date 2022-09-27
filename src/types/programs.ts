@@ -1,5 +1,5 @@
 import { defaultPublicAccount, PublicAccountType } from "./account"
-import { CategoryType, MunicipalityType } from "./filter"
+import { CategoryType, MunicipalityType,CategoryTypeGender,CategoryTypeReligion } from "./filter"
 import { QuestionType } from "./questions"
 
 
@@ -11,6 +11,8 @@ interface ProgramType {
 	image: string,
 	description: string,
 	category: CategoryType,
+	genderCategory:CategoryTypeGender,
+	religionCategory:CategoryTypeReligion,
 	municipality: MunicipalityType,
 	address: string,
 	date: string,
@@ -19,7 +21,7 @@ interface ProgramType {
 	repeat?: string,
 	attendees: PublicAccountType[],
 	questions: QuestionType[]
-}
+}                  
 const defaultProgram: ProgramType = {
 	title: '',
 	caption: '',
@@ -27,6 +29,8 @@ const defaultProgram: ProgramType = {
 	image: '',
 	description: '',
 	category: 'Learning',
+	genderCategory:'-Select-',
+	religionCategory:'-Select-',
 	municipality: 'Waterloo',
 	address: '',
 	date: '',

@@ -13,7 +13,7 @@ export const CheckBox = (props: {
 		height: props.size,
 		width: props.size,
 		borderRadius: props.size / 10,
-		borderColor: colors.mediumGrey,
+		borderColor: colors.grey,
 		borderWidth: 2,
 		alignItems: 'center',
 		justifyContent: 'center',

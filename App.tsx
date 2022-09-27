@@ -10,6 +10,8 @@ import { ErrorScreen } from 'screens/ErrorScreen'
 import { Program } from 'screens/Program'
 import { Privacy } from 'screens/Privacy'
 import { Help } from 'screens/Help'
+import { EditProfile } from 'screens/EditProfile'
+import { EditAvatar } from 'screens/Avatar'
 import { LearnMore } from 'screens/LearnMore'
 import { Login } from 'screens/Login/Login'
 import { Survey } from 'screens/Survey'
@@ -38,8 +40,6 @@ import { defaultDisplayValue, DisplayContext, DisplayContextType } from 'context
 import { tryGetPolls } from 'data/polls'
 import Polls from 'screens/Polls'
 import { Poll } from 'screens/Poll'
-import { HouseholdRequest } from 'screens/HouseholdRequest'
-import { AddHouseholdMember } from 'screens/AddHouseholdMember'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -104,7 +104,6 @@ const SmartWaterlooMobile = () => {
 			throwError(new Error('User authorization failed'))
 			return
 		} else if (authStatus === 404) {
-			setScreenState('LOADED')
 			navValue.setNav('SignUp')
 			return
 		}
@@ -151,6 +150,8 @@ const SmartWaterlooMobile = () => {
 										<NavItem name={'Data'} component={<MyData />} />
 										<NavItem name={'Privacy'} component={<Privacy />} />
 										<NavItem name={'Help'} component={<Help />} />
+										<NavItem name={'EditProfile'} component={<EditProfile />} />
+										<NavItem name={'EditAvatar'} component={<EditAvatar />} />
 										<NavItem name={'LearnMore'} component={<LearnMore />} />
 										<NavItem name={'CreateSurvey'} component={<CreateSurvey />} />
 										<NavItem name={'CreateProgram'} component={<CreateProgram />} />
@@ -158,8 +159,6 @@ const SmartWaterlooMobile = () => {
 										<NavItem name={'SurveyData'} component={<SurveyData />} />
 										<NavItem name={'MyCreations'} component={<MyCreations />} />
 										<NavItem name={'UploadScreen'} component={<UploadScreen />} />
-										<NavItem name={'HouseholdRequest'} component={<HouseholdRequest content={navContent}/>} />
-										<NavItem name={'AddHouseholdMember'} component={<AddHouseholdMember />} />
 									</NavContainer>
 									{mainTab && <Tabs tab={nav.nav as tabName} />}
 								</>
