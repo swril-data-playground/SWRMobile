@@ -69,9 +69,9 @@ export const GenericScroller = (props: {
 				{
 					props.imageSet.map((item, index) => (
 					<View key={index} style={{ marginLeft: 20, marginRight: 20, width: dimension.width-80}}>
-						{props.textOnTop && <SWRText style={styles.captionText}>{item.text}</SWRText> }
+						{props.textOnTop && <SWRText style={[styles.captionText, {marginBottom: 20}]}>{item.text}</SWRText> }
 						<Image key = {index} source = {item.image} style={{ width: dimension.width-80, height: 256, resizeMode: 'contain', display: 'flex'}}/>
-						{!props.textOnTop && <SWRText style={styles.captionText2}>{item.text}</SWRText> }
+						{!props.textOnTop && <SWRText style={[styles.captionText, {marginTop: 10}]}>{item.text}</SWRText> }
 					</View>
 					))
 				}
@@ -98,14 +98,6 @@ const styles = StyleSheet.create({
 	captionText: {
 		textAlign: 'center',
 		fontSize: 20,
-		marginBottom: 20,
-	
-	},
-	captionText2: {
-		textAlign: 'center',
-		fontSize: 20,
-		marginTop: 10,
-	
 	},
 	guitarGirlImage: {
 		marginTop: 10,
