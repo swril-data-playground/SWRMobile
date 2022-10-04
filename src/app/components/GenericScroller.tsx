@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { View, StyleSheet, Image, ScrollView, Dimensions, Text } from "react-native"
 
 export const GenericScroller = (props: {
-	imageSet: {image: any,text: string}[]
+	imageSet: {image: any,text: string}[],
+	textOnTop: boolean,
 }) => {
 
 	const [dimension, setDimension] = useState(Dimensions.get('window'))
@@ -68,19 +69,20 @@ export const GenericScroller = (props: {
 				{
 					props.imageSet.map((item, index) => (
 					<View key={index} style={{ marginLeft: 20, marginRight: 20, width: dimension.width-80}}>
-						<SWRText style={styles.captionText}>{item.text}</SWRText> 
+						{props.textOnTop && <SWRText style={styles.captionText}>{item.text}</SWRText> }
 						<Image key = {index} source = {item.image} style={{ width: dimension.width-80, height: 256, resizeMode: 'contain', display: 'flex'}}/>
+						{!props.textOnTop && <SWRText style={styles.captionText2}>{item.text}</SWRText> }
 					</View>
 					))
 				}
 			</ScrollView>
 			<View style={styles.dotsContainer}>
 			{props.imageSet.map((item, index) => (
-          		<SWRText
+				<SWRText
            		  key={index}
 				style={[styles.dots, { color: index === selectedIndex ? 'black' : 'white' }]}>
             		⬤
-          		</SWRText>
+          		</SWRText>	
         	))}
 			</View>
 		</View>
@@ -97,6 +99,12 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 20,
 		marginBottom: 20,
+	
+	},
+	captionText2: {
+		textAlign: 'center',
+		fontSize: 20,
+		marginTop: 10,
 	
 	},
 	guitarGirlImage: {

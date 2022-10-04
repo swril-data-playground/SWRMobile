@@ -17,7 +17,7 @@ export const Welcome = (props: {
 		<View style={gs.fullScreen} >
 			<PuzzleImage width={200}/>
 			<SWRText font={'medium'} style={gs.h1}>Welcome!</SWRText>
-			<WelcomeScroller/>
+			<WelcomeScroller textOnTop={true}/>
 			<SWRButton onPress={props.next} style={styles.signUpButton}>
 				<SWRText font={'medium'} style={gs.h4}>Sign up</SWRText>
 			</SWRButton>
