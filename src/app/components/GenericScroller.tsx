@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react"
 import { View, StyleSheet, Image, ScrollView, Dimensions, Text } from "react-native"
 
 export const GenericScroller = (props: {
-	imageSet: {image: any,text: string}[]
+	imageSet: {image: any,text: string}[],
+	textOnTop: boolean,
 }) => {
 
 	const [dimension, setDimension] = useState(Dimensions.get('window'))
@@ -56,7 +57,7 @@ export const GenericScroller = (props: {
 	}
 
 	return (
-		<View style={styles.container}>
+		<View style={styles().container}>
 			<ScrollView 
 			  horizontal
 			  ref={scrollRef}
@@ -67,27 +68,27 @@ export const GenericScroller = (props: {
 			  onTouchEnd={onTouchEnd}>
 				{
 					props.imageSet.map((item, index) => (
-					<View key={index} style={{ marginLeft: 20, marginRight: 20, width: dimension.width-80}}>
-						<SWRText style={styles.captionText}>{item.text}</SWRText> 
-						<Image key = {index} source = {item.image} style={{ width: dimension.width-80, height: 256, resizeMode: 'contain', display: 'flex'}}/>
+					<View key={index} style={styles(props, dimension).imageTextContainer}>
+						<SWRText style={styles(props).captionText}>{item.text}</SWRText> 
+						<Image key = {index} source = {item.image} style={styles(props, dimension).image}/>
 					</View>
 					))
 				}
 			</ScrollView>
-			<View style={styles.dotsContainer}>
+			<View style={styles().dotsContainer}>
 			{props.imageSet.map((item, index) => (
-          		<SWRText
+				<SWRText
            		  key={index}
-				style={[styles.dots, { color: index === selectedIndex ? 'black' : 'white' }]}>
+				style={[styles().dots, { color: index === selectedIndex ? 'black' : 'white' }]}>
             		⬤
-          		</SWRText>
+          		</SWRText>	
         	))}
 			</View>
 		</View>
 	)
 }
 
-const styles = StyleSheet.create({
+const styles = (props?: any, dimension?: any)  => StyleSheet.create({
 	container: {
 		width: '100%',
 		alignItems: 'center',
@@ -96,13 +97,14 @@ const styles = StyleSheet.create({
 	captionText: {
 		textAlign: 'center',
 		fontSize: 20,
-		marginBottom: 20,
-	
+		marginTop: props?.textOnTop ? 0 : 10 , 
+		marginBottom: props?.textOnTop ? 20 : 0
 	},
-	guitarGirlImage: {
-		marginTop: 10,
-		height: 280,
-		width: 230
+	image: {
+		width: dimension?.width-80, 
+		height: 256, resizeMode: 
+		'contain',
+		display: 'flex'
 	},
 	dotsContainer: {
 		display: 'flex',
@@ -114,5 +116,12 @@ const styles = StyleSheet.create({
 		marginLeft: 5,
 		marginRight: 5,
 		fontSize: 10,
+	},
+	imageTextContainer: {
+		marginHorizontal: 20,
+		width: dimension?.width-80,
+		flexDirection: props?.textOnTop ? "column" : "column-reverse",
+		display: "flex", 
+		justifyContent: props?.textOnTop ? "flex-start" : "flex-end"
 	},
 })
