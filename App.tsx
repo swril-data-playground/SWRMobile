@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Keyboard, StyleSheet, View } from 'react-native'
 import { NavContainer, NavItem, Tabs } from 'src/app/navigation'
 import { tabName, tabNames } from 'src/app/navigation/tabs'
@@ -43,6 +43,7 @@ import { AddHouseholdMember } from 'screens/AddHouseholdMember'
 import { defaultToastValue, ToastContext, ToastContextType } from 'contexts/toastContext'
 import { Toast } from 'types/toast'
 import { Toasts } from 'components/toasts/Toasts'
+import { AllToasts } from 'screens/AllToasts/AllToasts'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -55,19 +56,25 @@ const SmartWaterlooMobile = () => {
 	const throwError = (e:Error) => { setError(e); setScreenState('ERROR')}
 	const [navContent, setNavContent] = useState<any>(null)
 	const dataValue = { data, setData }
+	const toastDataRef = useRef<ToastContextType>(toastData)
+	toastDataRef.current = toastData
+	
+	const removeToast = (toast:Toast) => {
+		setToastData({
+			...toastDataRef.current,
+			activeToasts: toastDataRef.current.activeToasts.filter(t => t !== toast)
+		})
+	}
 	const toastValue = { 
 		content: toastData,  
 		pushToast: (toast:Toast) => {
+			setTimeout(() => {
+				removeToast(toast)
+			}, 5000)
 			setToastData({ 
 				toasts: [...toastData.toasts, toast],
 				activeToasts: [...toastData.activeToasts, toast]
 			})
-			setTimeout(() => {
-				setToastData({
-					toasts: toastData.toasts,
-					activeToasts: toastData.activeToasts.filter(t => t !== toast)
-				})
-			}, 5000)
 		}
 	}
 	const displayValue = { display }
@@ -180,6 +187,7 @@ const SmartWaterlooMobile = () => {
 											<NavItem name={'UploadScreen'} component={<UploadScreen />} />
 											<NavItem name={'HouseholdRequest'} component={<HouseholdRequest content={navContent}/>} />
 											<NavItem name={'AddHouseholdMember'} component={<AddHouseholdMember />} />
+											<NavItem name={'AllToasts'} component={<AllToasts />} />
 										</NavContainer>
 										{mainTab && <Tabs tab={nav.nav as tabName} />}
 										<Toasts tabs={mainTab} />

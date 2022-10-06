@@ -3,6 +3,8 @@ import { BackButton } from "components/BackButton"
 import BackgroundImage from "components/BackgroundImage"
 import { SWRButton } from "components/SWRButton"
 import { SWRText } from "components/SWRText"
+import { ToastContext } from "contexts/toastContext"
+import { useContext } from "react"
 import { StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { ProgramType } from "types/programs"
@@ -11,7 +13,13 @@ export const Program = (props: {content: any}) => {
 	const content = props.content as ProgramType
 	const over3Attendees = content.attendees.length > 3
 	const avatarAttendeesList = over3Attendees ? content.attendees.slice(0, 3) : content.attendees
-	const trySignUp = () => {}
+	const { pushToast } = useContext(ToastContext)
+	const trySignUp = () => {
+		pushToast({
+			title: 'Successfully signed up!',
+			type: 'success'
+		})
+	}
 	return (
 		<View style={styles.container}>
 			<View style={styles.imageContainer}>
