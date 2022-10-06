@@ -46,7 +46,6 @@ export const UploadScreen = () => {
 			status = imageStatus;
 		} else return;
 		if (status === 200) {
-			console.log('success')
 			clearFiles()
 		} else {
 			console.log('failed')
