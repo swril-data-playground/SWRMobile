@@ -4,15 +4,22 @@ export type CategoryType = typeof dataCategories[number]
 export type MunicipalityType = typeof municipalities[number]
 
 export interface FilterType {
-	category: CategoryType
+	categories: CategoryType[]
 	municipalities: MunicipalityType[]
-	recent: boolean
-	lastOpened: boolean
+	sort: {
+		recent: boolean
+		// lastOpened: boolean - not implemented
+		nameAZ: boolean
+		nameZA: boolean
+	}
 }
 
 export const defaultFilter: FilterType = {
-	category: 'All',
+	categories: ['All'],
 	municipalities: ['Kitchener'],
-	recent: false,
-	lastOpened: false
+	sort: {
+		recent: false,
+		nameAZ: false,
+		nameZA: false,
+	}
 }
