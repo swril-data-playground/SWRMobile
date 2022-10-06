@@ -2,6 +2,7 @@ import { SWRText } from 'components/SWRText'
 import { ToastContext } from 'contexts/toastContext'
 import { useContext } from 'react'
 import { View, StyleSheet } from 'react-native'
+import { ToastItem } from './Toast'
 
 export const Toasts = (props: {
 	tabs: boolean
@@ -10,11 +11,14 @@ export const Toasts = (props: {
 	console.log(content)
 	return (
 		<View style={[styles.container, {marginBottom: props.tabs?80:0}]}>
-				{content.activeToasts.length > 0 && 
-				<SWRText style={styles.toast}>
-						{content.activeToasts[0].title}
-				</SWRText>
-				}
+				{content.activeToasts.length > 0 && content.activeToasts.map((toast, index) => {
+					return(
+						// <SWRText style={styles.toast}>
+						// 	{content.activeToasts[index].title}
+						// </SWRText>
+						<ToastItem toast={content.activeToasts[index]} key={index}/>
+					)}
+				)}
 		</View>
 	)
 }
@@ -30,15 +34,16 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	toast: {
+		position: 'relative',
 		width: '90%',
 		height: '30%',
-		margin: 10,
-		borderRadius: 10,
+		margin: 3,
+		borderRadius: 15,
 		display: 'flex',
 		borderWidth: 1,
 		borderColor: 'grey',
 		backgroundColor: 'white',
-		padding: 10,
+		padding: 15,
 		justifyContent: 'center',
 		alignItems: 'center',
 		overflow: 'hidden',
