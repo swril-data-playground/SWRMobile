@@ -10,9 +10,11 @@ export const Toasts = (props: {
 	console.log(content)
 	return (
 		<View style={[styles.container, {marginBottom: props.tabs?80:0}]}>
-			<SWRText>
-				Hello World
-			</SWRText>
+				{content.activeToasts.length > 0 && 
+				<SWRText style={styles.toast}>
+						{content.activeToasts[0].title}
+				</SWRText>
+				}
 		</View>
 	)
 }
@@ -20,6 +22,28 @@ export const Toasts = (props: {
 const styles = StyleSheet.create({
 	container: {
 		position: 'absolute',
-		bottom: 0
+		bottom: 0,
+		width: '100%',
+		height: '20%',
+		display: 'flex',
+		justifyContent: 'flex-end',
+		alignItems: 'center',
+	},
+	toast: {
+		width: '90%',
+		height: '30%',
+		margin: 10,
+		borderRadius: 10,
+		display: 'flex',
+		borderWidth: 1,
+		borderColor: 'grey',
+		backgroundColor: 'white',
+		padding: 10,
+		justifyContent: 'center',
+		alignItems: 'center',
+		overflow: 'hidden',
+		textAlign: 'center',
+		textAlignVertical: 'center',
+
 	}
 })
