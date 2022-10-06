@@ -1,5 +1,7 @@
 import { images } from "assets/images"
-import { Image, StyleSheet, View } from "react-native"
+import { NavContext } from "contexts/navContext"
+import { useContext } from "react"
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
 import { gs } from "styles/globals"
 
 const notifications = [
@@ -7,15 +9,15 @@ const notifications = [
 ]
 
 export const Notifications = () => {
-
 	const notificationIcon = notifications.length ? 'notification_active' : 'notification'
+	const { setNav } = useContext(NavContext)
 	return (
-		<View style={styles.container}>
+		<TouchableOpacity style={styles.container} onPress={() => setNav('AllToasts')}>
 			<Image 
 				source={images[notificationIcon]}
 				style={gs.fillImage}
 			/>
-		</View>
+		</TouchableOpacity>
 	)
 }
 

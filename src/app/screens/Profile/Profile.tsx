@@ -7,10 +7,12 @@ import { AuthContext } from 'contexts/authContext'
 import { SWRButton } from 'components/SWRButton'
 import { images } from 'assets/images'
 import { NavContext } from 'contexts/navContext'
+import { ToastContext } from 'contexts/toastContext'
 
 const ProfileScreen = () => {
 	const { auth } = useContext(AuthContext)
 	const { setNav } = useContext(NavContext)
+	const { pushToast } = useContext(ToastContext)
 	return (
 		<View style={gs.fullScreen}>
 			<View style={styles.profileContainer}>
@@ -20,7 +22,13 @@ const ProfileScreen = () => {
 				<View style={styles.profileInfoContainer}>
 					<SWRText font={'medium'} style={styles.name}>{auth.account?.firstName}</SWRText>
 					<SWRText font={'medium'} style={styles.name}>{auth.account?.lastName}</SWRText>
-					<SWRButton onPress={() => {}} style={styles.whiteSection}>
+					<SWRButton onPress={() => {
+						pushToast({
+							title: 'Coming Soon',
+							details: 'This feature is not yet implemented',
+							type: 'info'
+						})
+					}} style={styles.whiteSection}>
 						<SWRText style={gs.h4}>Edit Profile</SWRText>
 					</SWRButton>
 					<SWRButton onPress={() => {}} style={styles.whiteSection}>

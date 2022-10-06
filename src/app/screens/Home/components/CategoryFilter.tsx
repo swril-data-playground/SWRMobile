@@ -1,9 +1,12 @@
 import { SWRText } from "components/SWRText"
+import { ToastContext } from "contexts/toastContext"
+import { useContext } from "react"
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { dataCategories, FilterType } from "types/filter"
 
 
 export const CategoryFilter = (props: {filter: FilterType, setFilter: (newFilter: FilterType) => void }) => {
+	const { pushToast } = useContext(ToastContext)
 	return (
 		<View style={styles.container}>
 			<ScrollView horizontal={true} style={styles.scroll} showsHorizontalScrollIndicator={false}>
@@ -13,7 +16,13 @@ export const CategoryFilter = (props: {filter: FilterType, setFilter: (newFilter
 					return (
 						<TouchableOpacity 
 							style={[styles.category, {backgroundColor}]} 
-							onPress={() => props.setFilter({...props.filter, category})}
+							onPress={selected ? undefined : () => {
+								props.setFilter({...props.filter, category})
+								pushToast({
+									title: `Filtering by ${category}`,
+									type: 'info'
+								})
+							}}
 							key={i}
 						>
 							<SWRText font={selected?'bold':'main'} style={styles.categoryText}>{category}</SWRText>

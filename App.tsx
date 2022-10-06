@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Keyboard, StyleSheet, View } from 'react-native'
 import { NavContainer, NavItem, Tabs } from 'src/app/navigation'
 import { tabName, tabNames } from 'src/app/navigation/tabs'
@@ -40,6 +40,10 @@ import Polls from 'screens/Polls'
 import { Poll } from 'screens/Poll'
 import { HouseholdRequest } from 'screens/HouseholdRequest'
 import { AddHouseholdMember } from 'screens/AddHouseholdMember'
+import { defaultToastValue, ToastContext, ToastContextType } from 'contexts/toastContext'
+import { Toast } from 'types/toast'
+import { Toasts } from 'components/toasts/Toasts'
+import { AllToasts } from 'screens/AllToasts/AllToasts'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -47,10 +51,32 @@ const SmartWaterlooMobile = () => {
 	const [nav, setNav] = useState<NavContextType>(defaultNavValue)
 	const [error, setError] = useState<Error|null>(null)
 	const [display, setDisplay] = useState<DisplayContextType>(defaultDisplayValue)
-	const throwError = (e:Error) => { setError(e); setScreenState('ERROR')}
 	const [data, setData] = useState<DataContextType>(defaultDataValue)
+	const [toastData, setToastData] = useState<ToastContextType>(defaultToastValue)
+	const throwError = (e:Error) => { setError(e); setScreenState('ERROR')}
 	const [navContent, setNavContent] = useState<any>(null)
 	const dataValue = { data, setData }
+	const toastDataRef = useRef<ToastContextType>(toastData)
+	toastDataRef.current = toastData
+	
+	const removeToast = (toast:Toast) => {
+		setToastData({
+			...toastDataRef.current,
+			activeToasts: toastDataRef.current.activeToasts.filter(t => t !== toast)
+		})
+	}
+	const toastValue = { 
+		content: toastData,  
+		pushToast: (toast:Toast) => {
+			setTimeout(() => {
+				removeToast(toast)
+			}, 5000)
+			setToastData({ 
+				toasts: [...toastData.toasts, toast],
+				activeToasts: [...toastData.activeToasts, toast]
+			})
+		}
+	}
 	const displayValue = { display }
 	const navValue = { 
 		nav, 
@@ -128,44 +154,48 @@ const SmartWaterlooMobile = () => {
 		<AuthContext.Provider value={authValue}>
 			<DataContext.Provider value={dataValue}>
 				<NavContext.Provider value={navValue}>
-					<DisplayContext.Provider value={displayValue}>
-						<View style={styles.parentContainer}>
-							<BackgroundImage />
-							{screenState === 'LOADING' && <LoadingScreen />}
-							{screenState === 'ERROR' && error && <ErrorScreen err={error} />}
-							{screenState === 'LOADED' && (
-								<>
-									<NavContainer >
-										<NavItem name={'SignUp'} component={<SignUp />} />
-										<NavItem name={'Login'} component={<Login />} />
-										<NavItem name={'Home'} component={<Home />} />
-										<NavItem name={'Programs'} component={<Programs />} />
-										<NavItem name={'Program'} component={<Program content={navContent} />} />
-										<NavItem name={'Surveys'} component={<Surveys />} />
-										<NavItem name={'Survey'} component={<Survey content={navContent} />} />
-										<NavItem name={'Polls'} component={<Polls />} />
-										<NavItem name={'Poll'} component={<Poll content={navContent} />} />
-										<NavItem name={'Settings'} component={<Settings />} />
-										<NavItem name={'Profile'} component={<Profile />} />
-										<NavItem name={'Create'} component={<Create />} />
-										<NavItem name={'Data'} component={<MyData />} />
-										<NavItem name={'Privacy'} component={<Privacy />} />
-										<NavItem name={'Help'} component={<Help />} />
-										<NavItem name={'LearnMore'} component={<LearnMore />} />
-										<NavItem name={'CreateSurvey'} component={<CreateSurvey />} />
-										<NavItem name={'CreateProgram'} component={<CreateProgram />} />
-										<NavItem name={'ProgramData'} component={<ProgramData />} />
-										<NavItem name={'SurveyData'} component={<SurveyData />} />
-										<NavItem name={'MyCreations'} component={<MyCreations />} />
-										<NavItem name={'UploadScreen'} component={<UploadScreen />} />
-										<NavItem name={'HouseholdRequest'} component={<HouseholdRequest content={navContent}/>} />
-										<NavItem name={'AddHouseholdMember'} component={<AddHouseholdMember />} />
-									</NavContainer>
-									{mainTab && <Tabs tab={nav.nav as tabName} />}
-								</>
-							)}
-						</View>
-					</DisplayContext.Provider>
+					<ToastContext.Provider value={toastValue}>
+						<DisplayContext.Provider value={displayValue}>
+							<View style={styles.parentContainer}>
+								<BackgroundImage />
+								{screenState === 'LOADING' && <LoadingScreen />}
+								{screenState === 'ERROR' && error && <ErrorScreen err={error} />}
+								{screenState === 'LOADED' && (
+									<>
+										<NavContainer >
+											<NavItem name={'SignUp'} component={<SignUp />} />
+											<NavItem name={'Login'} component={<Login />} />
+											<NavItem name={'Home'} component={<Home />} />
+											<NavItem name={'Programs'} component={<Programs />} />
+											<NavItem name={'Program'} component={<Program content={navContent} />} />
+											<NavItem name={'Surveys'} component={<Surveys />} />
+											<NavItem name={'Survey'} component={<Survey content={navContent} />} />
+											<NavItem name={'Polls'} component={<Polls />} />
+											<NavItem name={'Poll'} component={<Poll content={navContent} />} />
+											<NavItem name={'Settings'} component={<Settings />} />
+											<NavItem name={'Profile'} component={<Profile />} />
+											<NavItem name={'Create'} component={<Create />} />
+											<NavItem name={'Data'} component={<MyData />} />
+											<NavItem name={'Privacy'} component={<Privacy />} />
+											<NavItem name={'Help'} component={<Help />} />
+											<NavItem name={'LearnMore'} component={<LearnMore />} />
+											<NavItem name={'CreateSurvey'} component={<CreateSurvey />} />
+											<NavItem name={'CreateProgram'} component={<CreateProgram />} />
+											<NavItem name={'ProgramData'} component={<ProgramData />} />
+											<NavItem name={'SurveyData'} component={<SurveyData />} />
+											<NavItem name={'MyCreations'} component={<MyCreations />} />
+											<NavItem name={'UploadScreen'} component={<UploadScreen />} />
+											<NavItem name={'HouseholdRequest'} component={<HouseholdRequest content={navContent}/>} />
+											<NavItem name={'AddHouseholdMember'} component={<AddHouseholdMember />} />
+											<NavItem name={'AllToasts'} component={<AllToasts />} />
+										</NavContainer>
+										{mainTab && <Tabs tab={nav.nav as tabName} />}
+										<Toasts tabs={mainTab} />
+									</>
+								)}
+							</View>
+						</DisplayContext.Provider>
+					</ToastContext.Provider>
 				</NavContext.Provider>
 			</DataContext.Provider>
 		</AuthContext.Provider>
