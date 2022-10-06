@@ -4,10 +4,10 @@ import { ToastContext } from 'contexts/toastContext'
 import { useContext } from 'react'
 import { View, ScrollView } from 'react-native'
 import { gs } from 'styles/globals'
+import { ToastView } from './Toast'
 
 export const AllToasts = () => {
 	const { content } = useContext(ToastContext)
-	// console.log(content)
 	return (
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign screenPadding />
@@ -15,11 +15,7 @@ export const AllToasts = () => {
 				<SWRText font={'medium'} style={gs.h2}>All Notifications</SWRText>
 				{content.toasts.map((toast, index) => {
 					return (
-						<View key={index}>
-							<SWRText >
-								{toast.title}
-							</SWRText>
-						</View>
+						<ToastView key={index} toast={toast} />
 					)
 				})}
 			</ScrollView>

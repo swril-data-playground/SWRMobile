@@ -5,7 +5,7 @@ import { SWRButton } from "components/SWRButton"
 import { SWRText } from "components/SWRText"
 import { ToastContext } from "contexts/toastContext"
 import { useContext } from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { gs } from "styles/globals"
 import { ProgramType } from "types/programs"
 
