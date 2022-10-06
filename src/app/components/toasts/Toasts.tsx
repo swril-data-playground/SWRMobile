@@ -10,14 +10,9 @@ export const Toasts = (props: {
 	const { content } = useContext(ToastContext)
 	return (
 		<View style={[styles.container, {marginBottom: props.tabs?80:0}]}>
-				{content.activeToasts.length > 0 && content.activeToasts.map((toast, index) => {
-					return(
-						// <SWRText style={styles.toast}>
-						// 	{content.activeToasts[index].title}
-						// </SWRText>
-						<ToastItem toast={content.activeToasts[index]} key={index}/>
-					)}
-				)}
+			{content.activeToasts.map((toast, index) => {
+				return <ToastItem toast={content.activeToasts[index]} key={index}/>
+			})}
 		</View>
 	)
 }
@@ -32,22 +27,4 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end',
 		alignItems: 'center',
 	},
-	toast: {
-		position: 'relative',
-		width: '90%',
-		height: '30%',
-		margin: 3,
-		borderRadius: 15,
-		display: 'flex',
-		borderWidth: 1,
-		borderColor: 'grey',
-		backgroundColor: 'white',
-		padding: 15,
-		justifyContent: 'center',
-		alignItems: 'center',
-		overflow: 'hidden',
-		textAlign: 'center',
-		textAlignVertical: 'center',
-
-	}
 })

@@ -16,7 +16,7 @@ export const CategoryFilter = (props: {filter: FilterType, setFilter: (newFilter
 					return (
 						<TouchableOpacity 
 							style={[styles.category, {backgroundColor}]} 
-							onPress={() => {
+							onPress={selected ? undefined : () => {
 								props.setFilter({...props.filter, category})
 								pushToast({
 									title: `Filtering by ${category}`,
