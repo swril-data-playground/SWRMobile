@@ -5,7 +5,6 @@ import { images } from "assets/images"
 import { gs } from 'styles/globals'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { SWRButton } from 'components/SWRButton'
- // import Swipeable from 'react-native-gesture-handler/Swipeable'
 
 const toastMap = {
     'error': images.toast_error_icon,
@@ -14,40 +13,11 @@ const toastMap = {
     'info': images.toast_info_icon,
 }
 
-// const exit = () => {
-
-// }
-
-const {width, height} = Dimensions.get('screen')
-
-
 export const ToastItem = (props: {
 	toast: Toast,
 }) => {
 
-const [dimension, setDimension] = useState(Dimensions.get('window'))
-	const [selectedIndex, setSelectedIndex] = useState(0)
-	const scrollRef = useRef<ScrollView>(null)
-	const intervalId = useRef<NodeJS.Timeout>()
     const [showToast, setShowToast] = useState(true)
-
-	const onChange = () => {
-		setDimension(Dimensions.get('window'))
-	}
-
-	useEffect(() => {
-		const listener = Dimensions.addEventListener('change', onChange)
-		return () => {
-			listener.remove()
-		};
-	});
-
-	
-	// useEffect(() => {
-		
-	// }, [showToast]);
-
-
     return (
 
             showToast && <View style={styles.container}>
