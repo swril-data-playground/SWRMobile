@@ -35,6 +35,7 @@ export const NavContainer = (props: NavContainerType['props']): JSX.Element => {
 				const displayed =  item.props.name === nav.nav || (nav === undefined && i === 0)
 				const display = displayed ? 'flex' : 'none'
 				if (item.props.component.props.content !== undefined && !displayed) return
+				if (!item.props.persistent && !displayed) return
 				const paddingBottom = listIncludes(tabNames, item.props.name) ? 80 : 0
 				return (
 					<View

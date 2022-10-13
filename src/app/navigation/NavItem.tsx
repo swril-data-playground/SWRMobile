@@ -4,6 +4,7 @@ export interface NavItemType extends JSX.Element {
 	props: {
 		name: string
 		component: JSX.Element
+		persistent?: boolean
 	}
 }
 
