@@ -22,3 +22,10 @@ export const tryCreateProgram = async (program: ProgramType, account: AccountTyp
 		}
 	}
 }
+
+export const trySignUpForProgram = async (program: ProgramType, account: AccountType): Promise<{ status: statusType}> => {
+	await new Promise((resolve) => setTimeout(resolve, 2000))
+	return {
+		status: 200
+	}
+}

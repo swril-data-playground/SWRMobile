@@ -9,20 +9,13 @@ import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { gs } from "styles/globals"
 import { ProgramType } from "types/programs"
 
-export const ProgramView = (props: {program: ProgramType}) => {
+export const ProgramView = (props: {
+	program: ProgramType
+	signUp: () => Promise<void> | void
+}) => {
 	const program = props.program as ProgramType
 	const over3Attendees = program.attendees.length > 3
 	const avatarAttendeesList = over3Attendees ? program.attendees.slice(0, 3) : program.attendees
-	const { pushToast } = useContext(ToastContext)
-	const trySignUp = async () => {
-		console.log('hi')
-		await new Promise((resolve) => setTimeout(resolve, 2000))
-
-		// pushToast({
-		// 	title: 'Successfully signed up!',
-		// 	type: 'success'
-		// })
-	}
 	return (
 		<>
 			<View style={styles.imageContainer}>
@@ -43,7 +36,7 @@ export const ProgramView = (props: {program: ProgramType}) => {
 					})}
 					{over3Attendees && <SWRText style={[{marginLeft: 20}, gs.h4]}>+{program.attendees.length - 3}</SWRText>}
 				</View>
-				<SWRButton onPress={trySignUp} style={{backgroundColor: 'lightgrey', width: '70%'}}>
+				<SWRButton onPress={props.signUp} style={{backgroundColor: 'lightgrey', width: '70%'}}>
 					<SWRText style={[gs.h3, {textAlign: 'center'}]}>Sign Up</SWRText>
 				</SWRButton>
 			</View>
@@ -52,12 +45,6 @@ export const ProgramView = (props: {program: ProgramType}) => {
 }	
 
 const styles = StyleSheet.create({
-	container: {
-		marginHorizontal: 20,
-		backgroundColor: 'white',
-		borderRadius: 20,
-		height: '97%',
-	},
 	imageContainer: {
 		flex: 3
 	},
