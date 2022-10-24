@@ -2,7 +2,7 @@
 import { SWRText } from "components/SWRText"
 import { ToastContext } from "contexts/toastContext"
 import { useContext } from "react"
-import { StyleProp, StyleSheet, TextInput, ViewStyle } from "react-native"
+import { StyleProp, StyleSheet, TextInput, View, ViewStyle } from "react-native"
 import { SWRInputLabel } from "./SWRInputLabel"
 
 export interface SWRUnitInputProps {
@@ -22,7 +22,7 @@ export const SWRUnitInput = (props: SWRUnitInputProps) => {
 		return null
 	}
 	const content = (
-		<>
+		<View style={styles.container}>
 			<TextInput 
 				keyboardType={"numeric"} 
 				value={props.value} 
@@ -30,8 +30,8 @@ export const SWRUnitInput = (props: SWRUnitInputProps) => {
 				placeholder={"0"} 
 				onChangeText={props.onChange}
 			/>
-			<SWRText>{props.units[0]}</SWRText>
-		</>
+			<SWRText style={styles.unitText}>{props.units[0]}</SWRText>
+		</View>
 	)
 	if (!props.withTitle) return content
 	return (
@@ -43,17 +43,29 @@ export const SWRUnitInput = (props: SWRUnitInputProps) => {
 
 const styles = StyleSheet.create({
 	container: {
-		alignItems: 'flex-start',
-		width: '100%',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
+		backgroundColor: 'white',
+		borderColor: 'lightgrey',
+		borderRadius: 15,
+		borderWidth: 1,
+		width: 120,
+		overflow: 'hidden',
+		marginVertical: 4,
 	},
 	textInput: {
 		height: 50,
-		padding: 10,
-		marginVertical: 4,
-		borderRadius: 15,
+		paddingHorizontal: 20,
 		fontSize: 18,
 		textAlign: 'left',
-		width: '100%',
-		backgroundColor: 'white'
+		borderRightColor: 'lightgrey',
+		borderRightWidth: 1,
 	},
+	unitText: {
+		paddingHorizontal: 10,
+		fontSize: 20,
+		textAlign: 'left',
+		width: '100%'
+	}
 })

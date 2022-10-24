@@ -40,8 +40,10 @@ const styles = StyleSheet.create({
 		marginVertical: 4,
 		borderRadius: 15,
 		fontSize: 18,
-		textAlign: 'left',
-		width: '100%',
-		backgroundColor: 'white'
+		textAlign: 'center',
+		backgroundColor: 'white',
+		borderColor: 'lightgrey',
+		borderWidth: 1,
+		width: 60
 	},
 })
