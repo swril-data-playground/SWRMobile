@@ -212,4 +212,14 @@ export const exampleAccount:AccountType = {
 		programs: [...examplePrograms],
 		surveys: [...exampleSurveys],
 	},
+	personalInfo: {
+		DOB: '1990-01-01',
+		gender: 'Male',
+		height: 180,
+		weight: 170,
+		religion: 'Zac Waite',
+		race: 'Black',
+		grade: 69,
+		postalCode: 'M2W 1A8',
+	}
 }

@@ -14,22 +14,32 @@ import { SWRDateInput } from "components/inputs/SWRDateInput"
 import { SWRInputLabel } from "components/inputs/SWRInputLabel"
 import { SWRMCInput } from "components/inputs/SWRMCInput"
 import { AccountType, defaultAccount } from "types/account"
+import { SWRSmallIntInput } from "components/inputs/SWRSmallIntInput"
+import { ToastContext } from "contexts/toastContext"
+import { exampleAccount } from "data/exampleData"
+
 
 export const EditProfile = () => {
 	const { auth } = useContext(AuthContext)
+    const { pushToast } = useContext(ToastContext)
+    const { setNav } = useContext(NavContext)
+
     if(!auth.account || !auth.account.personalInfo) {
-        console.error('No account found')
-        return null
+        pushToast({
+			title: `No Account Found`,
+			type: 'error'
+    	})
+        setNav('Home')
     }
-    const [profileData, setProfileData] = useState<AccountType>(auth.account)
-	 const handleTryEditProfileInfo = async () => {
+    const [profileData, setProfileData] = useState<AccountType>(exampleAccount)
+	const handleTryEditProfileInfo = async () => {
 	 	if (!auth.account) return
-	 	const {status} = await tryEditProfileInfo(profileData, auth.account)
+	 	const {status} = await tryEditProfileInfo(profileData, exampleAccount)
 	 	if (status === 200) {
-	 		setProfileData(defaultAccount)
+	 		setProfileData({...exampleAccount, personalInfo: profileData.personalInfo})
 	 	}
-	 	else throw Error('Failed to create survey')
-	 }
+	 	else throw Error('Failed to create Profile')
+	}
 	const doneEnabled = (
         (['DOB', 'gender', 'race', 'religion', 'postalCode'] as const).every(key =>  profileData.personalInfo[key] !== '') 
         && (['grade', 'height', 'weight'] as const).every(key =>  profileData.personalInfo[key] !== 0)
@@ -57,58 +67,67 @@ export const EditProfile = () => {
                     choices={['Male', 'Female', 'Other']}
                     buttonStyle={{marginBottom: 10}}
                 />
-                <SWRText style={gs.h5}>Height (cm)        Weight (lbs) </SWRText>
                 <View style={styles.heightWeightontainer}>
-                    <SWRTextInput
+                    <View>
+                        <SWRText style={gs.h5}>Height (cm)</SWRText>
+                        <SWRSmallIntInput
                         name={'165'}
                         onChange={(height) => setProfileData({...profileData, 
                             personalInfo: {...profileData.personalInfo, height: parseInt(height)}})} 
                         value={profileData.personalInfo.height.toString()}
                         inputStyle={styles.heightWeightInput}
                     /> 
-                    <SWRTextInput
+                    </View>
+                    <View style={{marginLeft: 40}}>
+                        <SWRText style={gs.h5}>Weight (lbs) </SWRText>
+                        <SWRSmallIntInput
                         name={'160'}
                         onChange={(weight) => setProfileData({...profileData, 
-                            personalInfo: {...profileData.personalInfo, weight: parseInt(weight)}})} 
+                            personalInfo: {...profileData.personalInfo, weight: parseInt(weight) || 0}})} 
                         value={profileData.personalInfo.weight.toString()}
                         inputStyle={styles.heightWeightInput}
                     /> 
+                    </View>
                 </View>
                 <SWRText style={gs.h5}>Religion</SWRText>
                 <SWRSelectInput
-                    name={'Gender'}
+                    name={'Religion'}
                     onChange={(religion) => setProfileData({...profileData, 
                         personalInfo: {...profileData.personalInfo, religion}})} 
                     value={profileData.personalInfo.religion}
-                    choices={['Penis', 'Zac Waite', 'Pastafarianism']}
+                    choices={['Zac Waite', 'Pastafarianism']}
                     buttonStyle={{marginBottom: 10}}
                 />
                 <SWRText style={gs.h5}>Race</SWRText>
                 <SWRSelectInput
-                    name={'Gender'}
+                    name={'Race'}
                     onChange={(race) => setProfileData({...profileData, 
                         personalInfo: {...profileData.personalInfo, race}})} 
                     value={profileData.personalInfo.race}
                     choices={['White', 'Black', 'Rainbow']}
                     buttonStyle={{marginBottom: 10}}
                 />
-                <SWRText style={gs.h5}>Grade                 Postal Code </SWRText>
                 <View style={styles.heightWeightontainer}>
-                    <SWRTextInput
-                        name={'7'}
-                        onChange={(grade) => setProfileData({...profileData, 
-                            personalInfo: {...profileData.personalInfo, grade: parseInt(grade)}})} 
-                        value={profileData.personalInfo.grade.toString()}
-                        inputStyle={styles.heightWeightInput}
-                    /> 
-                    <SWRTextInput
-                        name={'M5A'}
-                    onChange={(postalCode) => setProfileData({...profileData, 
-                        personalInfo: {...profileData.personalInfo, postalCode}})} 
-                    value={profileData.personalInfo.postalCode}
-                        inputStyle={styles.heightWeightInput}
-                    /> 
-
+                    <View>
+                        <SWRText style={gs.h5}>Grade</SWRText> 
+                        <SWRSmallIntInput
+                            name={'7'}
+                            onChange={(grade) => setProfileData({...profileData, 
+                                personalInfo: {...profileData.personalInfo, grade: parseInt(grade)}})} 
+                            value={profileData.personalInfo.grade.toString()}
+                            inputStyle={styles.heightWeightInput}
+                        /> 
+                    </View>
+                    <View style={{marginLeft: 40}}>
+                        <SWRText style={gs.h5}>Postal Code</SWRText>
+                        <SWRTextInput
+                            name={'M5A 6B7'}
+                        onChange={(postalCode) => setProfileData({...profileData, 
+                            personalInfo: {...profileData.personalInfo, postalCode}})} 
+                        value={profileData.personalInfo.postalCode}
+                            inputStyle={styles.heightWeightInput}
+                        /> 
+                    </View>
                 </View>
 				<SWRButton style={styles.doneButton} onPress={handleTryEditProfileInfo} disabled={!doneEnabled}>
 					<SWRText style={gs.h5} font={'medium'}>Done</SWRText>
@@ -143,7 +162,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     heightWeightInput: {
-        width: '25%',
+        width: '100%',
         textAlign: 'center',
         marginRight: 40,
         marginBottom: 10

@@ -11,7 +11,10 @@ export const SWRDateInput = (props: {
 		//2022-03-23 
 	const date = new Date(props.value)
 	const validDate = date.toString() !== 'Invalid Date'
-	const [state, setState] = useState<{day?:number, month?:number, year?:number}>({})
+	
+	const [state, setState] = useState<{day?:number, month?:number, year?:number}>({
+		day: date.getDate(), month: date.getMonth(), year: date.getFullYear()
+	})
 	const setDay = (newDay: string) => {
 		setState({...state, day: parseInt(newDay)})
 	}
@@ -42,7 +45,7 @@ export const SWRDateInput = (props: {
 			<TextInput 
 				keyboardType={'number-pad'} 
 				value={state.year?.toString()} 
-				style={styles.textInput} 
+				style={[styles.textInput, {width: 80}]}
 				placeholder={'YY'} 
 				onChangeText={setYear}
 			/>
