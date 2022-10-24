@@ -1,9 +1,9 @@
 import { Toast } from '../../../types/toast'
-import { StyleSheet, View, Image, ScrollView, Dimensions, Button } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { SWRText } from 'components/SWRText'
 import { images } from "assets/images"
 import { gs } from 'styles/globals'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { SWRButton } from 'components/SWRButton'
 
 const toastMap = {
@@ -15,22 +15,24 @@ const toastMap = {
 
 export const ToastItem = (props: {
 	toast: Toast,
+    disableDelete?: boolean,
 }) => {
 
     const [showToast, setShowToast] = useState(true)
-    if (showToast) return (
-        <View style={styles.container}>
+    const display = showToast ? 'flex' : 'none'
+    return (
+        <View style={[styles.container, {display}]}>
             <Image source={toastMap[props.toast.type]} style={styles.image}/>
             <View style={styles.data}>
                 <SWRText style={gs.h4}>{props.toast.title}</SWRText>
                 {props.toast.details && <SWRText style={gs.h7}>{props.toast.details}</SWRText>}
             </View>
+            {!props.disableDelete && 
             <SWRButton onPress={() => setShowToast(false)} style={{marginLeft: 'auto'}}>
                 <Image source={images.x} style={styles.xicon}/>
-            </SWRButton>
+            </SWRButton>}
         </View>
     )
-    return null
 }
         
 

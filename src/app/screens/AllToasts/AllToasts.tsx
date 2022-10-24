@@ -15,7 +15,7 @@ export const AllToasts = () => {
 				<SWRText font={'medium'} style={gs.h2}>All Notifications</SWRText>
 				{content.toasts.map((toast, index) => {
 					return (
-						<ToastItem key={index} toast={toast} />
+						<ToastItem key={index} toast={toast} disableDelete />
 					)
 				})}
 			</ScrollView>
