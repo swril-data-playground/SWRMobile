@@ -44,6 +44,7 @@ import { defaultToastValue, ToastContext, ToastContextType } from 'contexts/toas
 import { Toast } from 'types/toast'
 import { Toasts } from 'components/toasts/Toasts'
 import { AllToasts } from 'screens/AllToasts/AllToasts'
+import { EditProfile } from 'screens/EditProfile/EditProfile'
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -188,6 +189,7 @@ const SmartWaterlooMobile = () => {
 											<NavItem name={'HouseholdRequest'} component={<HouseholdRequest content={navContent}/>} />
 											<NavItem name={'AddHouseholdMember'} component={<AddHouseholdMember />} />
 											<NavItem name={'AllToasts'} component={<AllToasts />} />
+											<NavItem name={'EditProfile'} component={<EditProfile />} />
 										</NavContainer>
 										{mainTab && <Tabs tab={nav.nav as tabName} />}
 										<Toasts tabs={mainTab} />

@@ -1,4 +1,4 @@
-import { AccountType } from "types/account";
+import { AccountType, defaultAccount } from "types/account";
 import { defaultAvatar } from "types/avatar";
 import { PollType } from "types/polls";
 import { defaultProgram, ProgramType } from "types/programs";
@@ -186,6 +186,7 @@ export const examplePolls:PollType[] = [
 ]
 
 export const exampleAccount:AccountType = {
+	...defaultAccount,
 	firstName: 'Jonathan',
 	lastName: 'Lateef',
 	avatar: defaultAvatar,
@@ -199,5 +200,5 @@ export const exampleAccount:AccountType = {
 	creations: {
 		programs: [...examplePrograms],
 		surveys: [...exampleSurveys],
-	}
+	},
 }
