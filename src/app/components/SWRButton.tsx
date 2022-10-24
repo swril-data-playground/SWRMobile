@@ -8,11 +8,11 @@ export const SWRButton = (props: {
 	disabled?: boolean,
 	singleUse?: boolean
 }) => {
-	const [running, setRunnning] = useState(false)
+	const [running, setRunning] = useState(false)
 	const onPressFunction = async () => {
-		setRunnning(true)
+		setRunning(true)
 		await props.onPress()
-		if (!props.singleUse) setRunnning(false)
+		if (!props.singleUse) setRunning(false)
 	}
 	const disabled = props.disabled || running
 	if (disabled) {

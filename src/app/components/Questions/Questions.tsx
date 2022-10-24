@@ -1,7 +1,9 @@
 import { SWRDateInput } from "components/inputs/SWRDateInput";
 import { SWRMCInput } from "components/inputs/SWRMCInput";
 import { SWRSelectInput } from "components/inputs/SWRSelectInput";
+import { SWRSmallIntInput } from "components/inputs/SWRSmallIntInput";
 import { SWRTextInput } from "components/inputs/SWRTextInput";
+import { SWRUnitInput } from "components/inputs/SWRUnitInput";
 import { SWRText } from "components/SWRText";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { gs } from "styles/globals";
@@ -46,6 +48,20 @@ export const Questions = (props: {
 						value={answer}
 						onChange={setAnswer}
 					/>; break;
+					case 'SmallInt': input = <SWRSmallIntInput
+						value={answer}
+						onChange={setAnswer}
+					/>; break;
+					case 'Unit': 
+					    if (!question.choices || question.choices.length < 1) {
+							console.error("Unit question must unit choices")
+					        return null
+					    }
+						input = <SWRUnitInput
+							value={answer}
+							onChange={setAnswer}
+							units={question.choices}
+						/>; break;
 				}
 				return (
 					<View style={styles.question} key={i}>

@@ -69,6 +69,17 @@ export const exampleSurveys:SurveyType[] = [
 				prompt: 'What is your date of birth?',
 				type: 'Date',
 			},
+			{
+				id: '44',
+				prompt: 'How many grams of sugar do you eat per day?',
+				type: 'Unit',
+				choices: ['g']
+			},
+			{
+				id: '45',
+				prompt: 'Pick a number between 1 and 10',
+				type: 'SmallInt',
+			}
 		],
 	},
 	{

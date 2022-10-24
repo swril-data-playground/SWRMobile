@@ -18,21 +18,19 @@ export const ToastItem = (props: {
 }) => {
 
     const [showToast, setShowToast] = useState(true)
-    return (
-
-            showToast && <View style={styles.container}>
-                <Image source={toastMap[props.toast.type]} style={styles.image}/>
-                <View style={styles.data}>
-                    <SWRText style={gs.h4}>{props.toast.title}</SWRText>
-                    {props.toast.details && <SWRText style={gs.h7}>{props.toast.details}</SWRText>}
-                </View>
-                <SWRButton onPress={() => setShowToast(false)} style={{marginLeft: 'auto'}}>
-                    <Image source={images.x} style={styles.xicon}/>
-                </SWRButton>
+    if (showToast) return (
+        <View style={styles.container}>
+            <Image source={toastMap[props.toast.type]} style={styles.image}/>
+            <View style={styles.data}>
+                <SWRText style={gs.h4}>{props.toast.title}</SWRText>
+                {props.toast.details && <SWRText style={gs.h7}>{props.toast.details}</SWRText>}
             </View>
- 
-
+            <SWRButton onPress={() => setShowToast(false)} style={{marginLeft: 'auto'}}>
+                <Image source={images.x} style={styles.xicon}/>
+            </SWRButton>
+        </View>
     )
+    return null
 }
         
 
@@ -43,6 +41,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         padding: 10,
         width: '90%',
+        height: 60,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
