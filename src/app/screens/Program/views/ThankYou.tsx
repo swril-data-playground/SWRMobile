@@ -18,7 +18,7 @@ export const ThankYou = (props: {
 	const program = props.program as ProgramType
 	return (
 		<View style={[gs.fullScreen, styles.container]} >
-			<View>
+			<View style={{alignItems: 'center'}}>
 				<PuzzleImage width={200}/>
 				<SWRText font={'medium'} style={gs.h1}>Thank you</SWRText>
 				<SWRText font={'medium'} style={gs.h3}>For signing up to</SWRText>
