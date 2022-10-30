@@ -17,6 +17,7 @@ import { AccountType, defaultAccount } from "types/account"
 import { SWRSmallIntInput } from "components/inputs/SWRSmallIntInput"
 import { ToastContext } from "contexts/toastContext"
 import { exampleAccount } from "data/exampleData"
+import { genderOptions, religionOptions, raceOptions } from "./Options"
 
 
 export const EditProfile = () => {
@@ -64,7 +65,7 @@ export const EditProfile = () => {
                     onChange={(gender) => setProfileData({...profileData, 
                         personalInfo: {...profileData.personalInfo, gender}})} 
                     value={profileData.personalInfo.gender}
-                    choices={['Male', 'Female', 'Other']}
+                    choices={genderOptions}
                     buttonStyle={{marginBottom: 10}}
                 />
                 <View style={styles.heightWeightontainer}>
@@ -95,7 +96,7 @@ export const EditProfile = () => {
                     onChange={(religion) => setProfileData({...profileData, 
                         personalInfo: {...profileData.personalInfo, religion}})} 
                     value={profileData.personalInfo.religion}
-                    choices={['Zac Waite', 'Pastafarianism']}
+                    choices={religionOptions}   
                     buttonStyle={{marginBottom: 10}}
                 />
                 <SWRText style={gs.h5}>Race</SWRText>
@@ -104,7 +105,7 @@ export const EditProfile = () => {
                     onChange={(race) => setProfileData({...profileData, 
                         personalInfo: {...profileData.personalInfo, race}})} 
                     value={profileData.personalInfo.race}
-                    choices={['White', 'Black', 'Rainbow']}
+                    choices={raceOptions}
                     buttonStyle={{marginBottom: 10}}
                 />
                 <View style={styles.heightWeightontainer}>
