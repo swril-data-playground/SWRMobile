@@ -52,7 +52,7 @@ export const Program = (props: {content: any}) => {
 const styles = StyleSheet.create({
 	container: {
 		marginHorizontal: 20,
-		backgroundColor: 'white',
+		// backgroundColor: 'white',
 		borderRadius: 20,
 		height: '97%',
 	},
