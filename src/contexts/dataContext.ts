@@ -18,7 +18,8 @@ export const defaultDataValue: DataContextType = {
 	pollCache: new Map(),
 }
 
-export const DataContext = createContext<{ data: DataContextType; setData: (newData: DataContextType) => void }>({
+export const DataContext = createContext<{ data: DataContextType; setData: (newData: DataContextType) => void, reloadData: () => Promise<void> }>({
 	data: defaultDataValue,
 	setData: (newData: DataContextType) => {},
+	reloadData: async () => {},
 })

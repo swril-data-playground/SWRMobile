@@ -10,7 +10,8 @@ export const defaultAuthValue: AuthContextType = {
 	account: null,
 }
 
-export const AuthContext = createContext<{ auth: AuthContextType; setAuth: (newAuth: AuthContextType) => void }>({
+export const AuthContext = createContext<{ auth: AuthContextType; setAuth: (newAuth: AuthContextType) => void, signOut: () => Promise<void> }>({
 	auth: defaultAuthValue,
 	setAuth: (newAuth: AuthContextType) => {},
+	signOut: async () => {},
 })
