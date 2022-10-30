@@ -34,3 +34,7 @@ export const tryAddHouseholdMember = async (data: String, account: AccountType):
 	await new Promise((resolve) => setTimeout(resolve, 5000))
 	return { status: 200 , householdMember: data}
 }
+export const tryEditProfileInfo = async (data: AccountType, account: AccountType): Promise<{ status: statusType}> => {
+	await new Promise((resolve) => setTimeout(resolve, 5000))
+	return { status: 200 }
+}
