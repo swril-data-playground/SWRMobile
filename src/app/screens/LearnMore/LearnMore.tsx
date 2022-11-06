@@ -21,11 +21,13 @@ export const LearnMore = () => {
 			<BackButton leftAlign screenPadding/>
 			<ScrollView style={gs.screenPadding}>
 				<View style={styles.header}>
-					<Image
-						source={images.search_icon}
-						style={styles.headerIcon}
-					/>
-					<SWRText style={gs.h2}>Learn More</SWRText>
+					<View style={{flexDirection: 'row'}}>
+						<Image
+							source={images.search_icon}
+							style={styles.headerIcon}
+						/>
+						<SWRText style={gs.h2}>Learn More</SWRText>
+					</View>
 					<View style={gs.fullScreen}>
 						<SWRText style={gs.h5}>{accordionTitle}</SWRText>
 							{accordionData.map((props) => (
