@@ -5,12 +5,13 @@ import { BackButton } from "components/BackButton"
 import { SWRText } from "components/SWRText"
 import { Image, ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
+import { accordionItem } from "types/accordionItem"
 
 export const LearnMore = () => {
 
-	const accordionFunc = (data: {header: string, content: string}[]) => {
+	const accordionFunc = (data: accordionItem[]) => {
 		return (
-			data.map(( props: {header:string, content:string} ) => (
+			data.map(( props: accordionItem ) => (
 				<Accordion {...props} />      					
 			))
 		)
