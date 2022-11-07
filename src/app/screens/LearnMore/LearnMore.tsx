@@ -12,7 +12,7 @@ export const LearnMore = () => {
 	const accordionFunc = (data: accordionItem[]) => {
 		return (
 			data.map(( props: accordionItem ) => (
-				<Accordion {...props} />      					
+				<Accordion key={props.header + props.content} {...props}/>      					
 			))
 		)
 	}
@@ -22,23 +22,21 @@ export const LearnMore = () => {
 			<BackButton leftAlign screenPadding/>
 			<ScrollView style={gs.screenPadding}>
 				<View style={styles.header}>
-					<View style={{flexDirection: 'row'}}>
 						<Image
 							source={images.search_icon}
 							style={styles.headerIcon}
 						/>
 						<SWRText style={gs.h2}>Learn More</SWRText>
-					</View>
-					<View style={gs.fullScreen}>
+				</View>
+				<View style={gs.fullScreen}>
 						<SWRText style={gs.h5}>{accordionTitle}</SWRText>
 							{accordionData.map((props) => (
-								<View>
-									<SWRText style={gs.h6}>{props.title}</SWRText>
+								<View key={props.title}>
+									<SWRText style={styles.sectionTitle}>{props.title}</SWRText>
 									{accordionFunc(props.data)}
 								</View>
 							))}
     				</View>
-				</View>
 			</ScrollView>
 		</View>
 	)
@@ -46,13 +44,22 @@ export const LearnMore = () => {
 
 const styles = StyleSheet.create({
 	header: {
-		flexDirection: 'column',
+		flexDirection: 'row',
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		marginBottom: 20
 	},
 	headerIcon: {
 		height: 40,
 		width: 40,
 		marginRight: 10
+	},
+	sectionTitle: {
+		marginTop: 20,
+		marginBottom: 10,
+		backgroundColor: 'lightgrey',
+		fontSize: 20,
+		textAlign: 'center',
 	}
+
 })

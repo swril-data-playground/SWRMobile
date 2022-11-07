@@ -12,7 +12,7 @@ export const Help = () => {
 	const accordionFunc = (data: accordionItemImage[]) => {
 		return (
 			data.map(( props: accordionItemImage ) => (
-				<AccordionWithImage {...props} />      					
+				<AccordionWithImage key={props.header + props.content.text} {...props} />      					
 			))
 		)
 	}
@@ -30,8 +30,8 @@ export const Help = () => {
 				</View>
 				<View style={gs.fullScreen}>
 					{HelpData.map((props) => (
-						<View>
-							<SWRText style={gs.h6}>{props.title}</SWRText>
+						<View key={props.title}>
+							<SWRText style={styles.sectionTitle}>{props.title}</SWRText>
 							{accordionFunc(props.data)}
 						</View>
 					))}
@@ -51,5 +51,12 @@ const styles = StyleSheet.create({
 		height: 40,
 		width: 40,
 		marginRight: 10
+	},
+	sectionTitle: {
+		marginTop: 20,
+		marginBottom: 10,
+		backgroundColor: 'lightgrey',
+		fontSize: 20,
+		textAlign: 'center',
 	}
 })
