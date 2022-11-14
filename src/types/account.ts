@@ -12,16 +12,6 @@ interface AccountType {
 	creations: {
 		programs: ProgramType[],
 		surveys: SurveyType[],
-	},
-	personalInfo: {
-		DOB: string,
-		gender: string,
-		height: number,
-		weight: number,
-		religion: string,
-		race: string,
-		grade: number,
-		postalCode: string,
 	}
 }
 
@@ -35,16 +25,6 @@ const defaultAccount: AccountType = {
 	creations: {
 		programs: [],
 		surveys: [],
-	},
-	personalInfo: {
-		DOB: '',
-		gender: '',
-		height: 0,
-		weight: 0,
-		religion: '',
-		race: '',
-		grade: 0,
-		postalCode: '',
 	}
 }
 

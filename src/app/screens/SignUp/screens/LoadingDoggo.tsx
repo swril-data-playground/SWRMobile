@@ -6,11 +6,19 @@ import { gs } from "styles/globals"
 import {  StyleSheet } from "react-native"
 import { DoggoScroller } from "./components/DoggoScroller"
 import { images } from "assets/images"
+import { createseedphrase , createpripubkey } from "contexts/keygeneration"
+import { useAuth } from '/home/narukirito/SWRMobileAries/src/contexts/auth'
+import {AgentInit} from 'src/agentdec/agentaction'
+import { useAgent } from '@aries-framework/react-hooks'
+import deviceStorage from '/home/narukirito/SWRMobileAries/src/app/services/jwtstore';
+
+
 
 export const LoadingDoggo = (props: {
 	next: () => void,
 	loaded: boolean
 }) => {
+	
 	return (
 		<View style={gs.fullScreen} >
 			<PuzzleImage width={200}/>

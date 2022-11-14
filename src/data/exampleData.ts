@@ -1,4 +1,4 @@
-import { AccountType, defaultAccount } from "types/account";
+import { AccountType } from "types/account";
 import { defaultAvatar } from "types/avatar";
 import { PollType } from "types/polls";
 import { defaultProgram, ProgramType } from "types/programs";
@@ -69,17 +69,6 @@ export const exampleSurveys:SurveyType[] = [
 				prompt: 'What is your date of birth?',
 				type: 'Date',
 			},
-			{
-				id: '44',
-				prompt: 'How many grams of sugar do you eat per day?',
-				type: 'Unit',
-				choices: ['g']
-			},
-			{
-				id: '45',
-				prompt: 'Pick a number between 1 and 10',
-				type: 'SmallInt',
-			}
 		],
 	},
 	{
@@ -197,7 +186,6 @@ export const examplePolls:PollType[] = [
 ]
 
 export const exampleAccount:AccountType = {
-	...defaultAccount,
 	firstName: 'Jonathan',
 	lastName: 'Lateef',
 	avatar: defaultAvatar,
@@ -211,15 +199,5 @@ export const exampleAccount:AccountType = {
 	creations: {
 		programs: [...examplePrograms],
 		surveys: [...exampleSurveys],
-	},
-	personalInfo: {
-		DOB: '1990-01-01',
-		gender: 'Male',
-		height: 180,
-		weight: 170,
-		religion: 'Zac Waite',
-		race: 'Black',
-		grade: 69,
-		postalCode: 'M2W 1A8',
 	}
 }
