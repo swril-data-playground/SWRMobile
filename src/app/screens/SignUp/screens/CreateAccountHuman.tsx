@@ -7,35 +7,20 @@ import { Image, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { setSignUpData, SignUpData, step } from '../SignUpFlow'
 import { PuzzleImage } from "../../../components/PuzzleImage"
-import { useAuth } from '../contexts/auth'
 import React, { useState } from 'react'
-import {AgentInit} from 'src/agentdec/agentaction'
-import { useAgent } from '@aries-framework/react-hooks'
-import deviceStorage from '../services/jwtstore';
-import axios from 'axios';
 import { createseedphrase , createpripubkey } from "contexts/keygeneration"
 import { storeCryptoKey , storeCryptoAddress , storeSeedPhrase } from "src/app/services/keychain"
+import { agentInitialization , passcodeCreate } from "data/account"
+
+
+
 export const CreateAccountHuman = (props: {
 	data: SignUpData,
 	setData: setSignUpData
 	next: step
 	back: step
 }) => {
-
-	const { setPIN , getWalletCredentials } = useAuth()
-	const [walletId , setWalletId] = useState('')
-	const [name , setname] = useState('')
-	const { setAgent } = useAgent()
-
-	
-	const passcodeCreate = async (pin: string , walletId: string , salt?: string) => {
-		try {
-		  await setPIN(pin , walletId , salt)
-		}catch (e){
-			//fill in
-		}
-	}
-
+	/*
 	//User registeration on HLF
 	const hlfregister = async() => {
 		axios.post("http://44.209.184.166:8080/register",{
@@ -47,15 +32,7 @@ export const CreateAccountHuman = (props: {
       deviceStorage.saveKey("id_token", response.data.token);
     })
 	}
-
-	//agentInitialization 
-	const agentInitialization = async() =>{
-
-		const agent = AgentInit.build(props.data.firstName , props.data.firstName+props.data.lastName , props.data.password);
-		setAgent(agent);
-	}
-
-
+*/
 	const nextEnabled = (props.data.firstName.length > 0 &&
 		props.data.lastName.length > 0 &&
 		props.data.password.length > 0 &&
@@ -70,9 +47,8 @@ export const CreateAccountHuman = (props: {
 		let resultthree = await storeSeedPhrase(userseed);
 
 		if(resultone&&resulttwo&&resultthree){
-			passcodeCreate(props.data.password , props.data.firstName , userseed.mnemonic.toString());
-			agentInitialization;
-			hlfregister;
+			await passcodeCreate(props.data.password , props.data.firstName , userseed.mnemonic.toString());
+			await agentInitialization(props.data.firstName , props.data.firstName+props.data.lastName , props.data.password);
 			props.next
 		}
 	}

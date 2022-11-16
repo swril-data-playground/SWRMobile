@@ -1,5 +1,3 @@
-import { Agent, AgentConfig } from '@aries-framework/core'
-import { SWRWallet } from '/home/narukirito/SWRMobileAries/src/wallet/SWRWallet'
 import { agentDependencies } from '/home/narukirito/SWRMobileAries/src/storage'
 import React, { createContext, useContext, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -19,7 +17,7 @@ export interface AuthContext {
   checkPIN: (pin: string) => Promise<boolean>
   getWalletCredentials: () => Promise<WalletSecret | undefined>
   removeSavedWalletSecret: () => void
-  setPIN: (pin: string , walletId:string) => Promise<void>
+  setPIN: (pin: string , walletId:string , salt?:string) => Promise<void>
   commitPIN: (useBiometry: boolean) => Promise<boolean>
   isBiometricsActive: () => Promise<boolean>
 }
@@ -31,7 +29,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const { t } = useTranslation()
 
   const setPIN = async (pin: string , walletId: string , salt ?: string): Promise<void> => {
-    const secret = await secretForPIN(pin , walletId , salt)//returns object with walledId and Pin
+    const secret = await secretForPIN(walletId , pin , salt)//returns object with walledId and Pin
     await storeWalletSecret(secret)//stores walletId and pin
   }
 
@@ -40,7 +38,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       return walletSecret
     }
 
-    const secret = await loadWalletSecret(t('Biometry.UnlockPromptTitle'), t('Biometry.UnlockPromptDescription'))
+    const secret = await loadWalletSecret()
     if (!secret) {
       return
     }

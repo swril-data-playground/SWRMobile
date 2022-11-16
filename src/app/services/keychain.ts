@@ -19,12 +19,6 @@ export interface WalletKey {
   key: string
 }
 
-export interface WalletSeed {
-
-
-}
-
-
 export const optionsForKeychainAccess = (service: KeychainServices, useBiometrics = false): Keychain.Options => {
   const opts: Keychain.Options = {
     accessible: useBiometrics ? Keychain.ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY : Keychain.ACCESSIBLE.ALWAYS,
@@ -146,7 +140,7 @@ export const storeWalletSecret = async (secret: WalletSecret, useBiometrics = fa
   return keyResult && saltResult
 }
 
-export const loadWalletSalt = async (): Promise<WalletSalt | undefined> => {
+export const loadWalletSalt = async (): Promise<string | undefined> => {
   const opts: Keychain.Options = {
     service: KeychainServices.Salt,
   }
@@ -155,7 +149,7 @@ export const loadWalletSalt = async (): Promise<WalletSalt | undefined> => {
     return
   }
 
-  return JSON.parse(result.password) as WalletSalt
+  return JSON.parse(result.password) 
 }
 
 export const loadWalletKey = async (title?: string, description?: string): Promise<WalletKey | undefined> => {

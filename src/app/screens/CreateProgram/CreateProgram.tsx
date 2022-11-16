@@ -14,26 +14,13 @@ import { CategoryType, municipalities } from "types/filter"
 import { defaultProgram, ProgramType } from "types/programs"
 import { questionTypes , QuestionType} from "types/questions"
 import { useAgent, useCredentialById } from '@aries-framework/react-hooks'
-import {SchemaTemplate , CredentialDefinitionTemplate} from "/home/narukirito/SWRMobileAries/src/app/configs/ledgers/fabric/LedgerService"//To create Schema and Credential OUtline 
 import { CategoryFilter } from "screens/Home/components/CategoryFilter"
+import { progScheme } from "types/creation"
 /*
 export const progschema = () => {
 	const [progschema , setprogschema] = useState({name:'sample' , version :'1.0.0' , attributes:[]})
 	}
 */
-
-export interface progScheme{
-	name:string
-	version:string
-	attributes:{
-		actionType:string
-		description:string
-		category:string
-		municipality:string
-		address:string
-		questions:QuestionType[]
-	}
-}
 
 export const CreateProgram = () => {
 	
@@ -47,7 +34,7 @@ export const CreateProgram = () => {
 		const {program, status} = await tryCreateProgram(programData, auth.account)
 		if (status === 200) {
 			setProgramData(defaultProgram)
-			const sch = agent.registerSchema
+			//const sch = agent.registerSchema
 			setStack(['Home', 'Program'], program)
 		}
 		else throw Error('Failed to create program')

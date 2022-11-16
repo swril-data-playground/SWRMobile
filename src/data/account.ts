@@ -4,6 +4,39 @@ import { AccountType } from 'types/account';
 import { statusType } from 'types/data';
 import { HouseholdRequestType } from 'types/householdRequest';
 import { exampleAccount } from './exampleData';
+import {AgentInit} from 'src/agentdec/agentaction'
+import { useAgent } from '@aries-framework/react-hooks'
+import { useAuth } from '../contexts/auth'
+import { hashPIN } from '/home/narukirito/SWRMobileAries/src/utils/crypto'
+import { getSeedPhrase , loadWalletKey } from 'src/app/services/keychain';
+
+
+
+export const checkkey = async (password:string) => {
+
+let seedsalt = await getSeedPhrase();
+const checkpass = await hashPIN(password , seedsalt);
+const realpass = await loadWalletKey();
+
+return checkpass === realpass?.key
+	
+}
+
+export const agentInitialization = async(walletId: string , name: string , key :string) =>{
+
+	const { setAgent } = useAgent()
+	const agent = AgentInit.build(walletId , name , key);
+	setAgent(agent);
+}
+
+export const passcodeCreate = async (pin: string , walletId: string , salt?: string) => {
+	const {setPIN} = useAuth()
+	try {
+	  await setPIN(pin , walletId , salt)
+	}catch (e){
+		//fill in
+	}
+}
 
 export const tryGetAuth = async (): Promise<{ status: statusType, auth: AuthContextType }> => {
 	await new Promise((resolve) => setTimeout(resolve, 1000))

@@ -14,17 +14,7 @@ import { CategoryType } from "types/filter"
 import { questionTypes, QuestionType} from "types/questions"
 import { defaultSurvey, SurveyType } from "types/surveys"
 import { useAgent, useCredentialById } from '@aries-framework/react-hooks'
-
-export interface surveySchema{
-	name:string
-	version:string
-	attributes:{
-		actionType:string
-		description:string
-		category?:string
-		questions:QuestionType[]
-	}
-}
+import { surveySchema } from "types/creation"
 
 export const CreateSurvey = () => {
 	const { agent } = useAgent()
