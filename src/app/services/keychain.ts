@@ -46,7 +46,7 @@ export const secretForPIN = async (walletId: string , pin: string, salt?: string
   const myKey = await hashPIN(pin, mySalt)
   const secret: WalletSecret = {
     id: walletId,
-    key: myKey,
+    key: myKey.toString(),
     salt: mySalt,
   }
 
@@ -140,7 +140,7 @@ export const storeWalletSecret = async (secret: WalletSecret, useBiometrics = fa
   return keyResult && saltResult
 }
 
-export const loadWalletSalt = async (): Promise<string | undefined> => {
+export const loadWalletSalt = async (): Promise<WalletSalt | undefined> => {
   const opts: Keychain.Options = {
     service: KeychainServices.Salt,
   }
@@ -149,7 +149,7 @@ export const loadWalletSalt = async (): Promise<string | undefined> => {
     return
   }
 
-  return JSON.parse(result.password) 
+  return JSON.parse(result.password) as WalletSalt
 }
 
 export const loadWalletKey = async (title?: string, description?: string): Promise<WalletKey | undefined> => {
