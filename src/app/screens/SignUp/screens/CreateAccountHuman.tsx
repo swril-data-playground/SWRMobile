@@ -48,7 +48,7 @@ export const CreateAccountHuman = (props: {
 
 		if(resultone&&resulttwo&&resultthree){
 			await passcodeCreate(props.data.password , props.data.firstName , userseed.mnemonic.toString());
-			await agentInitialization(props.data.firstName , props.data.firstName+props.data.lastName , props.data.password);
+			//await agentInitialization(props.data.firstName , props.data.firstName+props.data.lastName , props.data.password);
 			props.next
 		}
 	}

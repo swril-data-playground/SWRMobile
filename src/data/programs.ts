@@ -20,7 +20,7 @@ export const tryCreateProgram = async (program: ProgramType, account: AccountTyp
 		status: 200,
 		program: {
 			...program,
-			creator: agent.walletId,
+			creator: "",
 			id: Math.round(Math.random() * 100000).toString()
 		}
 	}

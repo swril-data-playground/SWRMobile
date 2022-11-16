@@ -1,5 +1,5 @@
 import { Platform } from 'react-native'
-import DeviceInfo from 'react-native-device-info'
+//import DeviceInfo from 'react-native-device-info'
 import Keychain, { getSupportedBiometryType } from 'react-native-keychain'
 import uuid from 'react-native-uuid'
 
@@ -56,7 +56,7 @@ export const secretForPIN = async (walletId: string , pin: string, salt?: string
 export const storeCryptoKey = async (key:keys) => {
  
   const opts = optionsForKeychainAccess(KeychainServices.Cry , false)
-  const result = await Keychain.setGenericPassword(key.publick , key.privatek)
+  const result = await Keychain.setGenericPassword(key.publick.toString() , key.privatek.toString())
   return typeof result ==='boolean' ? false : true
 
 }
@@ -64,7 +64,7 @@ export const storeCryptoKey = async (key:keys) => {
 export const storeCryptoAddress = async (key: keys) => {
 
   const opts = optionsForKeychainAccess(KeychainServices.addr , false)
-  const result = await Keychain.setGenericPassword('PublicAddress' , key.address)
+  const result = await Keychain.setGenericPassword('PublicAddress' , key.address.toString())
   return typeof result ==='boolean' ? false : true
 
 
