@@ -164,7 +164,7 @@ const SmartWaterlooMobile = () => {
 		}
 		const { status: programStatus, programs } = await tryGetPrograms(defaultFilter)
 		const { status: surveyStatus, surveys } = await tryGetSurveys(defaultFilter)
-		const { status: pollStatus, polls } = await tryGetPolls()
+		const { status: pollStatus, polls } = await tryGetPolls(defaultFilter)
 		if (programStatus === 500 || surveyStatus === 500 || pollStatus === 500) {
 			throwError(new Error(`Network connection error`))
 		}

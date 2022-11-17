@@ -15,7 +15,7 @@ const GET_SURVEYS = gql`
 			image
 			description
 			category
-			creatorId
+			creator
 			questions {
 				id
 				prompt

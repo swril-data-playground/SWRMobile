@@ -30,11 +30,11 @@ export const ErrorScreen = (props: {err: Error}) => {
 				{stackView && <SWRText style={errorStyles.errorText}>{props.err?.stack?.replace('\n', '\n\n')}</SWRText>}
 			</ScrollView>
 
-			<TouchableOpacity
+			{/* <TouchableOpacity
 				style={errorStyles.restartButton}
 			>
 				<SWRText style={gs.h2}>Restart</SWRText>
-			</TouchableOpacity>
+			</TouchableOpacity> */}
 		</View>
 	)
 }
