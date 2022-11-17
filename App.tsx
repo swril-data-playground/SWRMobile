@@ -48,6 +48,7 @@ import { ApolloProvider, gql } from '@apollo/client'
 import { client } from 'data/graphql'
 import { Storage } from 'data/storage'
 import { EditProfile } from 'screens/EditProfile/EditProfile'
+import { FilterType } from 'types/filter'
 
 
 const SmartWaterlooMobile = () => {
@@ -151,7 +152,17 @@ const SmartWaterlooMobile = () => {
 	}
 
 	const loadData = async () => {
-		const { status: programStatus, programs } = await tryGetPrograms()
+		const defaultFilter: FilterType = {
+			categories: ['All'],
+			municipalities: ['Waterloo'],
+			sort: {
+				recent: true,
+				// lastOpened: boolean - not implemented
+				nameAZ: false,
+				nameZA: false
+			}
+		}
+		const { status: programStatus, programs } = await tryGetPrograms(defaultFilter)
 		const { status: surveyStatus, surveys } = await tryGetSurveys()
 		const { status: pollStatus, polls } = await tryGetPolls()
 		if (programStatus === 200 && surveyStatus === 200 && pollStatus === 200) {

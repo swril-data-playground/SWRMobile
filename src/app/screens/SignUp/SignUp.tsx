@@ -34,6 +34,13 @@ const SignUp = (): JSX.Element => {
 			await reloadData()
 			setAccount(account)
 			setSignUpState(4)
+		} else if (status === 500) {
+			setSignUpState(2)
+			pushToast({
+				type: 'error',
+				title: 'Network Error',
+				details: 'Something went wrong. Check your network connection.',
+			})
 		} else {
 			setSignUpState(2)
 			pushToast({
