@@ -34,37 +34,52 @@ export const tryGetAuth = async (): Promise<{ status: statusType; auth: AuthCont
 			auth: null
 		}
 	}
-	const res = await client.query({
-		query: GET_ACCOUNT,
-		variables: {
-			input: {
-				walletId: auth.account.walletId,
-				token: ''
+	try {
+		const res = await client.query({
+			query: GET_ACCOUNT,
+			variables: {
+				input: {
+					walletId: auth.account.walletId,
+					token: ''
+				},
 			},
-		},
-	})
-	const data = res.data
-	if (!data) {
-		console.log(res.errors)
-		return { 
-			status: 400, 
-			auth: null 
+		})
+		const data = res.data
+		if (!data) {
+			return { 
+				status: 400, 
+				auth: null 
+			}
+		}
+		const account = data.account.user
+		return {
+			status: 200,
+			auth: {
+				auth: '',
+				account: {
+					...defaultAccount,
+					firstName: account.firstName,
+					lastName: account.lastName,
+					walletId: auth.account.walletId,
+					householdMembers: account.householdMembers,
+				},
+			},
+		}
+	} catch (e: any) {
+		if (e.message === 'user not found') {
+			return {
+				status: 404,
+				auth: null,
+			}
+		} else {
+			console.error(e)
+			return {
+				status: 500,
+				auth: null,
+			}
 		}
 	}
-	const account = data.account.user
-	return {
-		status: 200,
-		auth: {
-			auth: '',
-			account: {
-				...defaultAccount,
-				firstName: account.firstName,
-				lastName: account.lastName,
-				walletId: auth.account.walletId,
-				householdMembers: account.householdMembers,
-			},
-		},
-	}
+	
 }
 
 const CREATE_USER = gql`
