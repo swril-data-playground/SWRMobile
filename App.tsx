@@ -44,7 +44,11 @@ import { defaultToastValue, ToastContext, ToastContextType } from 'contexts/toas
 import { Toast } from 'types/toast'
 import { Toasts } from 'components/toasts/Toasts'
 import { AllToasts } from 'screens/AllToasts/AllToasts'
+import { ApolloProvider, gql } from '@apollo/client'
+import { client } from 'data/graphql'
+import { Storage } from 'data/storage'
 import { EditProfile } from 'screens/EditProfile/EditProfile'
+
 
 const SmartWaterlooMobile = () => {
 	const [screenState, setScreenState] = useState<'LOADING' | 'ERROR' | 'LOADED'>('LOADING')
@@ -56,7 +60,7 @@ const SmartWaterlooMobile = () => {
 	const [toastData, setToastData] = useState<ToastContextType>(defaultToastValue)
 	const throwError = (e:Error) => { setError(e); setScreenState('ERROR')}
 	const [navContent, setNavContent] = useState<any>(null)
-	const dataValue = { data, setData }
+	const dataValue = { data, setData, reloadData: async () => { await loadData() }}
 	const toastDataRef = useRef<ToastContextType>(toastData)
 	toastDataRef.current = toastData
 	
@@ -103,11 +107,17 @@ const SmartWaterlooMobile = () => {
 	}
 	const authValue = { 
 		auth, 
-		setAuth: (newAuth: AuthContextType) => {
+		setAuth: async (newAuth: AuthContextType) => {
 			if (newAuth.account) navValue.setNav('Home')
 			else navValue.setNav('SignUp')
+			await Storage.setJson('auth', newAuth)
 			setAuth(newAuth)
 		},
+		signOut: async () => {
+			await Storage.remove('auth')
+			setAuth(defaultAuthValue)
+			navValue.setNav('SignUp')
+		}
 	 }
 	useEffect(() => {
 		const keyboardDidShowListener = Keyboard.addListener(
@@ -122,19 +132,25 @@ const SmartWaterlooMobile = () => {
 		}
 	}, []);
 
-	const initialLoad = async () => {
-		await Font.loadAsync(fonts);
+	const loadAccount = async ():Promise<boolean> => {
 		const { status: authStatus, auth: gotAuth } = await tryGetAuth()
 		if (authStatus === 200) {
+			if (!gotAuth) {
+				console.error("No auth")
+				return false
+			}
 			setAuth(gotAuth)
+			return true
 		} else if (authStatus === 400) {
 			throwError(new Error('User authorization failed'))
-			return
 		} else if (authStatus === 404) {
 			setScreenState('LOADED')
 			navValue.setNav('SignUp')
-			return
 		}
+		return false
+	}
+
+	const loadData = async () => {
 		const { status: programStatus, programs } = await tryGetPrograms()
 		const { status: surveyStatus, surveys } = await tryGetSurveys()
 		const { status: pollStatus, polls } = await tryGetPolls()
@@ -149,9 +165,16 @@ const SmartWaterlooMobile = () => {
 			throwError(new Error(`${errorStrings.join(' and ')} failed to load`))
 		}
 	}
+
+	const initialLoad = async () => {
+		await Font.loadAsync(fonts);
+		const accountSuccess = await loadAccount()
+		if (accountSuccess) await loadData()
+	}
 	if (screenState === 'LOADING') initialLoad()
 	const mainTab = listIncludes(tabNames, nav.nav)
 	return (
+		<ApolloProvider client={client}>
 		<AuthContext.Provider value={authValue}>
 			<DataContext.Provider value={dataValue}>
 				<NavContext.Provider value={navValue}>
@@ -201,6 +224,7 @@ const SmartWaterlooMobile = () => {
 				</NavContext.Provider>
 			</DataContext.Provider>
 		</AuthContext.Provider>
+		</ApolloProvider>
 	)
 }
 

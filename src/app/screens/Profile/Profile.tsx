@@ -10,7 +10,7 @@ import { NavContext } from 'contexts/navContext'
 import { ToastContext } from 'contexts/toastContext'
 
 const ProfileScreen = () => {
-	const { auth } = useContext(AuthContext)
+	const { auth, signOut } = useContext(AuthContext)
 	const { setNav } = useContext(NavContext)
 	const { pushToast } = useContext(ToastContext)
 	return (
@@ -55,17 +55,22 @@ const ProfileScreen = () => {
 				</ScrollView>
 			</View>
 			<View style={styles.linksContainer}>
-				<SWRButton style={[styles.whiteSection, styles.linkButton]} onPress={() => setNav('Help')}>
-					<Image source={images.question_icon} style={styles.linkIcon}/>
-					<SWRText style={gs.h4}>Help</SWRText>
-				</SWRButton>
-				<SWRButton style={[styles.whiteSection, styles.linkButton]} onPress={() => setNav('LearnMore')}>
-					<Image source={images.search_icon} style={styles.linkIcon}/>
-					<SWRText style={gs.h4}>Learn more</SWRText>
-				</SWRButton>
-				<SWRButton style={[styles.whiteSection, styles.linkButton]} onPress={() => setNav('Privacy')}>
+				<View style={styles.horizontal}>
+					<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '35%'}]} onPress={() => setNav('Help')}>
+						<Image source={images.question_icon} style={styles.linkIcon}/>
+						<SWRText style={gs.h4}>Help</SWRText>
+					</SWRButton>
+					<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '60%'}]} onPress={() => setNav('LearnMore')}>
+						<Image source={images.search_icon} style={styles.linkIcon}/>
+						<SWRText style={gs.h4}>Learn more</SWRText>
+					</SWRButton>
+				</View>
+				<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '100%'}]} onPress={() => setNav('Privacy')}>
 					<Image source={images.profile_sheild} style={styles.linkIcon}/>
 					<SWRText style={gs.h4}>Privacy policy</SWRText>
+				</SWRButton>
+				<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '100%'}]} onPress={signOut}>
+					<SWRText style={[gs.h4, {textAlign: 'center', width: '100%'}]}>Sign out</SWRText>
 				</SWRButton>
 			</View>
 		</View>
@@ -92,7 +97,6 @@ const styles = StyleSheet.create({
 		fontSize: 25
 	},
 	whiteSection: {
-		width: '100%',
 		marginTop: 10,
 		borderRadius: 10,
 	},
@@ -115,12 +119,17 @@ const styles = StyleSheet.create({
 		width: '100%',
 	},
 	linkButton: {
-		justifyContent: 'flex-start'
+		justifyContent: 'flex-start',
 	},
 	linkIcon: {
 		height: 30,
 		width: 30,
 		marginRight: 10
+	},
+	horizontal: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		width: '100%'
 	},
 	addImage: {
 		margin: 8,

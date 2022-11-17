@@ -1,7 +1,10 @@
 import { DisplayWrapper } from "components/DisplayWrapper"
 import { AuthContext } from "contexts/authContext"
+import { DataContext } from "contexts/dataContext"
+import { ToastContext } from "contexts/toastContext"
 import { tryCreateHumanAccount, tryCreateOrgAccount } from "data/account"
 import { useContext, useState } from "react"
+import { AccountType } from "types/account"
 import { defaultAvatar } from "types/avatar"
 import { CreateAccountHuman } from "./screens/CreateAccountHuman"
 import { CreateAccountOrg } from "./screens/CreateAccountOrg"
@@ -12,24 +15,51 @@ import { defaultSignUpData, SignUpData } from "./SignUpFlow"
 
 const SignUp = (): JSX.Element => {
 	const { setAuth } = useContext(AuthContext)
+	const { reloadData } = useContext(DataContext)
+	const { pushToast } = useContext(ToastContext)
 	const [signUpStep, setSignUpState] = useState<0|1|2|3|4>(0)
 	const [state, setState] = useState<SignUpData>(defaultSignUpData)
+	const [account, setAccount] = useState<AccountType|null>(null)
 	const afterInitialize = () => {
 		setAuth({
 			auth: 'abc',
-			account: {
-				...state,
-				walletId: '4252-427e-af7d-3dcaaf2db2df',
-				keyPhrase: 'One two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen',
-				avatar: defaultAvatar,
-				householdMembers: [],
-				creations: {
-					surveys: [],
-					programs: [],
-				}
-			}
+			account
 		})
 	}
+
+	const createHuman = async () => {
+		setSignUpState(3)
+		const { status, account } = await tryCreateHumanAccount(state)
+		if (status === 200) {
+			await reloadData()
+			setAccount(account)
+			setSignUpState(4)
+		} else {
+			setSignUpState(2)
+			pushToast({
+				type: 'error',
+				title: 'Error',
+				details: 'Something went wrong. Please try again.',
+			})
+		}	
+	}
+
+	const createOrg = async () => {
+		setSignUpState(3)
+		const { status } = await tryCreateOrgAccount(state)
+		if (status === 200) {
+			await reloadData()
+			setSignUpState(4)
+		} else {
+			setSignUpState(2)
+			pushToast({
+				type: 'error',
+				title: 'Error',
+				details: 'Something went wrong. Please try again.',
+			})
+		}
+	}
+
 	return (
 		<>
 			<DisplayWrapper display={signUpStep === 0}>
@@ -45,24 +75,14 @@ const SignUp = (): JSX.Element => {
 			/></DisplayWrapper>
 			<DisplayWrapper display={signUpStep===2 && state.type ==='Human'}>
 			<CreateAccountHuman 
-				next={
-					async ()=>{
-						setSignUpState(3);
-						await tryCreateHumanAccount(state);
-						setSignUpState(4);
-					}
-				} 
+				next={createHuman} 
 				back={()=>setSignUpState(1)} 
 				data={state} 
 				setData={setState}
 			/></DisplayWrapper>
 			<DisplayWrapper display={signUpStep===2 && state.type ==='Org'}>
 			<CreateAccountOrg 
-				next={async ()=>{
-					setSignUpState(3);
-					await tryCreateOrgAccount(state);
-					setSignUpState(4);
-				}} 
+				next={createOrg} 
 				back={()=>setSignUpState(1)} 
 				data={state} 
 				setData={setState}
