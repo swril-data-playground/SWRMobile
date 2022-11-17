@@ -11,11 +11,15 @@ import { useContext, useState } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { CategoryType } from "types/filter"
-import { questionTypes } from "types/questions"
+import { questionTypes, QuestionType} from "types/questions"
 import { defaultSurvey, SurveyType } from "types/surveys"
+import { useAgent, useCredentialById } from '@aries-framework/react-hooks'
+import { surveySchema } from "types/creation"
 
 export const CreateSurvey = () => {
+	const { agent } = useAgent()
 	const [surveyData, setSurveyData] = useState<SurveyType>(defaultSurvey)
+	const [survSchema , setsurvSchema] = useState<surveySchema>()
 	const { auth } = useContext(AuthContext)
 	const { setStack } = useContext(NavContext)
 	const handleTryCreateSurvey = async () => {
@@ -33,6 +37,7 @@ export const CreateSurvey = () => {
 		surveyData.category &&
 		surveyData.questions.length > 0
 	)
+	
 	return (
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign screenPadding />
@@ -60,7 +65,7 @@ export const CreateSurvey = () => {
 				/>
 				<QuestionsCreator 
 					questions={surveyData.questions} 
-					setQuestions={(questions) => setSurveyData({...surveyData, questions})} 
+					setQuestions={(questions) => {setSurveyData({...surveyData, questions}); setsurvSchema({...survSchema , name:surveyData.title , version:'1.0.0' , attributes:{actionType:'survey' , category:surveyData.category ,description:surveyData.description, questions:questions}})}}
 					withTitle
 				/>
 				<SWRButton style={styles.doneButton} onPress={handleTryCreateSurvey} disabled={!doneEnabled}>

@@ -6,11 +6,17 @@ import { gs } from "styles/globals"
 import {  StyleSheet } from "react-native"
 import { DoggoScroller } from "./components/DoggoScroller"
 import { images } from "assets/images"
+import { getSeedPhrase } from "src/app/services/keychain"
 
 export const LoadingDoggo = (props: {
 	next: () => void,
 	loaded: boolean
+
+	
 }) => {
+	
+let wordseed = getSeedPhrase();
+
 	return (
 		<View style={gs.fullScreen} >
 			<PuzzleImage width={200}/>
@@ -22,12 +28,9 @@ export const LoadingDoggo = (props: {
 				<Image source = {images.forward_dog} style={{ width: 256, height: 256, resizeMode: 'contain', display: 'flex', paddingBottom: 10}}/>
 				<SWRText style={styles.captionText}>Your unique 16 word phrase is...</SWRText>
 				<View style={styles.roundedTextBox}>
-					<SWRText style={styles.roundedText}>{
-						'One two three four \n' +
-						'five six seven eight \n' +
-						'nine ten eleven twelve \n' +
-						'thirteen fourteen fifteen sixteen'
-					}</SWRText>
+					<SWRText style={styles.roundedText}>
+						wordseed
+					</SWRText>
 				</View>
 				<SWRButton onPress={props.next} style={styles.loadedButton}>
 					<SWRText font={'medium'} style={gs.h4}>Next</SWRText>

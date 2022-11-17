@@ -10,7 +10,9 @@ import { LoadingDoggo } from "./screens/LoadingDoggo"
 import { Welcome } from "./screens/Welcome"
 import { defaultSignUpData, SignUpData } from "./SignUpFlow"
 
+
 const SignUp = (): JSX.Element => {
+	
 	const { setAuth } = useContext(AuthContext)
 	const [signUpStep, setSignUpState] = useState<0|1|2|3|4>(0)
 	const [state, setState] = useState<SignUpData>(defaultSignUpData)

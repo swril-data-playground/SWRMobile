@@ -5,10 +5,12 @@ import { NavContext } from "contexts/navContext"
 import { useContext } from "react"
 import { StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
+import { checkkey } from "data/account"
 
 export const Login = () => {
 	const { setNav } = useContext(NavContext)
 	const tryLogin = () => {
+		
 
 	}
 	return (

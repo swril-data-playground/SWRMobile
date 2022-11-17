@@ -12,9 +12,20 @@ import { ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { CategoryType, municipalities } from "types/filter"
 import { defaultProgram, ProgramType } from "types/programs"
-import { questionTypes } from "types/questions"
+import { questionTypes , QuestionType} from "types/questions"
+import { useAgent, useCredentialById } from '@aries-framework/react-hooks'
+import { CategoryFilter } from "screens/Home/components/CategoryFilter"
+import { progScheme } from "types/creation"
+/*
+export const progschema = () => {
+	const [progschema , setprogschema] = useState({name:'sample' , version :'1.0.0' , attributes:[]})
+	}
+*/
 
 export const CreateProgram = () => {
+	
+	const {agent} = useAgent()
+	const [progschema , setprogschema] = useState<progScheme>()//Schema is set up during Creation and Credential is set up during creating information
 	const [programData, setProgramData] = useState<ProgramType>(defaultProgram)
 	const { auth } = useContext(AuthContext)
 	const { setStack } = useContext(NavContext)
@@ -23,6 +34,7 @@ export const CreateProgram = () => {
 		const {program, status} = await tryCreateProgram(programData, auth.account)
 		if (status === 200) {
 			setProgramData(defaultProgram)
+			//const sch = agent.registerSchema
 			setStack(['Home', 'Program'], program)
 		}
 		else throw Error('Failed to create program')
@@ -41,13 +53,13 @@ export const CreateProgram = () => {
 				<SWRText font={'medium'} style={styles.headerText}>Program</SWRText>
 				<SWRTextInput 
 					name={'Title'} 
-					onChange={(title) => setProgramData({...programData, title})} 
+					onChange={(title) => setProgramData({...programData, title})}
 					value={programData.title}
 					withTitle
 				/>
 				<SWRTextInput
 					name={'Description'} 
-					onChange={(description) => setProgramData({...programData, description})} 
+					onChange={(description) => setProgramData({...programData, description})}
 					value={programData.description}
 					lines={3}
 					withTitle
@@ -68,13 +80,13 @@ export const CreateProgram = () => {
 				<SWRSelectInput 
 					value={programData.municipality}
 					choices={municipalities}
-					onChange={(value) => setProgramData({...programData, category: value as CategoryType})}
+					onChange={(value) => {setProgramData({...programData, category: value as CategoryType})}}
 					name={'Municipal Area'}
 					withTitle
 				/>
 				<QuestionsCreator 
 					questions={programData.questions} 
-					setQuestions={(questions) => setProgramData({...programData, questions})} 
+					setQuestions={(questions) => {setProgramData({...programData, questions}); setprogschema({...progschema , name:programData.title , version:'1.0.0',attributes:{actionType:'program', category : programData.category, description:programData.description, address:programData.address , municipality:programData.municipality , questions:questions }})}} 
 					withTitle
 				/>
 				<SWRButton style={styles.doneButton} onPress={handleTryCreateProgram} disabled={!doneEnabled}>
