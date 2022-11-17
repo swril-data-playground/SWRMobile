@@ -9,7 +9,7 @@ export const Toasts = (props: {
 }) => {
 	const { content } = useContext(ToastContext)
 	return (
-		<View style={[styles.container, {marginBottom: props.tabs?80:0}]}>
+		<View style={[styles.container, {marginBottom: props.tabs?80:20}]}>
 			{content.activeToasts.map((toast, index) => {
 				return <ToastItem toast={content.activeToasts[index]} key={index}/>
 			})}
