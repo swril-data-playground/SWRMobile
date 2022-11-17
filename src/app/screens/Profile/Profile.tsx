@@ -22,13 +22,7 @@ const ProfileScreen = () => {
 				<View style={styles.profileInfoContainer}>
 					<SWRText font={'medium'} style={styles.name}>{auth.account?.firstName}</SWRText>
 					<SWRText font={'medium'} style={styles.name}>{auth.account?.lastName}</SWRText>
-					<SWRButton onPress={() => {
-						pushToast({
-							title: 'Coming Soon',
-							details: 'This feature is not yet implemented',
-							type: 'info'
-						})
-					}} style={styles.whiteSection}>
+					<SWRButton onPress={() => setNav('EditProfile')} style={styles.whiteSection}>
 						<SWRText style={gs.h4}>Edit Profile</SWRText>
 					</SWRButton>
 					<SWRButton onPress={() => {}} style={styles.whiteSection}>
