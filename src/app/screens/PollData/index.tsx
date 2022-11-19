@@ -1,0 +1,1 @@
+export { PollData } from './PollData'

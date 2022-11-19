@@ -196,30 +196,30 @@ export const examplePolls:PollType[] = [
 	},
 ]
 
-export const exampleAccount:AccountType = {
-	...defaultAccount,
-	firstName: 'Jonathan',
-	lastName: 'Lateef',
-	avatar: defaultAvatar,
-	walletId: '4252-427e-af7d-3dcaaf2db2df',
-	keyPhrase: 'One two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen',
-	householdMembers: [
-		{firstName: 'Miriam', lastName: 'Lateef', avatar: defaultAvatar},
-		{firstName: 'Zainab', lastName: 'Lateef', avatar: defaultAvatar},
-		{firstName: 'Seth', lastName: 'Lateef', avatar: defaultAvatar},
-	],
-	creations: {
-		programs: [...examplePrograms],
-		surveys: [...exampleSurveys],
-	},
-	personalInfo: {
-		DOB: '1990-01-01',
-		gender: 'Male',
-		height: 180,
-		weight: 170,
-		religion: 'Zac Waite',
-		race: 'Black',
-		grade: 69,
-		postalCode: 'M2W 1A8',
-	}
-}
+// export const exampleAccount:AccountType = {
+// 	...defaultAccount,
+// 	firstName: 'Jonathan',
+// 	lastName: 'Lateef',
+// 	avatar: defaultAvatar,
+// 	walletId: '4252-427e-af7d-3dcaaf2db2df',
+// 	keyPhrase: 'One two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen',
+// 	householdMembers: [
+// 		{firstName: 'Miriam', lastName: 'Lateef', avatar: defaultAvatar},
+// 		{firstName: 'Zainab', lastName: 'Lateef', avatar: defaultAvatar},
+// 		{firstName: 'Seth', lastName: 'Lateef', avatar: defaultAvatar},
+// 	],
+// 	creations: {
+// 		programs: [...examplePrograms],
+// 		surveys: [...exampleSurveys],
+// 	},
+// 	personalInfo: {
+// 		DOB: '1990-01-01',
+// 		gender: 'Male',
+// 		height: 180,
+// 		weight: 170,
+// 		religion: 'Zac Waite',
+// 		race: 'Black',
+// 		grade: 69,
+// 		postalCode: 'M2W 1A8',
+// 	}
+// }

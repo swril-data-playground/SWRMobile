@@ -11,7 +11,9 @@ import { mapCreationObjectToList } from "utils/creations"
 export const MyCreations = () => {
 	const { auth } = useContext(AuthContext)
 	const { setNav } = useContext(NavContext)
-	const creationList = auth.account? mapCreationObjectToList(auth.account.creations): []
+	const isOrg = auth.account?.org
+	const creationList = auth.account?.org? mapCreationObjectToList(auth.account.orgInfo.creations): []
+	if (!isOrg) return null
 	return (
 		<>
 			<View style={[gs.screenPadding, styles.subHeader]}>

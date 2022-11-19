@@ -12,7 +12,7 @@ import { mapCreationObjectToList } from "utils/creations"
 export const MyCreations = () => {
 	const { auth } = useContext(AuthContext)
 	const { setNav } = useContext(NavContext)
-	const creationList = auth.account? mapCreationObjectToList(auth.account.creations): []
+	const creationList = auth.account?.org ? mapCreationObjectToList(auth.account.orgInfo.creations): []
 	return (
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign screenPadding />

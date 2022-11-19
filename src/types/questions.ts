@@ -10,7 +10,8 @@ export interface QuestionType {
 }
 
 export const defaultQuestion:QuestionType = {
-	prompt: ''
+	prompt: '',
+	choices: [],
 }	
 
 export type AnswerType = string

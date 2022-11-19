@@ -5,9 +5,12 @@ import { images } from 'assets/images'
 import { SWRButton } from 'components/SWRButton'
 import { useContext } from 'react'
 import { NavContext } from 'contexts/navContext'
+import { AuthContext } from 'contexts/authContext'
 
 const CreateScreen = () => {
 	const { setNav } = useContext(NavContext)
+	const { auth } = useContext(AuthContext)
+	const isOrg = auth.account?.org
 	return (
 		<View style={gs.fullScreen}>
 			<Image source={images.puzzle} style={styles.puzzleImage}/>
@@ -15,15 +18,20 @@ const CreateScreen = () => {
 				<SWRText font={'medium'} style={gs.h1}>Create</SWRText>
 				<SWRText style={gs.h3}>Let's make something</SWRText>
 			</View>
-			<SWRButton onPress={() => setNav('CreateSurvey')} style={styles.button}>
-				<SWRText style={styles.buttonText}>Survey</SWRText>
-			</SWRButton>
-			<SWRButton onPress={() => {}} style={styles.button}>
-				<SWRText style={styles.buttonText}>Poll</SWRText>
-			</SWRButton>
-			<SWRButton onPress={() => setNav('CreateProgram')} style={styles.button}>
-				<SWRText style={styles.buttonText}>Program</SWRText>
-			</SWRButton>
+			{isOrg && <View>
+				<SWRButton onPress={() => setNav('CreateSurvey')} style={styles.button}>
+					<SWRText style={styles.buttonText}>Survey</SWRText>
+				</SWRButton>
+				<SWRButton onPress={() => {}} style={styles.button}>
+					<SWRText style={styles.buttonText}>Poll</SWRText>
+				</SWRButton>
+				<SWRButton onPress={() => setNav('CreateProgram')} style={styles.button}>
+					<SWRText style={styles.buttonText}>Program</SWRText>
+				</SWRButton>
+			</View>}
+			{!isOrg && <View>
+				<SWRText style={gs.h2}>Join an org to create content</SWRText>
+			</View>}
 			<Image source={images.skateboard_girl} style={styles.skaterGirlImage}/>
 		</View>
 	)

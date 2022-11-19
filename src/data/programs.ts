@@ -3,50 +3,50 @@ import { AccountType } from 'types/account';
 import { statusType } from 'types/data'
 import { FilterType } from 'types/filter';
 import { ProgramType } from 'types/programs'
-import { examplePrograms } from './exampleData';
-import { client } from './graphql';
+import { graphql } from './graphql';
 
-const GET_PROGRAMS = gql`
-	query GetPrograms($input: FilterInput!) {
-		programs(input: $input) {
-			id
-			title
-			caption
-			image
-			description
-			category
-			municipality
-			address
-			date
-			startTime
-			endTime
-			repeat
-			attendees {
-				firstName
-				lastName
-				avatar {
-					male	
-				}
-			}
-			questions {
-				id
-				prompt
-				type
-				choices
-				optional
-			}
+export const programFields = `
+	id
+	title
+	caption
+	image
+	description
+	category
+	municipality
+	address
+	date
+	startTime
+	endTime
+	repeat
+	attendees {
+		firstName
+		lastName
+		avatar {
+			male	
 		}
 	}
+	questions {
+		id
+		prompt
+		type
+		choices
+		optional
+	}
 `
+
+const GET_PROGRAMS = gql(`
+	query GetPrograms($input: FilterInput!) {
+		programs(input: $input) {
+			`+programFields+`
+		}
+	}
+`)
 
 
 export const tryGetPrograms = async (filter: FilterType): Promise<{ status: statusType; programs: ProgramType[] }> => {
 	try {
-		const res = await client.query({
-			query: GET_PROGRAMS,
-			variables: {
-				input: filter
-			},
+		const res = await graphql.query(GET_PROGRAMS, {
+			input: filter
 		})
 		const data = res.data
 		if (!data) {

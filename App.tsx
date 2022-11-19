@@ -32,6 +32,7 @@ import { tryGetPrograms } from 'data/programs'
 import { tryGetSurveys } from 'data/surveys'
 import { ProgramData } from 'screens/ProgramData'
 import { SurveyData } from 'screens/SurveyData'
+import { PollData } from 'screens/PollData'
 import { MyCreations } from 'screens/MyCreations'
 import { UploadScreen } from 'screens/Upload'
 import { defaultDisplayValue, DisplayContext, DisplayContextType } from 'contexts/displayContext'
@@ -44,8 +45,8 @@ import { defaultToastValue, ToastContext, ToastContextType } from 'contexts/toas
 import { Toast } from 'types/toast'
 import { Toasts } from 'components/toasts/Toasts'
 import { AllToasts } from 'screens/AllToasts/AllToasts'
-import { ApolloProvider, gql } from '@apollo/client'
-import { client } from 'data/graphql'
+// import { ApolloProvider, gql } from '@apollo/client'
+import { graphql } from 'data/graphql'
 import { Storage } from 'data/storage'
 import { EditProfile } from 'screens/EditProfile/EditProfile'
 import { FilterType } from 'types/filter'
@@ -112,6 +113,7 @@ const SmartWaterlooMobile = () => {
 			if (newAuth.account) navValue.setNav('Home')
 			else navValue.setNav('SignUp')
 			await Storage.setJson('auth', newAuth)
+			graphql.setAuth(newAuth.auth)
 			setAuth(newAuth)
 		},
 		signOut: async () => {
@@ -188,7 +190,6 @@ const SmartWaterlooMobile = () => {
 	if (screenState === 'LOADING') initialLoad()
 	const mainTab = listIncludes(tabNames, nav.nav)
 	return (
-		<ApolloProvider client={client}>
 		<AuthContext.Provider value={authValue}>
 			<DataContext.Provider value={dataValue}>
 				<NavContext.Provider value={navValue}>
@@ -221,6 +222,7 @@ const SmartWaterlooMobile = () => {
 											<NavItem name={'CreateProgram'} component={<CreateProgram />} />
 											<NavItem name={'ProgramData'} component={<ProgramData />} />
 											<NavItem name={'SurveyData'} component={<SurveyData />} />
+											<NavItem name={'PollData'} component={<PollData />} />
 											<NavItem name={'MyCreations'} component={<MyCreations />} />
 											<NavItem name={'UploadScreen'} component={<UploadScreen />} />
 											<NavItem name={'HouseholdRequest'} component={<HouseholdRequest content={navContent}/>} />
@@ -238,7 +240,6 @@ const SmartWaterlooMobile = () => {
 				</NavContext.Provider>
 			</DataContext.Provider>
 		</AuthContext.Provider>
-		</ApolloProvider>
 	)
 }
 

@@ -4,7 +4,7 @@ import { statusType } from 'types/data'
 import { FilterType } from 'types/filter';
 import { PollType } from 'types/polls';
 import { examplePolls } from './exampleData';
-import { client } from './graphql';
+import { graphql } from './graphql';
 
 const GET_POLLS = gql`
 	query GetPolls($input: FilterInput!) {
@@ -29,11 +29,8 @@ const GET_POLLS = gql`
 
 export const tryGetPolls = async (filter: FilterType): Promise<{ status: statusType; polls: PollType[] }> => {
 	try {
-		const res = await client.query({
-			query: GET_POLLS,
-			variables: {
-				input: filter
-			},
+		const res = await graphql.query(GET_POLLS, {
+			input: filter
 		})
 		const data = res.data
 		if (!data) {

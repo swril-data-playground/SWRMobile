@@ -22,7 +22,7 @@ const SignUp = (): JSX.Element => {
 	const [account, setAccount] = useState<AccountType|null>(null)
 	const afterInitialize = () => {
 		setAuth({
-			auth: 'abc',
+			auth: account?.walletId || '',
 			account
 		})
 	}
