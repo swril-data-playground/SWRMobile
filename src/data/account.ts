@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
 import { AuthContextType } from 'contexts/authContext'
+import { LoginData } from 'screens/Login/LoginFlow'
 import { SignUpData } from 'screens/SignUp/SignUpFlow'
 import { AccountType, defaultAccount, defaultUserInfo } from 'types/account'
 import { statusType } from 'types/data'
@@ -158,6 +159,26 @@ export const tryCreateHumanAccount = async (input: SignUpData): Promise<{ status
 		return { status: 500, account: null }
 	}
 }
+
+export const tryLoginHumanAccount = async (input: LoginData): Promise<{ status: statusType; account: AccountType | null }> => {
+	await new Promise((resolve) => setTimeout(resolve, 5000))
+	return {
+			status: 200,
+			account: {
+				...defaultAccount,
+				org: false,
+				userInfo: {
+					...defaultUserInfo,
+				},
+			},
+		}
+}
+
+export const tryLoginOrgAccount = async (data: LoginData): Promise<{ status: statusType }> => {
+	await new Promise((resolve) => setTimeout(resolve, 5000))
+	return { status: 200 }
+}
+
 
 export const tryCreateOrgAccount = async (data: SignUpData): Promise<{ status: statusType }> => {
 	await new Promise((resolve) => setTimeout(resolve, 5000))
