@@ -14,7 +14,7 @@ class GraphQL {
 	}
 	public async mutate(mutation: any, variables: any) {
 		return await this.client.mutate({
-			mutation,
+			mutation : mutation,
 			variables : {input : {...variables}},
 			context: { 
 				"authorization": this.auth,

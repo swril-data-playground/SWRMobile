@@ -122,17 +122,16 @@ export const tryGetAuth = async (): Promise<{ status: statusType; auth: AuthCont
 	
 }
 
-const CREATE_USER_MUTATION = gql`
-	mutation registerUser(
-		$input: SignUpData!
-) {
-		registerUser(input:$input) {
-			firstName
-			lastName
-			publicKey
+
+const CREATE_USER_MUTATION = gql` 
+	mutation registerUser($firstName: String!, $lastName: String! , $publicKey: String!) {
+		registerUser(input:{firstName: $firstName lastName: $lastName  publicKey: $publicKey}) {
+			ok,
+			message,
+			token
 		}
 	}
-`
+`;
 
 export const tryCreateHumanAccount = async (input: SignUpData): Promise<{ status: statusType; account: AccountType | null }> => {
 	console.log("IntryCreateHumanAccount");
@@ -141,7 +140,7 @@ export const tryCreateHumanAccount = async (input: SignUpData): Promise<{ status
 		const res = await graphql.mutate(CREATE_USER_MUTATION,{
 				firstName: input.firstName,
 				lastName: input.lastName,
-				publicKey: input.publicaddr,
+				publicKey: input.publicaddr
 			}
 		)
 		const data = res.data
