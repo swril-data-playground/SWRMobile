@@ -1,38 +1,66 @@
-import { images } from "assets/images"
 import { BackButton } from "components/BackButton"
 import { SWRButton } from "components/SWRButton"
 import { SWRText } from "components/SWRText"
 import { SWRTextInput } from "components/inputs/SWRTextInput"
-import { Image, StyleSheet, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
-import { PuzzleImage } from "../../components/PuzzleImage"
-import { LoginData, setLoginData, step } from "./LoginFlow"
+import { PuzzleImage } from "components/PuzzleImage"
+import { step } from "../LoginFlow"
 import { TextButton } from "components/TextButton"
+import { useContext, useState } from "react"
+import { tryLogin } from "data/account"
+import { AuthContext } from "contexts/authContext"
+import { DataContext } from "contexts/dataContext"
+import { ToastContext } from "contexts/toastContext"
 
-export const WalletLogin = (props: {
-	data: LoginData,
-	setData: setLoginData
-	login: step
+export const SeedLogin = (props: {
+	// data: LoginData,
+	// setData: setLoginData
     // to implement
 	switchLoginMethod: step
     contactSupport: step
     back: step
 }) => {
-	const nextEnabled = (props.data.password.length > 0)
+	const [state, setState] = useState('')
+	const nextEnabled = (state.length > 0)
+
+	const { setAuth } = useContext(AuthContext)
+	const { reloadData } = useContext(DataContext)
+	const { pushToast } = useContext(ToastContext)
+
+	const login = async () => {
+		const { status, account } = await tryLogin(state)
+		if (status === 200) {
+			await reloadData()
+			setAuth({
+				auth: account?.walletId || '',
+				account
+			})
+		} else if (status === 500) {
+			pushToast({
+				type: 'error',
+				title: 'Network Error',
+				details: 'Something went wrong. Check your network connection.',
+			})
+		} else {
+			pushToast({
+				type: 'error',
+				title: 'Error',
+				details: 'Something went wrong. Please try again.',
+			})
+		}	
+	}
     
 	return (
 		<View style={gs.fullScreen} >
 			<BackButton onPressOverride={props.back} leftAlign style={{position: 'absolute'}}/>
 			<PuzzleImage width={200}/>
 			<SWRText font={'medium'} style={styles.title}>Login</SWRText>
-			<SWRTextInput withTitle value={props.data.walletID} name={'Wallet ID'} containerStyle={styles.textInput} onChange={(walletID) => {
-				props.setData({...props.data, walletID})	
-			}}/>
-            <SWRTextInput lines={5} withTitle value={props.data.keyPhrase} name={'Key Phrase'} containerStyle={styles.textInput} onChange={(keyPhrase) => {
-				props.setData({...props.data, keyPhrase})	
+            <SWRTextInput lines={5} withTitle value={state} name={'Key Phrase'} containerStyle={styles.textInput} onChange={(keyPhrase) => {
+				setState(keyPhrase)	
 			}}/>
 
-			<SWRButton disabled={!nextEnabled} onPress={props.login} style={styles.nextButton}>
+			<SWRButton disabled={!nextEnabled} onPress={login} style={styles.nextButton}>
 				<SWRText style={gs.h4}>Login</SWRText>
 			</SWRButton>
             <SWRText font={'medium'} style={styles.subtitle}>Having some trouble?</SWRText>

@@ -1,4 +1,3 @@
-import { SWRText } from 'components/SWRText'
 import { ToastContext } from 'contexts/toastContext'
 import { useContext } from 'react'
 import { View, StyleSheet } from 'react-native'

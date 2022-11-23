@@ -9,7 +9,7 @@ import { NavContext } from 'contexts/navContext'
 import { ToastContext } from 'contexts/toastContext'
 
 const ProfileMembers = () => {
-	const { auth, signOut } = useContext(AuthContext)
+	const { auth } = useContext(AuthContext)
 	const { setNav } = useContext(NavContext)
 	const { pushToast } = useContext(ToastContext)
 	if (!auth.account) return null

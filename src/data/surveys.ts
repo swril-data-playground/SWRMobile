@@ -3,7 +3,6 @@ import { AccountType } from 'types/account';
 import { statusType } from 'types/data'
 import { FilterType } from 'types/filter';
 import { SurveyType } from 'types/surveys';
-import { exampleSurveys } from './exampleData';
 import { graphql } from './graphql';
 
 export const surveyFields = `

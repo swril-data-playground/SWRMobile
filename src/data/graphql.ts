@@ -39,6 +39,6 @@ class GraphQL {
 }
 
 export const graphql = new GraphQL(new ApolloClient({
-	uri: 'https://aside-artwork-mud-advantages.trycloudflare.com/query',
+	uri: 'https://tap-experiment-exhaust-store.trycloudflare.com/query',
 	cache: new InMemoryCache(),
 }))

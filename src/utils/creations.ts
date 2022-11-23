@@ -1,7 +1,7 @@
-import { AccountType } from "types/account";
+import { CreationsType } from "types/account";
 import { CreationType } from "types/creation";
 
-export const mapCreationObjectToList = (creations: AccountType['creations']):CreationType[] => {
+export const mapCreationObjectToList = (creations:CreationsType):CreationType[] => {
 	const creationList: CreationType[] = []
 	creations.programs.forEach(program => creationList.push({
 		type: 'Program',

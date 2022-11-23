@@ -1,4 +1,4 @@
-import { StyleProp, StyleSheet, Text, TextStyle } from "react-native";
+import { StyleProp, Text, TextStyle } from "react-native";
 
 export type SWRTextChild = string | undefined | JSX.Element | number
 

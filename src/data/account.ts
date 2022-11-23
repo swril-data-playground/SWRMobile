@@ -1,8 +1,7 @@
 import { gql } from '@apollo/client'
 import { AuthContextType } from 'contexts/authContext'
-import { LoginData } from 'screens/Login/LoginFlow'
 import { SignUpData } from 'screens/SignUp/SignUpFlow'
-import { AccountType, defaultAccount, defaultUserInfo } from 'types/account'
+import { AccountType, defaultAccount, defaultUserInfo, UserPersonalInfo } from 'types/account'
 import { statusType } from 'types/data'
 import { HouseholdRequestType } from 'types/householdRequest'
 import { graphql } from './graphql'
@@ -160,7 +159,14 @@ export const tryCreateHumanAccount = async (input: SignUpData): Promise<{ status
 	}
 }
 
-export const tryLoginHumanAccount = async (input: LoginData): Promise<{ status: statusType; account: AccountType | null }> => {
+export const tryGetSeedPhrase = async (password: string): Promise<{ status: statusType; seedPhrase: string | null }> => {
+	return {
+		status: 200,
+		seedPhrase: password,
+	}
+}	
+
+export const tryLogin = async (seedPhrase: string): Promise<{ status: statusType; account: AccountType | null }> => {
 	await new Promise((resolve) => setTimeout(resolve, 5000))
 	return {
 			status: 200,
@@ -174,9 +180,16 @@ export const tryLoginHumanAccount = async (input: LoginData): Promise<{ status: 
 		}
 }
 
-export const tryLoginOrgAccount = async (data: LoginData): Promise<{ status: statusType }> => {
-	await new Promise((resolve) => setTimeout(resolve, 5000))
-	return { status: 200 }
+
+export const tryPasswordLogin = async (password: string): Promise<{ status: statusType; account: AccountType | null }> => {
+	const { status, seedPhrase } = await tryGetSeedPhrase(password)
+	if (status !== 200 || !seedPhrase) {
+		return {
+			status,
+			account: null,
+		}
+	}
+	return await tryLogin(seedPhrase)
 }
 
 
@@ -193,7 +206,7 @@ export const tryAddHouseholdMember = async (data: String, account: AccountType):
 	await new Promise((resolve) => setTimeout(resolve, 5000))
 	return { status: 200 , householdMember: data}
 }
-export const tryEditProfileInfo = async (data: AccountType, account: AccountType): Promise<{ status: statusType}> => {
+export const tryEditProfileInfo = async (data: UserPersonalInfo): Promise<{ status: statusType}> => {
 	await new Promise((resolve) => setTimeout(resolve, 5000))
 	return { status: 200 }
 }

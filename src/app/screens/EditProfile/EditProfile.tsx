@@ -5,18 +5,14 @@ import { SWRTextInput } from "components/inputs/SWRTextInput"
 import { AuthContext } from "contexts/authContext"
 import { NavContext } from "contexts/navContext"
 import { useContext, useState } from "react"
-import { Image, ScrollView, StyleSheet, View } from "react-native"
+import { ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
-import { images } from "assets/images"
-import { tryAddHouseholdMember, tryEditProfileInfo } from "data/account"
+import { tryEditProfileInfo } from "data/account"
 import { SWRSelectInput } from "components/inputs/SWRSelectInput"
 import { SWRDateInput } from "components/inputs/SWRDateInput"
-import { SWRInputLabel } from "components/inputs/SWRInputLabel"
-import { SWRMCInput } from "components/inputs/SWRMCInput"
-import { AccountType, defaultAccount } from "types/account"
+import { UserPersonalInfo } from "types/account"
 import { SWRSmallIntInput } from "components/inputs/SWRSmallIntInput"
 import { ToastContext } from "contexts/toastContext"
-import { exampleAccount } from "data/exampleData"
 import { genderOptions, religionOptions, raceOptions } from "./Options"
 
 
@@ -24,26 +20,22 @@ export const EditProfile = () => {
 	const { auth } = useContext(AuthContext)
     const { pushToast } = useContext(ToastContext)
     const { setNav } = useContext(NavContext)
+    if (!auth.account) return null
+    const isOrg = auth.account.org
+    if (isOrg) return null
+    const userInfo = auth.account.userInfo
 
-    if(!auth.account || !auth.account.personalInfo) {
-        pushToast({
-			title: `No Account Found`,
-			type: 'error'
-    	})
-        setNav('Home')
-    }
-    const [profileData, setProfileData] = useState<AccountType>(exampleAccount)
+
+
+    const [profileData, setProfileData] = useState<UserPersonalInfo>(userInfo.personalInfo)
 	const handleTryEditProfileInfo = async () => {
 	 	if (!auth.account) return
-	 	const {status} = await tryEditProfileInfo(profileData, exampleAccount)
-	 	if (status === 200) {
-	 		setProfileData({...exampleAccount, personalInfo: profileData.personalInfo})
-	 	}
-	 	else throw Error('Failed to create Profile')
+	 	const {status} = await tryEditProfileInfo(profileData)
+	 	if (status !== 200) throw Error('Failed to save Profile')
 	}
 	const doneEnabled = (
-        (['DOB', 'gender', 'race', 'religion', 'postalCode'] as const).every(key =>  profileData.personalInfo[key] !== '') 
-        && (['grade', 'height', 'weight'] as const).every(key =>  profileData.personalInfo[key] !== 0)
+        (['DOB', 'gender', 'race', 'religion', 'postalCode'] as const).every(key =>  profileData[key] !== '') 
+        && (['grade', 'height', 'weight'] as const).every(key =>  profileData[key] !== 0)
 	)
 
     return (
@@ -54,17 +46,15 @@ export const EditProfile = () => {
                 <SWRText style={gs.h5}>Date Of Birth</SWRText>
                 <View style={styles.heightWeightInput}> 
                 <SWRDateInput 
-                    onChange={(DOB) => setProfileData({...profileData, 
-                        personalInfo: {...profileData.personalInfo, DOB}})} 
-					value={profileData.personalInfo.DOB}
+                    onChange={(DOB) => setProfileData({...profileData, DOB})} 
+					value={profileData.DOB??''}
                 />
                 </View>
                 <SWRText style={gs.h5}>Gender</SWRText>
                 <SWRSelectInput
                     name={'Gender'}
-                    onChange={(gender) => setProfileData({...profileData, 
-                        personalInfo: {...profileData.personalInfo, gender}})} 
-                    value={profileData.personalInfo.gender}
+                    onChange={(gender) => setProfileData({...profileData, gender})} 
+                    value={profileData.gender}
                     choices={genderOptions}
                     buttonStyle={{marginBottom: 10}}
                 />
@@ -73,9 +63,8 @@ export const EditProfile = () => {
                         <SWRText style={gs.h5}>Height (cm)</SWRText>
                         <SWRSmallIntInput
                         name={'165'}
-                        onChange={(height) => setProfileData({...profileData, 
-                            personalInfo: {...profileData.personalInfo, height: parseInt(height)}})} 
-                        value={profileData.personalInfo.height.toString()}
+                        onChange={(height) => setProfileData({...profileData, height: parseInt(height)})} 
+                        value={profileData.height?.toString()??''}
                         inputStyle={styles.heightWeightInput}
                     /> 
                     </View>
@@ -83,9 +72,8 @@ export const EditProfile = () => {
                         <SWRText style={gs.h5}>Weight (lbs) </SWRText>
                         <SWRSmallIntInput
                         name={'160'}
-                        onChange={(weight) => setProfileData({...profileData, 
-                            personalInfo: {...profileData.personalInfo, weight: parseInt(weight) || 0}})} 
-                        value={profileData.personalInfo.weight.toString()}
+                        onChange={(weight) => setProfileData({...profileData, weight: parseInt(weight) || 0})} 
+                        value={profileData.weight?.toString()??''}
                         inputStyle={styles.heightWeightInput}
                     /> 
                     </View>
@@ -93,18 +81,16 @@ export const EditProfile = () => {
                 <SWRText style={gs.h5}>Religion</SWRText>
                 <SWRSelectInput
                     name={'Religion'}
-                    onChange={(religion) => setProfileData({...profileData, 
-                        personalInfo: {...profileData.personalInfo, religion}})} 
-                    value={profileData.personalInfo.religion}
+                    onChange={(religion) => setProfileData({...profileData, religion})} 
+                    value={profileData.religion}
                     choices={religionOptions}   
                     buttonStyle={{marginBottom: 10}}
                 />
                 <SWRText style={gs.h5}>Race</SWRText>
                 <SWRSelectInput
                     name={'Race'}
-                    onChange={(race) => setProfileData({...profileData, 
-                        personalInfo: {...profileData.personalInfo, race}})} 
-                    value={profileData.personalInfo.race}
+                    onChange={(race) => setProfileData({...profileData, race})} 
+                    value={profileData.race}
                     choices={raceOptions}
                     buttonStyle={{marginBottom: 10}}
                 />
@@ -113,9 +99,8 @@ export const EditProfile = () => {
                         <SWRText style={gs.h5}>Grade</SWRText> 
                         <SWRSmallIntInput
                             name={'7'}
-                            onChange={(grade) => setProfileData({...profileData, 
-                                personalInfo: {...profileData.personalInfo, grade: parseInt(grade)}})} 
-                            value={profileData.personalInfo.grade.toString()}
+                            onChange={(grade) => setProfileData({...profileData, grade: parseInt(grade)})} 
+                            value={profileData.grade?.toString()??''}
                             inputStyle={styles.heightWeightInput}
                         /> 
                     </View>
@@ -123,9 +108,8 @@ export const EditProfile = () => {
                         <SWRText style={gs.h5}>Postal Code</SWRText>
                         <SWRTextInput
                             name={'M5A 6B7'}
-                        onChange={(postalCode) => setProfileData({...profileData, 
-                            personalInfo: {...profileData.personalInfo, postalCode}})} 
-                        value={profileData.personalInfo.postalCode}
+                            onChange={(postalCode) => setProfileData({...profileData, postalCode})} 
+                            value={profileData.postalCode??''}
                             inputStyle={styles.heightWeightInput}
                         /> 
                     </View>

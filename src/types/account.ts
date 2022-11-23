@@ -2,38 +2,51 @@ import { AvatarType, defaultAvatar } from "./avatar"
 import { ProgramType } from "./programs"
 import { SurveyType } from "./surveys"
 
-type AccountType = {
-	walletId: string
-	keyPhrase: string
-	org: false,
-	userInfo: {
-		firstName: string
-		lastName: string
-		avatar: AvatarType
-		householdMembers: PublicAccountType[]
-		personalInfo: {
-			DOB: string,
-			gender: string,
-			height: number,
-			weight: number,
-			religion: string,
-			race: string,
-			grade: number,
-			postalCode: string,
-		}
-	}
-} | {
+type UserPersonalInfo = {
+	DOB?: string,
+	gender?: string,
+	height?: number,
+	weight?: number,
+	religion?: string,
+	race?: string,
+	grade?: number,
+	postalCode?: string,
+}
+
+
+type UserInfo = {
+	firstName: string
+	lastName: string
+	avatar: AvatarType
+	householdMembers: PublicAccountType[]
+	personalInfo: UserPersonalInfo
+}
+
+type CreationsType = {
+	programs: ProgramType[]
+	surveys: SurveyType[]
+}
+
+type OrgInfo = {
+	name: string,
+	creations: CreationsType
+}
+
+type OrgAccountType = {
 	walletId: string
 	keyPhrase: string
 	org: true,
-	orgInfo: {
-		name: string,
-		creations: {
-			programs: ProgramType[],
-			surveys: SurveyType[],
-		},
-	}
+	orgInfo: OrgInfo
 }
+
+type UserAccountType = {
+	walletId: string
+	keyPhrase: string
+	org: false,
+	userInfo: UserInfo
+}
+
+type AccountType = UserAccountType | OrgAccountType
 
 const defaultUserInfo = {
 	firstName: '',
@@ -73,4 +86,4 @@ const defaultPublicAccount: PublicAccountType = {
 
 
 export { defaultAccount, defaultPublicAccount, defaultUserInfo }
-export type { AccountType, PublicAccountType }
+export type { AccountType, PublicAccountType, UserInfo, OrgInfo, UserPersonalInfo, UserAccountType, CreationsType }

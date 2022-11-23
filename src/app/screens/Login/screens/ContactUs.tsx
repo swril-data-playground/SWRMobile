@@ -4,9 +4,9 @@ import { SWRText } from "components/SWRText"
 import { SWRTextInput } from "components/inputs/SWRTextInput"
 import { StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
-import { PuzzleImage } from "../../components/PuzzleImage"
+import { PuzzleImage } from "components/PuzzleImage"
 import { ContactData, setContactData } from "./ContactData"
-import { step } from "./LoginFlow"
+import { step } from "../LoginFlow"
 
 export const ContactUs = (props: {
 	data: ContactData,

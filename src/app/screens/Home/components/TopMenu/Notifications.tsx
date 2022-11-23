@@ -1,7 +1,7 @@
 import { images } from "assets/images"
 import { NavContext } from "contexts/navContext"
 import { useContext } from "react"
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native"
+import { Image, StyleSheet, TouchableOpacity } from "react-native"
 import { gs } from "styles/globals"
 
 const notifications = [

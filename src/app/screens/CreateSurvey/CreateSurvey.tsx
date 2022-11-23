@@ -11,7 +11,6 @@ import { useContext, useState } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { CategoryType, dataCategories } from "types/filter"
-import { questionTypes } from "types/questions"
 import { defaultSurvey, SurveyType } from "types/surveys"
 import { ToastContext } from "contexts/toastContext"
 

@@ -1,8 +1,8 @@
-import { AccountType, defaultAccount } from "./account";
+import { defaultAccount, UserAccountType } from "./account";
 
 export interface HouseholdRequestType {
-	fromAccount: AccountType
-	toAccount: AccountType
+	fromAccount: UserAccountType
+	toAccount: UserAccountType
 }
 
 export const defaultHouseholdRequestType = {

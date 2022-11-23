@@ -8,7 +8,6 @@ import { SWRText } from "components/SWRText";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { gs } from "styles/globals";
 import { AnswerType, QuestionType, typeOfQuestion } from "types/questions";
-import { MultipleChoiceQuestion } from "./MultipleChoiceQuestion";
 
 export const Questions = (props: {
 	questions: QuestionType[],

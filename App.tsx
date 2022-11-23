@@ -138,6 +138,7 @@ const SmartWaterlooMobile = () => {
 	const loadAccount = async ():Promise<boolean> => {
 		const { status: authStatus, auth: gotAuth } = await tryGetAuth()
 		if (authStatus === 200) {
+			console.log(gotAuth)
 			if (!gotAuth) {
 				console.error("No auth")
 				return false
@@ -155,8 +156,8 @@ const SmartWaterlooMobile = () => {
 
 	const loadData = async () => {
 		const defaultFilter: FilterType = {
-			categories: ['All'],
-			municipalities: ['Waterloo'],
+			category: 'All',
+			municipality: 'Waterloo',
 			sort: {
 				recent: true,
 				// lastOpened: boolean - not implemented
@@ -182,12 +183,17 @@ const SmartWaterlooMobile = () => {
 		}
 	}
 
+	const [initialLoadStarted, setInitialLoadStarted] = useState(false)
+
 	const initialLoad = async () => {
 		await Font.loadAsync(fonts);
 		const accountSuccess = await loadAccount()
 		if (accountSuccess) await loadData()
 	}
-	if (screenState === 'LOADING') initialLoad()
+	if (screenState === 'LOADING' && !initialLoadStarted) {
+		setInitialLoadStarted(true)
+		initialLoad()
+	}
 	const mainTab = listIncludes(tabNames, nav.nav)
 	return (
 		<AuthContext.Provider value={authValue}>

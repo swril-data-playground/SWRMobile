@@ -1,7 +1,6 @@
 import { SWRText } from "components/SWRText"
 import { StyleSheet, TouchableOpacity, View } from "react-native"
 import { gs } from "styles/globals"
-import { AnswerType, QuestionType } from "types/questions"
 
 export const SWRMCInput = (props: {
 	choices: string[],

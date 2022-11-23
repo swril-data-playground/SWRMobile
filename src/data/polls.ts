@@ -3,7 +3,6 @@ import { AccountType } from 'types/account';
 import { statusType } from 'types/data'
 import { FilterType } from 'types/filter';
 import { PollType } from 'types/polls';
-import { examplePolls } from './exampleData';
 import { graphql } from './graphql';
 
 const GET_POLLS = gql`

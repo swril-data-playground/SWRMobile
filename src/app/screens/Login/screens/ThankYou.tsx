@@ -4,8 +4,8 @@ import { SWRButton } from "components/SWRButton"
 import { SWRText } from "components/SWRText"
 import { Image, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
-import { PuzzleImage } from "../../components/PuzzleImage"
-import { step } from "./LoginFlow"
+import { PuzzleImage } from "components/PuzzleImage"
+import { step } from "../LoginFlow"
 
 export const ThankYou = (props: {
 	done: step, back: step

@@ -1,7 +1,6 @@
 import { images } from "assets/images"
 import { Image, StyleProp, View, ViewStyle } from "react-native"
 import { colors } from "styles/colors"
-import { gs } from "styles/globals"
 
 export const CheckBox = (props: {
 	size: number,

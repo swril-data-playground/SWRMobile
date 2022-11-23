@@ -1,7 +1,4 @@
-import { useState } from "react"
-import { StyleProp, StyleSheet, TextInput, View, ViewStyle } from "react-native"
-import { gs } from "styles/globals"
-import { SWRText } from "../SWRText"
+import { StyleProp, StyleSheet, TextInput, ViewStyle } from "react-native"
 import { SWRInputLabel } from "./SWRInputLabel"
 
 export interface SWRTextInputProps {

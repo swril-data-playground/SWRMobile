@@ -7,12 +7,15 @@ import { StyleSheet, TouchableOpacity } from "react-native"
 export const ProfileIcon = () => {
 	const { setNav } = useContext(NavContext)
 	const { auth } = useContext(AuthContext)
+	if (!auth.account) return null
+	const isOrg = auth.account.org
+	const icon = isOrg ? null : <AvatarIcon avatar={auth.account?.userInfo.avatar}/>
 	return (
 		<TouchableOpacity 
 			style={styles.container}
 			onPress={() => setNav('Profile')}
 		>
-			<AvatarIcon avatar={auth.account?.avatar}/>
+			{icon}
 		</TouchableOpacity>
 	)
 }

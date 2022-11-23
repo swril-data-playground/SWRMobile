@@ -29,8 +29,10 @@ export const LocationFilter = () => {
 					const selectedStyle = selected? { backgroundColor: colors.lightOrange }: null
 					return (
 						<TouchableOpacity onPress={() => {
-							setLocation(municipality)
-							setDropDownState(false)
+							if (!selected) {
+								setLocation(municipality)
+								setDropDownState(false)
+							}
 						}} style={[styles.dropDownItem, selectedStyle]} key={i}>
 							<CheckBox checked={selected} size={17} color={colors.orange} />
 							<SWRText style={{fontSize: 17, marginLeft: 5}}>{municipality}</SWRText>

@@ -1,5 +1,4 @@
 import { images } from "assets/images"
-import BackgroundImage from "components/BackgroundImage"
 import { useState } from "react"
 import { Animated, StyleSheet, View } from "react-native"
 

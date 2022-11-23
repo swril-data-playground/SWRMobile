@@ -1,7 +1,6 @@
-import { images } from "assets/images"
 import { SWRText } from "components/SWRText"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { View, StyleSheet, Image, ScrollView, Dimensions, Text } from "react-native"
+import { View, StyleSheet, Image, ScrollView, Dimensions } from "react-native"
 
 export const GenericScroller = (props: {
 	imageSet: {image: any,text: string}[],

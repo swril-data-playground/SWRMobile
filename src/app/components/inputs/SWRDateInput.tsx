@@ -2,7 +2,6 @@ import { SWRText } from "components/SWRText"
 import { useState } from "react"
 import { StyleSheet, TextInput, View } from "react-native"
 import { colors } from "styles/colors"
-import { SWRTextInput } from "./SWRTextInput"
 
 export const SWRDateInput = (props: {
 	value: string,

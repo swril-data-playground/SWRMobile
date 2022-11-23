@@ -27,11 +27,11 @@ export const HouseholdRequest = (props: {content: any}) => {
 			<BackButton leftAlign screenPadding />
 			<View style={[gs.screenPadding, styles.container]} >
 				<SWRText font={'medium'} style={styles.headerText}>Household Request</SWRText>
-				<FullAvatar avatar={content.fromAccount.avatar} height={300}/>
-				<SWRText font={'medium'} style={styles.questionText}>{content.fromAccount.firstName} is asking if you want to join their household!</SWRText>
+				<FullAvatar avatar={content.fromAccount.userInfo.avatar} height={300}/>
+				<SWRText font={'medium'} style={styles.questionText}>{content.fromAccount.userInfo.firstName} is asking if you want to join their household!</SWRText>
 				<SWRText style={styles.consentText}>If you consent, you will be able added to their household. This means that they will be able to sign you up for programs.</SWRText>
 				<View style={styles.questionSection}>
-					<SWRText style={styles.consentQuestionText}>Do you consent to joining {content.fromAccount.firstName}'s household?</SWRText>
+					<SWRText style={styles.consentQuestionText}>Do you consent to joining {content.fromAccount.userInfo.firstName}'s household?</SWRText>
 				</View>
 				<View style={styles.buttons}>
 					<SWRButton onPress={() => handleTryRespondToHouseholdRequest(true)} singleUse style={[styles.button, {marginRight: 10}]}>

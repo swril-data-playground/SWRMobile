@@ -1,5 +1,4 @@
-import { ActivityIndicator, Image, Text, View } from 'react-native'
-import BackgroundImage from '../../components/BackgroundImage'
+import { Image, View } from 'react-native'
 import { images } from "assets/images"
 import { gs } from '../../styles/globals'
 import { MovingBackground } from './MovingBackground'
