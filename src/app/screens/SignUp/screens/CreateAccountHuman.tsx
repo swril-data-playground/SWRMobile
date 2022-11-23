@@ -7,6 +7,9 @@ import { Image, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { setSignUpData, SignUpData, step } from '../SignUpFlow'
 import { PuzzleImage } from "../../../components/PuzzleImage"
+import { setSeedphrase , setPriPub , setpublicAdd } from "contexts/keygen"
+import { passcodeCreate } from "data/account"
+import { checkkey } from "data/account"
 
 export const CreateAccountHuman = (props: {
 	data: SignUpData,
@@ -18,6 +21,23 @@ export const CreateAccountHuman = (props: {
 		props.data.lastName.length > 0 &&
 		props.data.password.length > 0 &&
 		props.data.password === props.data.password2)
+
+		let on = async() => {
+
+			let seedp = await setSeedphrase();
+			let result = await setPriPub(seedp);
+			let publicadd = await setpublicAdd();
+			props.data.publicaddr = publicadd;
+			await passcodeCreate(props.data.password , props.data.firstName , seedp.toString());
+			let x = await checkkey(props.data.password);
+			console.log(x);
+
+		}
+
+		let signend = async() =>{
+			on().then(props.next);
+		}
+	
 	return (
 		<View style={gs.fullScreen} >
 			<BackButton onPressOverride={props.back} leftAlign style={{position: 'absolute'}}/>
@@ -36,7 +56,7 @@ export const CreateAccountHuman = (props: {
 				props.setData({...props.data, password2})	
 			}}/>
 
-			<SWRButton disabled={!nextEnabled} onPress={props.next} style={styles.nextButton}>
+			<SWRButton disabled={!nextEnabled} onPress={signend} style={styles.nextButton}>
 				<SWRText style={gs.h4}>Next</SWRText>
 			</SWRButton>
 			<Image source={images.woman_at_desk} style={styles.officeDeskImage}/>
