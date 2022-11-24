@@ -12,7 +12,8 @@ export enum KeyNames {
   PrivateKey = 'PrivateKey',
   PublicKey = "PublicKey",
   PublicAddress = "PublicAddress",
-  SeedPhrase = "SeedPhrase"
+  SeedPhrase = "SeedPhrase",
+  TokenStorage = "HLFToken"
 }
 
 // wallet timeout of 5 minutes, 0 means the wallet never locks due to inactivity
