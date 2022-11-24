@@ -54,7 +54,7 @@ export const PasswordLogin = (props: {
 			<BackButton leftAlign style={{position: 'absolute'}}/>
 			<PuzzleImage width={200}/>
 			<SWRText font={'medium'} style={styles.title}>Login</SWRText>
-			<SWRTextInput withTitle value={state} name={'Password'} containerStyle={styles.textInput} onChange={(password) => {
+			<SWRTextInput password withTitle value={state} name={'Password'} containerStyle={styles.textInput} onChange={(password) => {
 				setState(password)
 			}}/>
 

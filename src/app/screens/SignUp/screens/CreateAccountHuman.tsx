@@ -29,10 +29,10 @@ export const CreateAccountHuman = (props: {
 			<SWRTextInput withTitle value={props.data.lastName} name={'Last Name'} containerStyle={styles.textInput} onChange={(lastName) => {
 				props.setData({...props.data, lastName})	
 			}}/>
-			<SWRTextInput withTitle value={props.data.password} name={'Password'} containerStyle={styles.textInput} onChange={(password) => {
+			<SWRTextInput password withTitle value={props.data.password} name={'Password'} containerStyle={styles.textInput} onChange={(password) => {
 				props.setData({...props.data, password})	
 			}}/>
-			<SWRTextInput withTitle value={props.data.password2} name={'Confirm Password'} containerStyle={styles.textInput} onChange={(password2) => {
+			<SWRTextInput password withTitle value={props.data.password2} name={'Confirm Password'} containerStyle={styles.textInput} onChange={(password2) => {
 				props.setData({...props.data, password2})	
 			}}/>
 
