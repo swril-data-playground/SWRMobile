@@ -13,20 +13,20 @@ const ProfileLinks = () => {
 	return (
 		<View style={styles.linksContainer}>
 			<View style={styles.horizontal}>
-				<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '35%'}]} onPress={() => setNav('Help')}>
+				<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '35%'}]} singleUse  onPress={() => setNav('Help')}>
 					<Image source={images.question_icon} style={styles.linkIcon}/>
 					<SWRText style={gs.h4}>Help</SWRText>
 				</SWRButton>
-				<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '60%'}]} onPress={() => setNav('LearnMore')}>
+				<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '60%'}]}  singleUse onPress={() => setNav('LearnMore')}>
 					<Image source={images.search_icon} style={styles.linkIcon}/>
 					<SWRText style={gs.h4}>Learn more</SWRText>
 				</SWRButton>
 			</View>
-			<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '100%'}]} onPress={() => setNav('Privacy')}>
+			<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '100%'}]} singleUse  onPress={() => setNav('Privacy')}>
 				<Image source={images.profile_sheild} style={styles.linkIcon}/>
 				<SWRText style={gs.h4}>Privacy policy</SWRText>
 			</SWRButton>
-			<SWRButton style={[styles.whiteSection, styles.linkButton, {width: '100%'}]} onPress={signOut}>
+			<SWRButton singleUse style={[styles.whiteSection, styles.linkButton, {width: '100%'}]} onPress={signOut}>
 				<SWRText style={[gs.h4, {textAlign: 'center', width: '100%'}]}>Sign out</SWRText>
 			</SWRButton>
 		</View>

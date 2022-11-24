@@ -5,28 +5,31 @@ import { StyleProp, StyleSheet, TextInput, View, ViewStyle } from "react-native"
 import { gs } from "styles/globals"
 import { SWRInputLabel } from "./SWRInputLabel"
 
-export const SWRDateInput = (props: {
+export const SWRTimeInput = (props: {
 	name?: string,
 	withTitle?: boolean,
 	value: string,
 	onChange: (newValue: string) => void,
 	containerStyle?: StyleProp<ViewStyle>
 }) => {
-	let date = new Date(props.value)
-	if (isNaN(date.getTime())) {
-		date = new Date()
+	console.log(props.value)
+	let time = new Date(props.value)
+	console.log(time)
+	if (isNaN(time.getTime())) {
+		time = new Date()
 	}
 	const content = (
 		<DateTimePicker
 			testID="dateTimePicker"
-			value={date}
-			mode={'date'}
+			value={time}
+			mode={'time'}
 			is24Hour={true}
-			onChange={(event, selectedDate) => {
-				props.onChange(selectedDate?.toUTCString() ?? '')
+			onChange={(event, selectedTime) => {
+				console.log(selectedTime?.toString())
+				props.onChange(selectedTime?.toString() ?? '')
 			}}
 			style={{
-				minWidth: 140,
+				minWidth: 80,
 				minHeight: 50,
 				alignSelf: 'flex-start'
 			}}

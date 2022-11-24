@@ -10,22 +10,27 @@ import { tryCreateProgram } from "data/programs"
 import { useContext, useState } from "react"
 import { ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
-import { CategoryType, municipalities } from "types/filter"
+import { CategoryType, dataCategories, municipalities } from "types/filter"
 import { defaultProgram, ProgramType } from "types/programs"
 import { questionTypes } from "types/questions"
+import { SWRDateInput } from "components/inputs/SWRDateInput"
+import { SWRTimeInput } from "components/inputs/SWRTimeInput"
+import { ToastContext } from "contexts/toastContext"
 
 export const CreateProgram = () => {
 	const [programData, setProgramData] = useState<ProgramType>(defaultProgram)
 	const { auth } = useContext(AuthContext)
 	const { setStack } = useContext(NavContext)
+	const { pushToast } = useContext(ToastContext)
 	const handleTryCreateProgram = async () => {
 		if (!auth.account) return
 		const {program, status} = await tryCreateProgram(programData, auth.account)
 		if (status === 200) {
 			setProgramData(defaultProgram)
 			setStack(['Home', 'Program'], program)
+		} else {
+			pushToast({title: 'Failed to create program', type: 'error'})
 		}
-		else throw Error('Failed to create program')
 	}
 	const doneEnabled = (
 		programData.title.length > 0 &&
@@ -54,11 +59,41 @@ export const CreateProgram = () => {
 				/>
 				<SWRSelectInput 
 					value={programData.category}
-					choices={questionTypes}
+					choices={dataCategories}
 					onChange={(value) => setProgramData({...programData, category: value as CategoryType})}
 					name={'Category'}
 					withTitle
 				/>
+				<SWRDateInput
+					name={'Date'}
+					value={programData.date}
+					onChange={(date) => setProgramData({...programData, date})}
+					withTitle
+				/>
+				<View style={styles.timeContainer}>
+					<SWRTimeInput
+						name={'Start Time'}
+						value={programData.startTime}
+						onChange={(startTime) => setProgramData({...programData, startTime})}
+						withTitle
+						containerStyle={{width: "50%"}}
+					/>
+					<SWRTimeInput
+						name={'End Time'}
+						value={programData.endTime}
+						onChange={(endTime) => setProgramData({...programData, endTime})}
+						withTitle
+						containerStyle={{width: "50%"}}
+					/>
+				</View>
+				<SWRSelectInput
+					name={'Repeat'}
+					value={programData.repeat}
+					choices={['Never', 'Daily', 'Weekly', 'Monthly']}
+					onChange={(repeat) => setProgramData({...programData, repeat})}
+					withTitle
+				/>
+
 				<SWRTextInput
 					name={'Address'} 
 					onChange={(address) => setProgramData({...programData, address})} 
@@ -77,7 +112,7 @@ export const CreateProgram = () => {
 					setQuestions={(questions) => setProgramData({...programData, questions})} 
 					withTitle
 				/>
-				<SWRButton style={styles.doneButton} onPress={handleTryCreateProgram} disabled={!doneEnabled}>
+				<SWRButton singleUse style={styles.doneButton} onPress={handleTryCreateProgram} disabled={!doneEnabled}>
 					<SWRText style={gs.h5} font={'medium'}>Done</SWRText>
 				</SWRButton>
 			</ScrollView>
@@ -94,5 +129,9 @@ const styles = StyleSheet.create({
 	doneButton: {
 		marginTop: 20,
 		borderRadius: 15,
+		marginBottom: 50,
+	},
+	timeContainer: {
+		flexDirection: 'row',
 	}
 })

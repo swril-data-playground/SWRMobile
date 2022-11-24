@@ -9,17 +9,16 @@ import { ScrollView, StyleSheet, View } from "react-native"
 import { gs } from "styles/globals"
 import { tryEditProfileInfo } from "data/account"
 import { SWRSelectInput } from "components/inputs/SWRSelectInput"
-import { SWRDateInput } from "components/inputs/SWRDateInput"
 import { UserPersonalInfo } from "types/account"
 import { SWRSmallIntInput } from "components/inputs/SWRSmallIntInput"
 import { ToastContext } from "contexts/toastContext"
 import { genderOptions, religionOptions, raceOptions } from "./Options"
+import { SWRDateInput } from "components/inputs/SWRDateInput"
 
 
 export const EditProfile = () => {
 	const { auth } = useContext(AuthContext)
     const { pushToast } = useContext(ToastContext)
-    const { setNav } = useContext(NavContext)
     if (!auth.account) return null
     const isOrg = auth.account.org
     if (isOrg) return null
@@ -31,12 +30,13 @@ export const EditProfile = () => {
 	const handleTryEditProfileInfo = async () => {
 	 	if (!auth.account) return
 	 	const {status} = await tryEditProfileInfo(profileData)
-	 	if (status !== 200) throw Error('Failed to save Profile')
+	 	if (status !== 200) {
+            pushToast({
+                title: 'Failed to edit profile',
+                type: 'error'
+            })
+        }
 	}
-	const doneEnabled = (
-        (['DOB', 'gender', 'race', 'religion', 'postalCode'] as const).every(key =>  profileData[key] !== '') 
-        && (['grade', 'height', 'weight'] as const).every(key =>  profileData[key] !== 0)
-	)
 
     return (
         <View style={gs.scrollParent}>
@@ -58,7 +58,7 @@ export const EditProfile = () => {
                     choices={genderOptions}
                     buttonStyle={{marginBottom: 10}}
                 />
-                <View style={styles.heightWeightontainer}>
+                <View style={styles.heightWeightContainer}>
                     <View>
                         <SWRText style={gs.h5}>Height (cm)</SWRText>
                         <SWRSmallIntInput
@@ -94,7 +94,7 @@ export const EditProfile = () => {
                     choices={raceOptions}
                     buttonStyle={{marginBottom: 10}}
                 />
-                <View style={styles.heightWeightontainer}>
+                <View style={styles.heightWeightContainer}>
                     <View>
                         <SWRText style={gs.h5}>Grade</SWRText> 
                         <SWRSmallIntInput
@@ -114,7 +114,7 @@ export const EditProfile = () => {
                         /> 
                     </View>
                 </View>
-				<SWRButton style={styles.doneButton} onPress={handleTryEditProfileInfo} disabled={!doneEnabled}>
+				<SWRButton style={styles.doneButton} onPress={handleTryEditProfileInfo}>
 					<SWRText style={gs.h5} font={'medium'}>Done</SWRText>
 				</SWRButton>
             </ScrollView>
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
 		marginLeft: 130,
         marginTop: 40
 	},
-    heightWeightontainer: {
+    heightWeightContainer: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',

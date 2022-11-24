@@ -19,13 +19,13 @@ const CreateScreen = () => {
 				<SWRText style={gs.h3}>Let's make something</SWRText>
 			</View>
 			{isOrg && <View style={styles.buttonContainer}>
-				<SWRButton onPress={() => setNav('CreateSurvey')} style={styles.button}>
+				<SWRButton singleUse onPress={() => setNav('CreateSurvey')} style={styles.button}>
 					<SWRText style={styles.buttonText}>Survey</SWRText>
 				</SWRButton>
-				<SWRButton onPress={() => {}} style={styles.button}>
+				<SWRButton singleUse onPress={() => {}} style={styles.button}>
 					<SWRText style={styles.buttonText}>Poll</SWRText>
 				</SWRButton>
-				<SWRButton onPress={() => setNav('CreateProgram')} style={styles.button}>
+				<SWRButton singleUse onPress={() => setNav('CreateProgram')} style={styles.button}>
 					<SWRText style={styles.buttonText}>Program</SWRText>
 				</SWRButton>
 			</View>}
