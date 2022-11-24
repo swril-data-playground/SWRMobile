@@ -126,6 +126,23 @@ const CREATE_USER = gql`
 	}
 `
 
+const CREATE_ORG = gql`
+	mutation CreateOrg($input: OrgInput!) {
+		createOrg(input: $input) {
+			walletId
+			name
+			creations {
+				programs {
+					id
+				}
+				surveys {
+					id
+				}
+			}
+		}
+	}
+`
+
 export const tryCreateHumanAccount = async (input: SignUpData): Promise<{ status: statusType; account: AccountType | null }> => {
 	try {
 		const res = await graphql.mutate(CREATE_USER, {
@@ -193,9 +210,35 @@ export const tryPasswordLogin = async (password: string): Promise<{ status: stat
 }
 
 
-export const tryCreateOrgAccount = async (data: SignUpData): Promise<{ status: statusType }> => {
-	await new Promise((resolve) => setTimeout(resolve, 5000))
-	return { status: 200 }
+export const tryCreateOrgAccount = async (input: SignUpData): Promise<{ status: statusType, account: AccountType | null }> => {
+	try {
+		const res = await graphql.mutate(CREATE_ORG, {
+			input: {
+				name: input.name,
+				password: input.password,
+			},
+		})
+		const data = res.data
+		if (!data) {
+			console.log(res.errors)
+			return { status: 400, account: null }
+		}
+		return {
+			status: 200,
+			account: {
+				...defaultAccount,
+				org: true,
+				orgInfo: {
+					name: data.createOrg.name,
+					creations: data.createOrg.creations
+				},
+				walletId: data.createOrg.walletId,
+			},
+		}
+	} catch (e:any) {
+		console.log(e)
+		return { status: 500, account: null }
+	}
 }
 
 export const tryRespondToHouseholdRequest = async (data: HouseholdRequestType, approve: boolean): Promise<{ status: statusType }> => {

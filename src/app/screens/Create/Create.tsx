@@ -18,7 +18,7 @@ const CreateScreen = () => {
 				<SWRText font={'medium'} style={gs.h1}>Create</SWRText>
 				<SWRText style={gs.h3}>Let's make something</SWRText>
 			</View>
-			{isOrg && <View>
+			{isOrg && <View style={styles.buttonContainer}>
 				<SWRButton onPress={() => setNav('CreateSurvey')} style={styles.button}>
 					<SWRText style={styles.buttonText}>Survey</SWRText>
 				</SWRButton>
@@ -38,6 +38,10 @@ const CreateScreen = () => {
 }
 
 const styles = StyleSheet.create({
+	buttonContainer: {
+		alignItems: "center",
+        justifyContent: "flex-start"
+	},
 	puzzleImage: {
 		width: 160,
 		height: 100
@@ -49,10 +53,13 @@ const styles = StyleSheet.create({
 	button: {
 		height: 50,
 		width: '90%',
-		margin: 10
+		margin: 10,
+
 	},
 	buttonText: {
-		fontSize: 25
+		fontSize: 25,
+		width: "100%",
+		textAlign: 'center'
 	},
 	skaterGirlImage: {
 		marginTop: 10,

@@ -29,7 +29,7 @@ export const LoadingDoggo = (props: {
 						'thirteen fourteen fifteen sixteen'
 					}</SWRText>
 				</View>
-				<SWRButton onPress={props.next} style={styles.loadedButton}>
+				<SWRButton singleUse onPress={props.next} style={styles.loadedButton}>
 					<SWRText font={'medium'} style={gs.h4}>Next</SWRText>
 				</SWRButton>
 			</>

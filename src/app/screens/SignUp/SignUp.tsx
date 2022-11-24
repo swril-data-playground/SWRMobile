@@ -52,9 +52,10 @@ const SignUp = (): JSX.Element => {
 
 	const createOrg = async () => {
 		setSignUpState(3)
-		const { status } = await tryCreateOrgAccount(state)
+		const { status, account } = await tryCreateOrgAccount(state)
 		if (status === 200) {
 			await reloadData()
+			setAccount(account)
 			setSignUpState(4)
 		} else {
 			setSignUpState(2)
