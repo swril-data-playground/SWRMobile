@@ -138,7 +138,6 @@ const SmartWaterlooMobile = () => {
 	const loadAccount = async ():Promise<boolean> => {
 		const { status: authStatus, auth: gotAuth } = await tryGetAuth()
 		if (authStatus === 200) {
-			console.log(gotAuth)
 			if (!gotAuth) {
 				console.error("No auth")
 				return false

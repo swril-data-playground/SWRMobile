@@ -5,6 +5,7 @@ import { min1NavItem } from './NavItem'
 import { min1Array } from 'types/array'
 import { listIncludes } from 'utils/typelessIncludes'
 import { tabNames } from './tabs'
+import { DisplayContext } from 'contexts/displayContext'
 
 export interface NavContainerType extends JSX.Element {
 	props: {
@@ -16,6 +17,7 @@ export type min1NavContainer = min1Array<NavContainerType> | NavContainerType
 
 export const NavContainer = (props: NavContainerType['props']): JSX.Element => {
 	const { nav } = useContext(NavContext)
+	const { display: screenDisplay } = useContext(DisplayContext)
 	const navItems = !Array.isArray(props.children) ? [props.children] : props.children
 	const navNames: string[] = []
 	let navFound = nav === undefined
@@ -36,7 +38,7 @@ export const NavContainer = (props: NavContainerType['props']): JSX.Element => {
 				const display = displayed ? 'flex' : 'none'
 				if (item.props.component.props.content !== undefined && !displayed) return
 				if (!item.props.persistent && !displayed) return
-				const paddingBottom = listIncludes(tabNames, item.props.name) ? 80 : 0
+				const paddingBottom = listIncludes(tabNames, item.props.name) && screenDisplay.keyboardHeight==0 ? 80 : 0
 				return (
 					<View
 						key={i}
@@ -44,6 +46,7 @@ export const NavContainer = (props: NavContainerType['props']): JSX.Element => {
 							paddingTop: 50,
 							display: display,
 							paddingBottom,
+							marginBottom: screenDisplay.keyboardHeight
 						}}
 					>
 						{item.props.component}

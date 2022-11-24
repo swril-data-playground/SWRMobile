@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
 	},
 	doneButton: {
 		marginTop: 20,
+		marginBottom: 50,
 		borderRadius: 15,
 	}
 })

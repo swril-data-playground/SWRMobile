@@ -60,15 +60,6 @@ const CREATE_SURVEY = gql(`
 `)
 
 export const tryCreateSurvey = async (survey: SurveyType, account: AccountType): Promise<{ status: statusType, survey: SurveyType|null}> => {
-	console.log({
-		title: survey.title,
-		category: survey.category,
-		description: survey.description,
-		creatorId: account.walletId,
-		image: survey.image,
-		questions: survey.questions
-	})
-	console.log(CREATE_SURVEY)
 	try {
 		const res = await graphql.mutate(CREATE_SURVEY, {
 			input: {
