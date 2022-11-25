@@ -7,7 +7,7 @@ export const PollData = () => {
 	return (
 		<View style={gs.scrollParent}>
 			<BackButton leftAlign screenPadding/>
-			<SWRText>Poll Data</SWRText>
+			<SWRText style={[gs.h1, {textAlign: 'center'}]}>Poll Data</SWRText>
 			<ScrollView style={gs.screenPadding}>
 				
 			</ScrollView>

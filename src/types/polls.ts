@@ -14,4 +14,4 @@ const defaultPoll: PollType = {
 }
 
 export { defaultPoll }
-export type { PollType }
+export type { PollType, PollQuestionType }
