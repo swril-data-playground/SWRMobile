@@ -21,6 +21,7 @@ export const HomePrograms = (props: {
 			</View>
 			<ScrollView style={styles.scroller} horizontal={true} showsHorizontalScrollIndicator={false}>
 				{props.programs.map((program, i) => {
+					if (i > 6) return null
 					return (
 						<TouchableOpacity style={styles.program} onPress={() => setNav('Program', program)} key={i}>
 							<BackgroundImage image={{uri: program.image}} style={styles.programImage}/>

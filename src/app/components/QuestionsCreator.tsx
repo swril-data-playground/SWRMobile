@@ -81,7 +81,7 @@ export const QuestionsCreator = (props: {
 								buttonStyle={{backgroundColor: colors.lightGrey}}
 								choices={questionTypes}
 							/>
-							{ (question.type === 'Multiple choice' || question.type === 'Select') && (
+							{ (question.type === 'MC' || question.type === 'Select') && (
 								<View>
 									<ListCreator
 										list={question.choices??[]}

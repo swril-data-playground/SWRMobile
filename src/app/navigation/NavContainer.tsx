@@ -27,14 +27,14 @@ export const NavContainer = (props: NavContainerType['props']): JSX.Element => {
 		if (name == undefined) throw Error('NavContainer children must have name')
 		if (navNames.includes(name)) throw Error('NavContainer children must have a unique name')
 		navNames.push(name)
-		if (nav.nav === name) navFound = true
+		if (nav == null || nav.nav === name) navFound = true
 	})
-	if (!navFound) throw Error('Page ' + nav.nav + ' not found')
+	if (!navFound) throw Error('Page ' + nav?.nav + ' not found')
 	return (
 		<>
 			{navItems.map((item, i) => {
 				if (!item) return;
-				const displayed =  item.props.name === nav.nav || (nav === undefined && i === 0)
+				const displayed =  item.props.name === nav?.nav || (nav === undefined && i === 0)
 				const display = displayed ? 'flex' : 'none'
 				if (item.props.component.props.content !== undefined && !displayed) return
 				if (!item.props.persistent && !displayed) return

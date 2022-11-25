@@ -20,7 +20,7 @@ export const Poll = (props: {content: any}) => {
 			<BackButton leftAlign screenPadding/>
 			<ScrollView style={keyboardPadding}>
 				<SWRText font={'medium'} style={styles.h1}>{content.title}</SWRText>
-				<Questions answers={answers} setAnswers={setAnswers} questions={content.questions} questionType="Multiple choice"/>
+				<Questions answers={answers} setAnswers={setAnswers} questions={content.questions} questionType="MC"/>
 				<SWRButton onPress={() => {}} style={styles.submit}>
 					<SWRText style={gs.h4}>Submit</SWRText>
 				</SWRButton>

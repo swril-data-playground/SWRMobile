@@ -34,7 +34,7 @@ export const ProgramView = (props: {
 					})}
 					{over3Attendees && <SWRText style={[{marginLeft: 20}, gs.h4]}>+{program.attendees.length - 3}</SWRText>}
 				</View>
-				<SWRButton onPress={props.signUp} style={{backgroundColor: 'lightgrey', width: '70%'}}>
+				<SWRButton singleUse onPress={props.signUp} style={{backgroundColor: 'lightgrey', width: '70%'}}>
 					<SWRText style={[gs.h3, {textAlign: 'center'}]}>Sign Up</SWRText>
 				</SWRButton>
 			</View>

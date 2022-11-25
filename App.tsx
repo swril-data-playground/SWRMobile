@@ -50,6 +50,7 @@ import { graphql } from 'data/graphql'
 import { Storage } from 'data/storage'
 import { EditProfile } from 'screens/EditProfile/EditProfile'
 import { FilterType } from 'types/filter'
+import { ThankYou } from 'screens/ThankYou'
 
 
 const SmartWaterlooMobile = () => {
@@ -88,15 +89,18 @@ const SmartWaterlooMobile = () => {
 	const navValue = { 
 		nav, 
 		setNav: (newNav: string, newNavContent: any = null) => {
-			if (newNavContent !== null) setNavContent(newNavContent)
 			let newStack: string[]
-			if (listIncludes(tabNames, newNav)) {
+			if (listIncludes(tabNames, newNav) || nav == null) {
 				newStack = [newNav]
 			} else if (listIncludes(nav.stack, newNav)) {
 				const idx = nav.stack.indexOf(newNav)
 				newStack = [...nav.stack.slice(0, idx + 1)]
 			} else {
 				newStack = [...nav.stack, newNav]
+			}
+			if (newNavContent !== null) {
+				setNav(null)
+				setNavContent(newNavContent)
 			}
 			setNav({nav: newNav, stack: newStack})
 			if (newNavContent === null) setNavContent(newNavContent)
@@ -191,7 +195,7 @@ const SmartWaterlooMobile = () => {
 		setInitialLoadStarted(true)
 		initialLoad()
 	}
-	const mainTab = listIncludes(tabNames, nav.nav)
+	const mainTab = !!nav && listIncludes(tabNames, nav.nav)
 	return (
 		<AuthContext.Provider value={authValue}>
 			<DataContext.Provider value={dataValue}>
@@ -232,6 +236,7 @@ const SmartWaterlooMobile = () => {
 											<NavItem name={'AddHouseholdMember'} component={<AddHouseholdMember />} />
 											<NavItem name={'AllToasts'} component={<AllToasts />} />
 											<NavItem name={'EditProfile'} component={<EditProfile />} />
+											<NavItem name={'ThankYou'} component={<ThankYou content={navContent} />} />
 										</NavContainer>
 										{mainTab && <Tabs tab={nav.nav as tabName} />}
 										<Toasts tabs={mainTab} />

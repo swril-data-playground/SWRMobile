@@ -5,7 +5,7 @@ import { createContext } from 'react'
 export type NavContextType = {
 	nav: string,
 	stack: string[]
-}
+} | null
 export const defaultNavValue: NavContextType = {
 	nav: 'Home',
 	stack: ['Home']

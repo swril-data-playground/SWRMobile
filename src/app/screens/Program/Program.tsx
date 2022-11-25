@@ -6,13 +6,17 @@ import { StyleSheet, View } from "react-native"
 import { ProgramType } from "types/programs"
 import { ProgramQuestions } from "./views/ProgramQuestions"
 import { ProgramView } from "./views/ProgramView"
-import { ThankYou } from "./views/ThankYou"
+import { ThankYou } from "../ThankYou"
+import { gs } from "styles/globals"
+import { SWRText } from "components/SWRText"
+import { NavContext } from "contexts/navContext"
 
 export const Program = (props: {content: any}) => {
 	const program = props.content as ProgramType
 	const { auth } = useContext(AuthContext)
 	const { pushToast } = useContext(ToastContext)
 	const [programSignUpState, setProgramSignUpState] = useState<'Info'|'Questions'|'Done'>('Info')
+	const { setNav } = useContext(NavContext)
 
 
 	const trySignUp = async () => {
@@ -25,7 +29,10 @@ export const Program = (props: {content: any}) => {
 		}
 		const { status } = await trySignUpForProgram(program, auth.account)
 		if (status === 200) {
-			setProgramSignUpState('Done')
+			setNav('ThankYou', <>
+				<SWRText font={'medium'} style={gs.h3}>For signing up to</SWRText>
+				<SWRText font={'medium'} style={[gs.h3, {color: '#234F68', textAlign:'center'} ]}>{program.title}</SWRText>
+			</>)
 		} else {
 			pushToast({
 				title: 'Error signing up for program',
@@ -38,7 +45,6 @@ export const Program = (props: {content: any}) => {
 		<View style={styles.container}>
 			{programSignUpState==='Info' && <ProgramView program={program} signUp={infoSignUp} />}
 			{programSignUpState==='Questions' && <ProgramQuestions program={program} next={trySignUp} back={() => setProgramSignUpState('Info')} />}
-			{programSignUpState==='Done' && <ThankYou program={program} />}
 		</View>
 	)
 }	

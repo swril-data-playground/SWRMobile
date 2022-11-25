@@ -85,3 +85,29 @@ export const tryCreateSurvey = async (survey: SurveyType, account: AccountType):
 		return { status: 500, survey: null }
 	}
 }
+
+const SUBMIT_SURVEY = gql(`
+	mutation SubmitSurvey($input: SubmitSurvey!) {
+		submitSurvey(input: $input)
+	}
+`)
+
+export const trySubmitSurvey = async (survey: SurveyType, answers: string[], account: AccountType): Promise<{ status: statusType }> => {
+	try {
+		const res = await graphql.mutate(SUBMIT_SURVEY, {
+			input: {
+				surveyId: survey.id,
+				answers: answers
+			},
+		})
+		const data = res.data
+		if (!data) {
+			console.log(res.errors)
+			return { status: 400 }
+		}
+		return { status: 200 }
+	} catch (e) {
+		console.log(e)
+		return { status: 500 }
+	}
+}

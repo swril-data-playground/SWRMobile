@@ -15,7 +15,7 @@ export const ProgramQuestions = (props: {
 		<>
 			<BackButton style={{margin: 10}} onPressOverride={props.back} />
 
-			<SWRButton onPress={props.next} style={{backgroundColor: 'lightgrey', width: '70%'}}>
+			<SWRButton singleUse onPress={props.next} style={{backgroundColor: 'lightgrey', width: '70%'}}>
 				<SWRText style={[gs.h3, {textAlign: 'center'}]}>Continue</SWRText>
 			</SWRButton>
 		</>

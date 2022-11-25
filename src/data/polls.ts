@@ -17,7 +17,6 @@ const GET_POLLS = gql`
 			questions {
 				id
 				prompt
-				type
 				choices
 				optional
 			}
