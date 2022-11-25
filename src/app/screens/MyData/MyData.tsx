@@ -38,7 +38,7 @@ const MyDataScreen = () => {
 				</ScrollView>
 				<MyCreations/>
 				<SWRText style={styles.subHeaderText} font={'medium'}>My cloud</SWRText>
-				<SWRButton onPress={() => setNav('UploadScreen')} style={styles.uploadButton}>
+				<SWRButton singleUse onPress={() => setNav('UploadScreen')} style={styles.uploadButton}>
 					<SWRText style={gs.h5}>Upload</SWRText>
 					<Image source={images.upload} style={styles.uploadIcon}/>
 				</SWRButton>

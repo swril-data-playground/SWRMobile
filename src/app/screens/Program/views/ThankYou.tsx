@@ -24,7 +24,7 @@ export const ThankYou = (props: {
 			</View>
 			
 			<Image source={images.umbrella_cat} style={styles.image}/>
-			<SWRButton onPress={() => setNav('Home')} style={{backgroundColor: 'lightgrey', width: '70%'}}>
+			<SWRButton singleUse onPress={() => setNav('Home')} style={{backgroundColor: 'lightgrey', width: '70%'}}>
 				<SWRText style={[gs.h3, {textAlign: 'center'}]}>Done</SWRText>
 		 	</SWRButton>
 		</View>
