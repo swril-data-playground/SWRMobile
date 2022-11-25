@@ -35,8 +35,10 @@ const SignUp = (): JSX.Element => {
 			})
 			await reloadData()
 			setAccount(account)
+			console.log("heyyy")
 			setSignUpState(4)
 		} else if (status === 500) {
+			console.log("Nooo")
 			setSignUpState(2)
 			pushToast({
 				type: 'error',

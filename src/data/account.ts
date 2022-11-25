@@ -8,6 +8,12 @@ import { graphql } from './graphql'
 import { programFields } from './programs'
 import { Storage } from './storage'
 import { surveyFields } from './surveys'
+import { hashPIN } from 'src/utils/crypto'
+import { getSeedPhrase , loadWalletKey } from 'src/services/keychain';
+import {
+	secretForPIN,
+	storeWalletSecret
+  } from 'src/services/keychain'
 
 const GET_ACCOUNT = gql(`
 	query Account($input: AuthInput!) {
@@ -116,15 +122,16 @@ export const tryGetAuth = async (): Promise<{ status: statusType; auth: AuthCont
 	
 }
 
-const CREATE_USER = gql`
-	mutation CreateUser($input: UserInput!) {
-		createUser(input: $input) {
-			firstName
-			lastName
-			walletId
+
+const CREATE_USER_MUTATION = gql` 
+	mutation registerUser($firstName: String!, $lastName: String! , $publicKey: String!) {
+		registerUser(input:{firstName: $firstName lastName: $lastName  publicKey: $publicKey}) {
+			ok,
+			message,
+			token
 		}
 	}
-`
+`;
 
 const CREATE_ORG = gql`
 	mutation CreateOrg($input: OrgInput!) {
@@ -144,17 +151,19 @@ const CREATE_ORG = gql`
 `
 
 export const tryCreateHumanAccount = async (input: SignUpData): Promise<{ status: statusType; account: AccountType | null }> => {
+	console.log("IntryCreateHumanAccount");
 	try {
-		const res = await graphql.mutate(CREATE_USER, {
-			input: {
+		console.log("Insidegraphqlstuff");
+		const res = await graphql.mutate(CREATE_USER_MUTATION,{
 				firstName: input.firstName,
 				lastName: input.lastName,
-				password: input.password,
-			},
-		})
+				publicKey: input.publicaddr
+			}
+		)
 		const data = res.data
 		if (!data) {
 			console.log(res.errors)
+			console.log("inerror")
 			return { status: 400, account: null }
 		}
 		return {
@@ -253,3 +262,26 @@ export const tryEditProfileInfo = async (data: UserPersonalInfo): Promise<{ stat
 	await new Promise((resolve) => setTimeout(resolve, 5000))
 	return { status: 200 }
 }
+
+export const checkkey = async (password:string) => {
+
+	let seedsalt = await getSeedPhrase();
+	console.log("inside checkkey" + seedsalt);
+	const checkpass = await hashPIN(password , seedsalt??"");
+	const realpass = await loadWalletKey();
+	let checkpas = "\"" + checkpass + "\"" ;
+	console.log("inside checkkey"+String(checkpass));
+	console.log("inside checkkey"+realpass);
+	
+	return String(checkpas) === realpass;
+		
+	}
+
+export const passcodeCreate = async (pin: string , walletId: string , salt?: string) => {
+	//const {setPIN} = useAuth()
+	const secret = await secretForPIN(walletId , pin , salt)//returns object with walledId and Pin
+    await storeWalletSecret(secret)
+	console.log("PasscodeCreated!")
+		//await setPIN(pin , walletId , salt)
+	}
+

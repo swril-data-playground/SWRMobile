@@ -5,6 +5,7 @@ export interface SignUpData {
 	lastName: string
 	password: string
 	password2: string
+	publicaddr : string 
 }
 
 export const defaultSignUpData: SignUpData = {
@@ -13,7 +14,9 @@ export const defaultSignUpData: SignUpData = {
 	firstName: '',
 	lastName: '',
 	password: '',
-	password2: ''
+	password2: '',
+	publicaddr : ''
+
 }
 
 export type setSignUpData = (newData: SignUpData) => void 

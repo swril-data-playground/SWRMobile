@@ -14,8 +14,8 @@ class GraphQL {
 	}
 	public async mutate(mutation: any, variables: any) {
 		return await this.client.mutate({
-			mutation,
-			variables,
+			mutation : mutation,
+			variables : {input : {...variables}},
 			context: { 
 				"authorization": this.auth,
 				headers: { 
@@ -39,6 +39,6 @@ class GraphQL {
 }
 
 export const graphql = new GraphQL(new ApolloClient({
-	uri: 'https://tap-experiment-exhaust-store.trycloudflare.com/query',
+	uri: 'https://api.demo.swrdataplayground.ca',
 	cache: new InMemoryCache(),
 }))
