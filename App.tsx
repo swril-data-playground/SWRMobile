@@ -110,8 +110,6 @@ const SmartWaterlooMobile = () => {
 	const authValue = { 
 		auth, 
 		setAuth: async (newAuth: AuthContextType) => {
-			if (newAuth.account) navValue.setNav('Home')
-			else navValue.setNav('SignUp')
 			await Storage.setJson('auth', newAuth)
 			graphql.setAuth(newAuth.auth)
 			setAuth(newAuth)

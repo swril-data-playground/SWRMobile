@@ -12,6 +12,7 @@ import { tryLogin } from "data/account"
 import { AuthContext } from "contexts/authContext"
 import { DataContext } from "contexts/dataContext"
 import { ToastContext } from "contexts/toastContext"
+import { NavContext } from "contexts/navContext"
 
 export const SeedLogin = (props: {
 	// data: LoginData,
@@ -24,6 +25,7 @@ export const SeedLogin = (props: {
 	const [state, setState] = useState('')
 	const nextEnabled = (state.length > 0)
 
+	const { setNav } = useContext(NavContext)
 	const { setAuth } = useContext(AuthContext)
 	const { reloadData } = useContext(DataContext)
 	const { pushToast } = useContext(ToastContext)
@@ -31,11 +33,12 @@ export const SeedLogin = (props: {
 	const login = async () => {
 		const { status, account } = await tryLogin(state)
 		if (status === 200) {
-			await reloadData()
 			setAuth({
 				auth: account?.walletId || '',
 				account
 			})
+			await reloadData()
+			setNav('Home')
 		} else if (status === 500) {
 			pushToast({
 				type: 'error',

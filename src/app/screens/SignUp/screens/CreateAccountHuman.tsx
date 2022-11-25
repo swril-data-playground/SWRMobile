@@ -36,7 +36,7 @@ export const CreateAccountHuman = (props: {
 				props.setData({...props.data, password2})	
 			}}/>
 
-			<SWRButton disabled={!nextEnabled} onPress={props.next} style={styles.nextButton}>
+			<SWRButton singleUse disabled={!nextEnabled} onPress={props.next} style={styles.nextButton}>
 				<SWRText style={gs.h4}>Next</SWRText>
 			</SWRButton>
 			<Image source={images.woman_at_desk} style={styles.officeDeskImage}/>

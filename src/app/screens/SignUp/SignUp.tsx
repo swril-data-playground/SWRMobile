@@ -1,6 +1,7 @@
 import { DisplayWrapper } from "components/DisplayWrapper"
 import { AuthContext } from "contexts/authContext"
 import { DataContext } from "contexts/dataContext"
+import { NavContext } from "contexts/navContext"
 import { ToastContext } from "contexts/toastContext"
 import { tryCreateHumanAccount, tryCreateOrgAccount } from "data/account"
 import { useContext, useState } from "react"
@@ -15,21 +16,23 @@ import { defaultSignUpData, SignUpData } from "./SignUpFlow"
 const SignUp = (): JSX.Element => {
 	const { setAuth } = useContext(AuthContext)
 	const { reloadData } = useContext(DataContext)
+	const { setNav } = useContext(NavContext)
 	const { pushToast } = useContext(ToastContext)
 	const [signUpStep, setSignUpState] = useState<0|1|2|3|4>(0)
 	const [state, setState] = useState<SignUpData>(defaultSignUpData)
 	const [account, setAccount] = useState<AccountType|null>(null)
 	const afterInitialize = () => {
-		setAuth({
-			auth: account?.walletId || '',
-			account
-		})
+		setNav('Home')
 	}
 
 	const createHuman = async () => {
 		setSignUpState(3)
 		const { status, account } = await tryCreateHumanAccount(state)
 		if (status === 200) {
+			setAuth({
+				auth: account?.walletId || '',
+				account
+			})
 			await reloadData()
 			setAccount(account)
 			setSignUpState(4)
@@ -54,6 +57,10 @@ const SignUp = (): JSX.Element => {
 		setSignUpState(3)
 		const { status, account } = await tryCreateOrgAccount(state)
 		if (status === 200) {
+			setAuth({
+				auth: account?.walletId || '',
+				account
+			})
 			await reloadData()
 			setAccount(account)
 			setSignUpState(4)

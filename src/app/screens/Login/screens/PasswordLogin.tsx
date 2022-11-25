@@ -12,6 +12,7 @@ import { AuthContext } from "contexts/authContext"
 import { DataContext } from "contexts/dataContext"
 import { ToastContext } from "contexts/toastContext"
 import { tryPasswordLogin } from "data/account"
+import { NavContext } from "contexts/navContext"
 
 export const PasswordLogin = (props: {
 	// data: LoginData,
@@ -23,16 +24,18 @@ export const PasswordLogin = (props: {
 	const [state, setState] = useState('')
 	const { setAuth } = useContext(AuthContext)
 	const { reloadData } = useContext(DataContext)
+	const { setNav } = useContext(NavContext)
 	const { pushToast } = useContext(ToastContext)
 
 	const login = async () => {
 		const { status, account } = await tryPasswordLogin(state)
 		if (status === 200) {
-			await reloadData()
 			setAuth({
 				auth: account?.walletId || '',
 				account
 			})
+			await reloadData()
+			setNav('Home')	
 		} else if (status === 500) {
 			pushToast({
 				type: 'error',
