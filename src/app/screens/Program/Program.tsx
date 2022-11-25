@@ -1,6 +1,6 @@
 import { AuthContext } from "contexts/authContext"
 import { ToastContext } from "contexts/toastContext"
-import { trySignUpForProgram } from "data/programs"
+import { tryProgramSignUp } from "data/programs"
 import { useContext, useState } from "react"
 import { StyleSheet, View } from "react-native"
 import { ProgramType } from "types/programs"
@@ -10,6 +10,8 @@ import { ThankYou } from "../ThankYou"
 import { gs } from "styles/globals"
 import { SWRText } from "components/SWRText"
 import { NavContext } from "contexts/navContext"
+import { AnswerType } from "types/questions"
+import { generateAnswersArray } from "components/Questions/generateAnswersArray"
 
 export const Program = (props: {content: any}) => {
 	const program = props.content as ProgramType
@@ -17,6 +19,8 @@ export const Program = (props: {content: any}) => {
 	const { pushToast } = useContext(ToastContext)
 	const [programSignUpState, setProgramSignUpState] = useState<'Info'|'Questions'|'Done'>('Info')
 	const { setNav } = useContext(NavContext)
+	const [answers, setAnswers] = useState<AnswerType[]>(generateAnswersArray(program.questions))
+
 
 
 	const trySignUp = async () => {
@@ -27,7 +31,7 @@ export const Program = (props: {content: any}) => {
 			})
 			return
 		}
-		const { status } = await trySignUpForProgram(program, auth.account)
+		const { status } = await tryProgramSignUp(program, answers, auth.account)
 		if (status === 200) {
 			setNav('ThankYou', <>
 				<SWRText font={'medium'} style={gs.h3}>For signing up to</SWRText>
@@ -44,16 +48,22 @@ export const Program = (props: {content: any}) => {
 	return (
 		<View style={styles.container}>
 			{programSignUpState==='Info' && <ProgramView program={program} signUp={infoSignUp} />}
-			{programSignUpState==='Questions' && <ProgramQuestions program={program} next={trySignUp} back={() => setProgramSignUpState('Info')} />}
+			{programSignUpState==='Questions' && <ProgramQuestions 
+				program={program} 
+				next={trySignUp} 
+				back={() => setProgramSignUpState('Info')} 
+				answers={answers}
+				setAnswers={setAnswers}
+			/>}
 		</View>
 	)
 }	
 
 const styles = StyleSheet.create({
 	container: {
-		marginHorizontal: 20,
+		// marginHorizontal: 20,
 		// backgroundColor: 'white',
 		borderRadius: 20,
-		height: '97%',
+		height: '100%',
 	},
 })

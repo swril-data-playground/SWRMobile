@@ -106,9 +106,28 @@ export const tryCreateProgram = async (program: ProgramType, account: AccountTyp
 	}
 }
 
-export const trySignUpForProgram = async (program: ProgramType, account: AccountType): Promise<{ status: statusType}> => {
-	await new Promise((resolve) => setTimeout(resolve, 2000))
-	return {
-		status: 200
+const PROGRAM_SIGNUP = gql(`
+	mutation ProgramSignUp($input: ProgramSignUp!) {
+		programSignUp(input: $input)
+	}
+`)
+
+export const tryProgramSignUp = async (program: ProgramType, answers: string[], account: AccountType): Promise<{ status: statusType }> => {
+	try {
+		const res = await graphql.mutate(PROGRAM_SIGNUP, {
+			input: {
+				programId: program.id,
+				answers: answers
+			},
+		})
+		const data = res.data
+		if (!data) {
+			console.log(res.errors)
+			return { status: 400 }
+		}
+		return { status: 200 }
+	} catch (e) {
+		console.log(e)
+		return { status: 500 }
 	}
 }
