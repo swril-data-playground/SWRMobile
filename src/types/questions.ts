@@ -1,4 +1,4 @@
-export const questionTypes = ['Open-ended', 'Multiple choice', 'Date', 'Select', 'Unit', 'SmallInt'] as const
+export const questionTypes = ['OpenEnded', 'MC', 'Date', 'Select', 'Unit', 'SmallInt'] as const
 export type typeOfQuestion = typeof questionTypes[number]
 
 export interface QuestionType {

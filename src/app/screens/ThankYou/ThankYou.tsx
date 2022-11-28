@@ -6,25 +6,26 @@ import { StyleSheet, Image } from "react-native"
 import { gs } from "styles/globals"
 import { ProgramType } from "types/programs"
 import { View } from "react-native"
-import { PuzzleImage } from "../../../components/PuzzleImage"
+import { PuzzleImage } from "components/PuzzleImage"
 import { images } from "assets/images"
 
-export const ThankYou = (props: {
-	program: ProgramType
-}) => {
+
+
+export const ThankYou = (props: {content: any}) => {
+	const element = props.content as JSX.Element
 	const { setNav } = useContext(NavContext)
-	const program = props.program as ProgramType
 	return (
 		<View style={[gs.fullScreen, styles.container]} >
 			<View style={{alignItems: 'center'}}>
 				<PuzzleImage width={200}/>
 				<SWRText font={'medium'} style={gs.h1}>Thank you</SWRText>
-				<SWRText font={'medium'} style={gs.h3}>For signing up to</SWRText>
-				<SWRText font={'medium'} style={[gs.h3, {color: '#234F68', textAlign:'center'} ]}>{program.title}</SWRText>
+				<View>
+					{element}
+				</View>
 			</View>
-			
+			 
 			<Image source={images.umbrella_cat} style={styles.image}/>
-			<SWRButton onPress={() => setNav('Home')} style={{backgroundColor: 'lightgrey', width: '70%'}}>
+			<SWRButton singleUse onPress={() => setNav('Home')} style={{width: '70%'}}>
 				<SWRText style={[gs.h3, {textAlign: 'center'}]}>Done</SWRText>
 		 	</SWRButton>
 		</View>
@@ -33,13 +34,13 @@ export const ThankYou = (props: {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
 		justifyContent: 'space-between',
 		maxHeight: '90%',
 	},
 	image: {
-		width: '70%',
+		width: 230,
 		height: 256, 
-		display: 'flex'
+		display: 'flex',
+		marginVertical: 20
 	},
 })

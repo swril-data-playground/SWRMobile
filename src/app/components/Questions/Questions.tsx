@@ -28,7 +28,7 @@ export const Questions = (props: {
 				}
 				let input;
 				switch (type) {
-					case 'Multiple choice': input = <SWRMCInput
+					case 'MC': input = <SWRMCInput
 						value={answer}
 						choices={question.choices ?? []}
 						onChange={setAnswer}
@@ -38,7 +38,7 @@ export const Questions = (props: {
 						choices={question.choices ?? []}
 						onChange={setAnswer}
 					/>; break;
-					case 'Open-ended': input = <SWRTextInput
+					case 'OpenEnded': input = <SWRTextInput
 						name={'Enter your answer'}
 						value={answer}
 						onChange={setAnswer}
@@ -64,7 +64,7 @@ export const Questions = (props: {
 				}
 				return (
 					<View style={styles.question} key={i}>
-						<SWRText style={gs.h5}>{i+1}. {question.prompt}</SWRText>
+						<SWRText style={gs.h5}>{i+1}. {question.prompt} {question.optional? '' :'*'}</SWRText>
 						{input}
 					</View>
 				)

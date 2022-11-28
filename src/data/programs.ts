@@ -8,7 +8,6 @@ import { graphql } from './graphql';
 export const programFields = `
 	id
 	title
-	caption
 	image
 	description
 	category
@@ -63,21 +62,72 @@ export const tryGetPrograms = async (filter: FilterType): Promise<{ status: stat
 	}
 }
 
-export const tryCreateProgram = async (program: ProgramType, account: AccountType): Promise<{ status: statusType, program: ProgramType}> => {
-	await new Promise((resolve) => setTimeout(resolve, 2000))
-	return {
-		status: 200,
-		program: {
-			...program,
-			creator: account.walletId,
-			id: Math.round(Math.random() * 100000).toString()
+const CREATE_PROGRAM = gql(`
+	mutation CreateProgram($input: ProgramInput!) {
+		createProgram(input: $input) {
+			` + programFields + `
 		}
+	}
+`)
+
+export const tryCreateProgram = async (program: ProgramType, account: AccountType): Promise<{ status: statusType, program: ProgramType|null}> => {
+	console.log('date', )
+	console.log('time1', program.startTime, new Date(program.startTime).toLocaleTimeString())
+	console.log('time2', program.endTime, new Date(program.endTime).toLocaleTimeString())
+	try {
+		const res = await graphql.mutate(CREATE_PROGRAM, {
+			input: {
+				title: program.title,
+				creatorId: account.walletId,
+				image: program.image,
+				description: program.description,
+				category: program.category,
+				municipality: program.municipality,
+				address: program.address,
+				date: new Date(program.date).toISOString().split("T")[0],
+				startTime: new Date(program.startTime).toLocaleTimeString(),
+				endTime: new Date(program.endTime).toLocaleTimeString(),
+				repeat: program.repeat,
+				questions: program.questions
+			},
+		})
+		const data = res.data
+		if (!data) {
+			console.log(res.errors)
+			return { status: 400, program: null }
+		}
+		return {
+			status: 200,
+			program: data.createProgram
+		}
+	} catch (e) {
+		console.error(e)
+		return { status: 500, program: null }
 	}
 }
 
-export const trySignUpForProgram = async (program: ProgramType, account: AccountType): Promise<{ status: statusType}> => {
-	await new Promise((resolve) => setTimeout(resolve, 2000))
-	return {
-		status: 200
+const PROGRAM_SIGNUP = gql(`
+	mutation ProgramSignUp($input: ProgramSignUp!) {
+		programSignUp(input: $input)
+	}
+`)
+
+export const tryProgramSignUp = async (program: ProgramType, answers: string[], account: AccountType): Promise<{ status: statusType }> => {
+	try {
+		const res = await graphql.mutate(PROGRAM_SIGNUP, {
+			input: {
+				programId: program.id,
+				answers: answers
+			},
+		})
+		const data = res.data
+		if (!data) {
+			console.log(res.errors)
+			return { status: 400 }
+		}
+		return { status: 200 }
+	} catch (e) {
+		console.log(e)
+		return { status: 500 }
 	}
 }

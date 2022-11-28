@@ -60,15 +60,6 @@ const CREATE_SURVEY = gql(`
 `)
 
 export const tryCreateSurvey = async (survey: SurveyType, account: AccountType): Promise<{ status: statusType, survey: SurveyType|null}> => {
-	console.log({
-		title: survey.title,
-		category: survey.category,
-		description: survey.description,
-		creatorId: account.walletId,
-		image: survey.image,
-		questions: survey.questions
-	})
-	console.log(CREATE_SURVEY)
 	try {
 		const res = await graphql.mutate(CREATE_SURVEY, {
 			input: {
@@ -92,5 +83,31 @@ export const tryCreateSurvey = async (survey: SurveyType, account: AccountType):
 	} catch (e) {
 		console.log(e)
 		return { status: 500, survey: null }
+	}
+}
+
+const SUBMIT_SURVEY = gql(`
+	mutation SubmitSurvey($input: SubmitSurvey!) {
+		submitSurvey(input: $input)
+	}
+`)
+
+export const trySubmitSurvey = async (survey: SurveyType, answers: string[], account: AccountType): Promise<{ status: statusType }> => {
+	try {
+		const res = await graphql.mutate(SUBMIT_SURVEY, {
+			input: {
+				surveyId: survey.id,
+				answers: answers
+			},
+		})
+		const data = res.data
+		if (!data) {
+			console.log(res.errors)
+			return { status: 400 }
+		}
+		return { status: 200 }
+	} catch (e) {
+		console.log(e)
+		return { status: 500 }
 	}
 }

@@ -21,7 +21,7 @@ const UserProfile = () => {
 			<View style={styles.profileInfoContainer}>
 				<SWRText font={'medium'} style={styles.name}>{userInfo.firstName}</SWRText>
 				<SWRText font={'medium'} style={styles.name}>{userInfo.lastName}</SWRText>
-				<SWRButton onPress={() => setNav('EditProfile')} style={styles.whiteSection}>
+				<SWRButton singleUse onPress={() => setNav('EditProfile')} style={styles.whiteSection}>
 					<SWRText style={gs.h4}>Edit Profile</SWRText>
 				</SWRButton>
 				<SWRButton onPress={() => {}} style={styles.whiteSection}>

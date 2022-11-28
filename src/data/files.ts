@@ -3,7 +3,7 @@ import { ImageInfo } from "expo-image-picker";
 import { statusType } from "types/data";
 
 export const uploadFile = async (file: DocumentResult): Promise<{status: statusType}> => {
-	await new Promise((resolve) => setTimeout(resolve, 50000))
+	await new Promise((resolve) => setTimeout(resolve, 5000))
 	return {
 		status: 200,
 	}
@@ -11,7 +11,7 @@ export const uploadFile = async (file: DocumentResult): Promise<{status: statusT
 
 
 export const uploadImage = async (image: ImageInfo): Promise<{status: statusType}> => {
-	await new Promise((resolve) => setTimeout(resolve, 50000))
+	await new Promise((resolve) => setTimeout(resolve, 5000))
 	return {
 		status: 200,
 	}

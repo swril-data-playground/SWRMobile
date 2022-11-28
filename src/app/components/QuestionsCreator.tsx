@@ -7,6 +7,7 @@ import { SWRButton } from "./SWRButton"
 import { SWRSelectInput } from "./inputs/SWRSelectInput"
 import { SWRText } from "./SWRText"
 import { SWRTextInput } from "./inputs/SWRTextInput"
+import { ListCreator } from "./ListCreator"
 
 export const QuestionsCreator = (props: {
 	questions: QuestionType[]
@@ -47,6 +48,7 @@ export const QuestionsCreator = (props: {
 						props.setQuestions(newQuestions)
 					}
 
+
 					return (
 						<View key={i} style={styles.question}>
 							<View style={styles.questionHeader}>
@@ -79,9 +81,12 @@ export const QuestionsCreator = (props: {
 								buttonStyle={{backgroundColor: colors.lightGrey}}
 								choices={questionTypes}
 							/>
-							{ question.type === 'Multiple choice' && (
+							{ (question.type === 'MC' || question.type === 'Select') && (
 								<View>
-
+									<ListCreator
+										list={question.choices??[]}
+										setList={(newChoices) => {setQuestion({...question, choices: newChoices})}}
+									/>
 								</View>
 							)}
 						</View>

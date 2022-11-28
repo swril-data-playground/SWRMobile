@@ -1,3 +1,4 @@
+import { SWRButton } from "components/SWRButton"
 import { SWRText } from "components/SWRText"
 import { TextButton } from "components/TextButton"
 import { AuthContext } from "contexts/authContext"
@@ -21,8 +22,13 @@ export const MyCreations = () => {
 				<TextButton onPress={() => setNav('MyCreations')}>View all</TextButton>
 			</View>
 
-			<ScrollView showsHorizontalScrollIndicator={false}
-				style={{overflow: 'visible'}} horizontal>
+			<ScrollView showsHorizontalScrollIndicator={false} style={{overflow: 'visible'}} horizontal>
+				{creationList.length === 0 && <View>
+					<SWRText style={[gs.h4, {marginBottom: 10}]}>You have no creations yet</SWRText>
+					<SWRButton singleUse onPress={() => setNav('Create')}>
+						<SWRText style={gs.h5}>Create Some Here!</SWRText>
+					</SWRButton>
+				</View>}
 				{creationList.map((creation, i) => {
 					return (
 						<TouchableOpacity style={styles.creation} key={i}

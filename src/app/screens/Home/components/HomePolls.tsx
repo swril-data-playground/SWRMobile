@@ -19,6 +19,7 @@ export const HomePolls = (props: {
 			</View>
 			<ScrollView style={styles.scroller} horizontal showsHorizontalScrollIndicator={false}>
 				{props.polls.map((poll, i) => {
+					if (i > 6) return null
 					return (
 						<TouchableOpacity style={styles.survey} onPress={() => setNav('Poll', poll)} key={i}>
 							<View style={styles.surveyImage}>

@@ -7,6 +7,7 @@ import { useContext } from "react"
 import { Image, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { gs } from "styles/globals"
 import { ProgramType } from "types/programs"
+import { textLimit } from "utils/textLimit"
 
 export const HomePrograms = (props: {
 	programs: ProgramType[]	
@@ -20,11 +21,12 @@ export const HomePrograms = (props: {
 			</View>
 			<ScrollView style={styles.scroller} horizontal={true} showsHorizontalScrollIndicator={false}>
 				{props.programs.map((program, i) => {
+					if (i > 6) return null
 					return (
 						<TouchableOpacity style={styles.program} onPress={() => setNav('Program', program)} key={i}>
 							<BackgroundImage image={{uri: program.image}} style={styles.programImage}/>
 							<SWRText font={'bold'} style={styles.programName}>{program.title}</SWRText>
-							<SWRText style={styles.programCaption}>{program.caption}</SWRText>
+							<SWRText style={styles.programCaption}>{textLimit(program.description, 50)}</SWRText>
 							<View style={styles.arrowSection}>
 								<Image source={images['long_arrow_right']}/>
 							</View>

@@ -10,6 +10,7 @@ export interface SWRTextInputProps {
 	withTitle?: boolean
 	containerStyle?: StyleProp<ViewStyle>,
 	inputStyle?: StyleProp<ViewStyle>,
+	password?: boolean
 }
 
 export const SWRTextInput = (props: SWRTextInputProps) => {
@@ -26,6 +27,8 @@ export const SWRTextInput = (props: SWRTextInputProps) => {
 			style={[styles.textInput, additionalStyles, props.inputStyle]} 
 			placeholder={props.name} 
 			onChangeText={props.onChange}
+			textContentType={props.password?'password':undefined}
+			secureTextEntry={props.password}
 			multiline={multiline}
 		/>
 	)

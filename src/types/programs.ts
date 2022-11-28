@@ -6,7 +6,6 @@ import { QuestionType } from "./questions"
 interface ProgramType {
 	id?: string,
 	title: string,
-	caption: string,
 	creator: string,
 	image: string,
 	description: string,
@@ -22,16 +21,15 @@ interface ProgramType {
 }
 const defaultProgram: ProgramType = {
 	title: '',
-	caption: '',
 	creator: '',
 	image: '',
 	description: '',
 	category: 'Learning',
 	municipality: 'Waterloo',
 	address: '',
-	date: '',
-	startTime: '',
-	endTime: '',
+	date: (new Date()).toUTCString(),
+	startTime: (new Date()).toUTCString(),
+	endTime: (new Date()).toUTCString(),
 	attendees: [defaultPublicAccount, defaultPublicAccount, defaultPublicAccount, defaultPublicAccount],
 	questions: []
 }

@@ -17,7 +17,6 @@ const GET_POLLS = gql`
 			questions {
 				id
 				prompt
-				type
 				choices
 				optional
 			}
@@ -55,5 +54,32 @@ export const tryCreatePoll = async (poll: PollType, account: AccountType): Promi
 			creator: account.walletId,
 			id: Math.round(Math.random() * 100000).toString()
 		}
+	}
+}
+
+
+const SUBMIT_POLL = gql(`
+	mutation SubmitPoll($input: SubmitPoll!) {
+		submitPoll(input: $input)
+	}
+`)
+
+export const trySubmitPoll = async (poll: PollType, answers: string[], account: AccountType): Promise<{ status: statusType }> => {
+	try {
+		const res = await graphql.mutate(SUBMIT_POLL, {
+			input: {
+				pollId: poll.id,
+				answers: answers
+			},
+		})
+		const data = res.data
+		if (!data) {
+			console.log(res.errors)
+			return { status: 400 }
+		}
+		return { status: 200 }
+	} catch (e) {
+		console.log(e)
+		return { status: 500 }
 	}
 }
